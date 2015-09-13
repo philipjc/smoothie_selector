@@ -1,19 +1,32 @@
 'use strict';
 
-import Reflux from 'reflux'
-import Actions from '../actions/SmoothieActions';
+import Reflux from 'reflux';
+import Actions from '../actions/SmoothieActions.js';
 
 let data = {
-
+  fruit: ['apple'],
+  veg: ['carrot']
 };
 
 const SmoothieStore = Reflux.createStore({
   listenables: Actions,
 
-  onFindIngredients(search) {
-    if (!search) return;
+  onFindIngredients(type) {
+    if (!type) return;
 
-    this.trigger(search);
+    let result;
+
+    type === 'fruit' ? result = this.findFruit() : result = this.findVeg();
+
+    this.trigger(result);
+  },
+
+  findFruit() {
+    return data.fruit;
+  },
+
+  findVeg() {
+    return data.veg;
   }
 
 });
