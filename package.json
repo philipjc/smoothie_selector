@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "font-awesome": "^4.4.0",
-    "reflux": "^0.2.12",
-    "react": "^0.13.3"
+    "octicons": "^2.4.1",
+    "react": "^0.13.3",
+    "reflux": "^0.2.12"
   }
 }

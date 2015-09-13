@@ -12,7 +12,7 @@ const SmoothieStore = Reflux.createStore({
   listenables: Actions,
 
   onFindIngredients(type) {
-    if (!type) return;
+    if (!type) { return };
 
     let result;
 
@@ -21,12 +21,19 @@ const SmoothieStore = Reflux.createStore({
     this.trigger(result);
   },
 
+  // TODO put in a helper module?
   findFruit() {
     return data.fruit;
   },
 
   findVeg() {
     return data.veg;
+  },
+
+  onRequiredType(type) {
+    if (!type) return;
+
+    this.trigger(type);
   }
 
 });

@@ -3,7 +3,8 @@
 import Reflux from 'reflux';
 
 const Actions = Reflux.createActions([
-  'findIngredients'
+  'findIngredients',
+  'requiredType'
 ]);
 
 export default Actions;

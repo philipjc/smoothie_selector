@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components ===============================
-import Button from './Button.jsx';
+import GenerateSmoothie from './GenerateSmoothie.jsx'
 import IngredientCard from './IngredientCard.jsx';
 
 // Reflux ===================================
@@ -11,7 +11,9 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.title
+      title: this.props.title,
+      ingredients: [],
+      type: ''
     }
     this.handleSmoothieStore = this.handleSmoothieStore.bind(this);
   }
@@ -24,7 +26,17 @@ export default class Main extends React.Component {
     this.findUnsubscribe();
   }
 
+  // TODO - How to listen for different Store Actions?
   handleSmoothieStore(res) {
+    if (Array.isArray(res)) {
+      this.setState({
+        ingredients: res
+      });
+    } else {
+      this.setState({
+        type: res
+      });
+    }
     console.log(res);
   }
 
@@ -38,9 +50,7 @@ export default class Main extends React.Component {
         </div>
         </div>
 
-        <div className="main-container__upper">
-          <Button type="generate" />
-        </div>
+        <GenerateSmoothie find={this.state.type} />
 
         <div className="main-container__mid">
           <IngredientCard />

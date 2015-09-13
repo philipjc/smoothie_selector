@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from '../actions/SmoothieActions.js';
+import Actions from '../../actions/SmoothieActions.js';
 
 export default class Button extends React.Component {
   constructor(props) {
@@ -11,13 +11,13 @@ export default class Button extends React.Component {
   }
 
   generateSmoothie() {
-    let type = 'veg';
+    let type = this.props.find;
     Actions.findIngredients(type);
   }
 
   render() {
-    let type = this.props.type;
-    if (type === 'generate') {
+    let name = this.props.name;
+    if (name === 'generate') {
       return (
         <div className={'button__' + this.props.type}
              onClick={this.generateSmoothie}>
