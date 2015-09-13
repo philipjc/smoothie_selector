@@ -7,14 +7,16 @@ import IngredientCard from './IngredientCard.jsx';
 // Reflux ===================================
 import SmoothieStore from '../stores/SmoothieStore.js';
 
+// TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
+
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: this.props.title,
-      ingredients: [],
-      type: ''
+      ingredients: []
     }
+
     this.handleSmoothieStore = this.handleSmoothieStore.bind(this);
   }
 
@@ -26,21 +28,16 @@ export default class Main extends React.Component {
     this.findUnsubscribe();
   }
 
-  // TODO - How to listen for different Store Actions?
   handleSmoothieStore(res) {
-    if (Array.isArray(res)) {
-      this.setState({
-        ingredients: res
-      });
-    } else {
-      this.setState({
-        type: res
-      });
-    }
     console.log(res);
+    this.setState({
+      ingredients: res
+    });
   }
 
   render() {
+    let ingredients = this.state.ingredients;
+
     return (
       <div className="main-container">
         <div className="main-container__header">
@@ -50,10 +47,12 @@ export default class Main extends React.Component {
         </div>
         </div>
 
-        <GenerateSmoothie find={this.state.type} />
+        <div className="main-container__upper">
+          <GenerateSmoothie />
+        </div>
 
         <div className="main-container__mid">
-          <IngredientCard />
+          <IngredientCard ingredients={ingredients} />
         </div>
       </div>
     );

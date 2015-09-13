@@ -5,26 +5,21 @@ export default class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      smoothieType: ''
+
     }
     this.inputHandler = this.inputHandler.bind(this);
-    this.pressEnterHandler = this.pressEnterHandler.bind(this);
   }
 
+  /**
+   * @desc update the store type. Pass type to Button as props.
+   */
   inputHandler(e) {
     let state = e.target.checked;
-    let input = this.props.value;
 
     if (state) {
+      let input = this.props.value;
+      console.log(input);
       Actions.requiredType(input);
-    }
-  }
-
-  pressEnterHandler(e) {
-    if (e.key === 'Enter') {
-      let type = this.props.find;
-
-      Actions.findIngredients(type);
 
     } else {
       return;
@@ -32,15 +27,17 @@ export default class Input extends React.Component {
   }
 
   render() {
-    let { type, name } = this.props;
+    let { type, name, value } = this.props;
 
     return (
       <div>
-        <input type={type}
-               name={name}
-               onChange={this.inputHandler}
-               onKeyDown={this.pressEnterHandler}
-        />
+        <label>
+        {value} <input type={type}
+                 name={name}
+                 onChange={this.inputHandler}
+                 onKeyDown={this.pressEnterHandler}
+                 />
+        </label>
       </div>
     )
   }

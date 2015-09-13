@@ -3,37 +3,44 @@
 import Reflux from 'reflux';
 import Actions from '../actions/SmoothieActions.js';
 
+import ingredients from '../constants.js';
+
 let data = {
-  fruit: ['apple'],
-  veg: ['carrot']
+  ingredients
 };
 
 const SmoothieStore = Reflux.createStore({
   listenables: Actions,
 
   onFindIngredients(type) {
-    if (!type) { return };
 
-    let result;
-
-    type === 'fruit' ? result = this.findFruit() : result = this.findVeg();
-
-    this.trigger(result);
+    type === 'mixed' ? this.multiSelect('mix') : this.typeSelect(type);
   },
 
   // TODO put in a helper module?
-  findFruit() {
-    return data.fruit;
+  singleSelect(type) {
+    let newData = data.ingredients;
+
+    if (type === 'fruit') {
+      let fruit = newData.fruit;
+    }
+
+    // TODO loop through array and select items
+
+    trigger();
   },
 
-  findVeg() {
-    return data.veg;
+  multiSelect(type) {
+    let newData = data.ingredients;
+
+    // TODO loop through both arrays in object and select fruit and veg
+
+    trigger();
   },
 
-  onRequiredType(type) {
-    if (!type) return;
+  typeSelect(type) {
 
-    this.trigger(type);
+    type === 'fruit' ? this.singleSelect('fruit') : this.singleSelect('veg');
   }
 
 });

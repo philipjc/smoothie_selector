@@ -11,7 +11,9 @@ export default class Button extends React.Component {
   }
 
   generateSmoothie() {
-    let type = this.props.find;
+    let type = this.props.smoothie;
+    console.log(type);
+
     Actions.findIngredients(type);
   }
 

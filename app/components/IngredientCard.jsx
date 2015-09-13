@@ -6,6 +6,7 @@ export default class IngredientCard extends React.Component {
   }
 
   render() {
+    console.log('ingredients card', this.props);
     return (
       <div>
         <h2>Ingredient Card</h2>
