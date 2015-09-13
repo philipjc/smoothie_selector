@@ -1,5 +1,5 @@
 import React from 'react';
-import Component from './Component.jsx';
+import Component from './Component';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -11,7 +11,9 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <Component {...this.props } />
+      <div className="">
+        <Component {...this.props } />
+      </div>
     )
   }
 }

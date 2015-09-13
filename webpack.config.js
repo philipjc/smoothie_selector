@@ -26,6 +26,10 @@ var common = {
     ]
   },
 
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+
   plugins: [
     new HtmlwebpackPlugin({
       title: 'App'
