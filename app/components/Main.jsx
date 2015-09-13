@@ -14,10 +14,21 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div className="main__container">
-        <h1>{this.props.title}</h1>
-        <Button type="generate" />
-        <IngredientCard />
+      <div className="main-container">
+        <div className="main-container__header">
+          <h1>{this.props.title}</h1>
+        <div className="main-container__header-logo">
+          <img src="" alt="" />
+        </div>
+        </div>
+
+        <div className="main-container__upper">
+          <Button type="generate" />
+        </div>
+
+        <div className="main-container__mid">
+          <IngredientCard />
+        </div>
       </div>
     );
   }
