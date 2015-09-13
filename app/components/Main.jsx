@@ -1,5 +1,8 @@
 import React from 'react';
-import Component from './Component';
+
+// Components ===============================
+import Button from './Button';
+import IngredientCard from './IngredientCard';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -11,12 +14,14 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <Component {...this.props } />
+      <div className="main__container">
+        <h1>{this.props.title}</h1>
+        <Button type="generate" />
+        <IngredientCard />
       </div>
-    )
+    );
   }
 }
 
 Main.propTypes = { title: React.PropTypes.string };
-Main.defaultProps = { title: 'Main Title' };
+Main.defaultProps = { title: 'Smoothie Selector' };
