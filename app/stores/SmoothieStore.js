@@ -39,13 +39,13 @@ const SmoothieStore = Reflux.createStore({
 
     // loop through - use for of
     while (buildIngredients.length <= amount) {
-      ingredients.forEach((ingredient, i) => {
+      ingredients.forEach((ingredient, index) => {
 
         // generate a number between 0 and length
         let number = Math.random() * (0, length);
         number = Math.floor(number);
         // find the index
-        if (i === number) {
+        if (index === number) {
           // push to new array
           buildIngredients.push(ingredient);
         }

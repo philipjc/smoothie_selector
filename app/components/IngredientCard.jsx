@@ -6,23 +6,23 @@ export default class IngredientCard extends React.Component {
   }
 
   render() {
-    let ingredients;
+    let { ingredients } = this.props;
+    let renderIngredients;
 
-    for (let arr in this.props) {
-      console.log('array', this.props[arr]);
-      ingredients = this.props[arr].map(item => {
-        return (
-          <li>{item}</li>
-        )
-      })
-    }
+    renderIngredients = ingredients.map((item, index) => {
+      return (
+        <li className={'card__ingredient-' + index}>{item}</li>
+      )
+    });
 
     return (
-      <div>
-        <h2>Ingredient Card</h2>
-      <ul>
-        {ingredients}
-      </ul>
+      <div className="main-container__upper--block">
+        <div className="card">
+          <h2>Ingredient Card</h2>
+            <ul>
+              {renderIngredients}
+            </ul>
+        </div>
       </div>
     )
   }
