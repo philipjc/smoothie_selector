@@ -13,34 +13,46 @@ const SmoothieStore = Reflux.createStore({
   listenables: Actions,
 
   onFindIngredients(type) {
-
-    type === 'mixed' ? this.multiSelect('mix') : this.typeSelect(type);
+    type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 3);
   },
 
   // TODO put in a helper module?
-  singleSelect(type) {
-    let newData = data.ingredients;
+  singleSelect(type, amount) {
+    let ingredientsToSend = this.createIngredients(type, amount);
 
-    if (type === 'fruit') {
-      let fruit = newData.fruit;
+    this.trigger(ingredientsToSend);
+  },
+
+  multiSelect() {
+    let fruitToSend = this.createIngredients('fruit', 2);
+    let vegToSend = this.createIngredients('veg', 2);
+
+    let ingredientsToSend = [].concat(fruitToSend, vegToSend);
+
+    this.trigger(ingredientsToSend);
+  },
+
+  createIngredients(type, amount) {
+    let buildIngredients = [];
+    let ingredients = data.ingredients[type];
+    let length = ingredients.length;
+
+    // loop through - use for of
+    while (buildIngredients.length <= amount) {
+      ingredients.forEach((ingredient, i) => {
+
+        // generate a number between 0 and length
+        let number = Math.random() * (0, length);
+        number = Math.floor(number);
+        // find the index
+        if (i === number) {
+          // push to new array
+          buildIngredients.push(ingredient);
+        }
+      });
     }
 
-    // TODO loop through array and select items
-
-    trigger();
-  },
-
-  multiSelect(type) {
-    let newData = data.ingredients;
-
-    // TODO loop through both arrays in object and select fruit and veg
-
-    trigger();
-  },
-
-  typeSelect(type) {
-
-    type === 'fruit' ? this.singleSelect('fruit') : this.singleSelect('veg');
+    return buildIngredients;
   }
 
 });

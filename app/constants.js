@@ -3,7 +3,7 @@ let ingredients = {
   'grapes', 'guava', 'melon', 'kiwi', 'lemon', 'mango', 'nectarine', 'almonds', 'orange',
   'pear', 'pineapple', 'raisins', 'strawberries', 'tomato', 'plum', 'honey'],
 
-  veg: ['asparagus', 'aubergine', 'beetroot', 'butternut squash', 'carrot', 'pumpkin', 'radish',
+  veg: ['hugs', 'love', 'beetroot', 'butternut squash', 'carrot', 'pumpkin', 'radish',
   'rubarb', 'watercress', 'zucchini', 'oats', 'spinach']
 };
 
