@@ -1,0 +1,46 @@
+.section-mid {
+
+  width: 100%;
+
+  &__form {
+    background: plum;
+
+    &--inputs {
+
+      width: 20%;
+      padding: $padding;
+
+      .input {
+        padding: $padding * 2;
+        border: $light-border;
+        border-bottom: none;
+
+        &:last-child {
+          border-bottom: $light-border;
+        }
+
+        input {
+          float: right;
+        }
+      }
+
+    }
+
+    &--button {
+      width: 20%;
+      padding: 0 $padding $padding;
+
+      .button-generate {
+        padding: $padding * 2;
+        cursor: pointer;
+        border: $light-border;
+
+      }
+    }
+  }
+
+  &__block {
+
+    background: darken(plum, 10%);
+  }
+}

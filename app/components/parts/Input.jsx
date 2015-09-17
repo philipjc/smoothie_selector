@@ -30,7 +30,7 @@ export default class Input extends React.Component {
     let { type, name, value } = this.props;
 
     return (
-      <div>
+      <div className="input">
         <label>
         {value} <input type={type}
                  name={name}

@@ -1,6 +1,32 @@
-.main-container {
+.section-mid {
 
-  &__upper {
-    
+  &__block {
+
+    .card {
+      width: 20%;
+      background: #fff;
+
+      &__heading {
+        width: 100%;
+        background: #bada55;
+        text-align: center;
+        padding: $padding * 5 $padding * 2;
+      }
+
+      &__list {
+
+        &--item {
+
+          padding: $padding * 2;
+          border: $light-border;
+          border-bottom: none;
+
+          &:last-child {
+            border-bottom: $light-border;
+          }
+        }
+      }
+    }
   }
+
 }

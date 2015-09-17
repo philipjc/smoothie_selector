@@ -9,7 +9,7 @@ let data = {
   ingredients
 };
 
-const SmoothieStore = Reflux.createStore({
+const CreateSmoothieStore = Reflux.createStore({
   listenables: Actions,
 
   onFindIngredients(type) {
@@ -24,8 +24,9 @@ const SmoothieStore = Reflux.createStore({
   },
 
   multiSelect() {
-    let fruitToSend = this.createIngredients('fruit', 2);
-    let vegToSend = this.createIngredients('veg', 2);
+    let qty = 2;
+    let fruitToSend = this.createIngredients('fruit', qty);
+    let vegToSend = this.createIngredients('vegetable', qty);
 
     let ingredientsToSend = [].concat(fruitToSend, vegToSend);
 
@@ -33,28 +34,42 @@ const SmoothieStore = Reflux.createStore({
   },
 
   createIngredients(type, amount) {
-    let buildIngredients = [];
+    let recipe = [];
     let ingredients = data.ingredients[type];
-    let length = ingredients.length;
+    let ingredientsLength = ingredients.length;
+    let oldNumbers = [];
 
     // loop through - use for of
-    while (buildIngredients.length <= amount) {
+    while (recipe.length < amount) {
+
       ingredients.forEach((ingredient, index) => {
 
-        // generate a number between 0 and length
-        let number = Math.random() * (0, length);
-        number = Math.floor(number);
+        let number = this.numberGen(ingredientsLength, oldNumbers);
+
         // find the index
         if (index === number) {
+          // push useed number
+          oldNumbers.push(number);
           // push to new array
-          buildIngredients.push(ingredient);
+          recipe.push(ingredient);
         }
       });
     }
 
-    return buildIngredients;
+    return recipe;
+  },
+
+  numberGen(maxVal, old) {
+    let number = Math.random() * (maxVal);
+    number = Math.floor(number);
+
+    if (old.indexOf(number) !== -1) {
+      this.numberGen(maxVal, old);
+    }
+
+    return number;
   }
 
 });
 
-export default SmoothieStore;
+export default CreateSmoothieStore;

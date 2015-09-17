@@ -8,7 +8,7 @@ let data = {
   type: ''
 }
 
-const GenerateStore = Reflux.createStore({
+const TypeSelectionStore = Reflux.createStore({
   listenables: Actions,
 
   onRequiredType(type) {
@@ -23,4 +23,4 @@ const GenerateStore = Reflux.createStore({
 
 });
 
-export default GenerateStore;
+export default TypeSelectionStore;

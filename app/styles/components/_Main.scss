@@ -4,4 +4,44 @@
 
 body {
   background: #eee;
+  font-size: 20px;
+}
+
+.main-container {
+
+  .section {
+
+    &-upper {
+
+      &__header {
+        background: plum;
+        padding: $padding;
+
+        &--logo {
+
+        }
+        &--title {
+          font-size: 1.4em;
+        }
+      }
+
+      &__intro {
+
+        &--heading {
+          padding: $padding;
+
+          h3 {
+            font-size: 1.2em;
+          }
+        }
+      }
+    }
+
+
+    &-mid {
+
+    }
+  }
+
+
 }

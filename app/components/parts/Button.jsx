@@ -18,17 +18,18 @@ export default class Button extends React.Component {
   }
 
   render() {
-    let name = this.props.name;
+    let {type, name, smoothie } = this.props;
+
     if (name === 'generate') {
       return (
-        <div className={'button__' + this.props.type}
+        <div className={'button-' + name}
              onClick={this.generateSmoothie}>
-          Button
+          Blend!!!!
         </div>
       )
     } else {
       return (
-        <button type={this.props.type} className={'button__' + this.props.type}>
+        <button type={type} className={'button__' + name}>
           Not generate
         </button>
       )
