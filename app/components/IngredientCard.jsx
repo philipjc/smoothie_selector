@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from './parts/Button.jsx';
+
 export default class IngredientCard extends React.Component {
   constructor(props) {
     super(props);
@@ -8,8 +10,10 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors.
 
   render() {
+    let saved = false;
     let { ingredients } = this.props;
     let renderIngredients;
+    let renderSaveButton;
 
     renderIngredients = ingredients.map((item, index) => {
       return (
@@ -17,12 +21,19 @@ export default class IngredientCard extends React.Component {
       )
     });
 
+    if (saved === false) {
+      renderSaveButton = (
+        <Button type="button" name="save-card" ingredients={ingredients} />
+      );
+    }
+
     return (
       <div className="card">
         <h2 className="card__heading">Ingredient Card</h2>
           <ul className="card__list">
             {renderIngredients}
           </ul>
+          {renderSaveButton}
       </div>
     );
   }

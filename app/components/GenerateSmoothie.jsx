@@ -33,7 +33,7 @@ export default class GenerateSmoothie extends React.Component {
   }
 
   render() {
-    let smoothie = this.state.type;
+    let recipeType = this.state.type;
 
     return (
       <div className="section-mid__form">
@@ -45,7 +45,7 @@ export default class GenerateSmoothie extends React.Component {
           </div>
 
           <div className="section-mid__form--button">
-            <Button type="submit" name="generate" smoothie={smoothie} />
+            <Button type="submit" name="generate" recipeType={recipeType} />
           </div>
         </form>
       </div>

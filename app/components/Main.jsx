@@ -6,6 +6,7 @@ import IngredientCard from './IngredientCard.jsx';
 
 // Reflux ===================================
 import CreateSmoothieStore from '../stores/CreateSmoothieStore.js';
+import SavedStore from '../stores/SavedStore.js';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 
@@ -18,14 +19,19 @@ export default class Main extends React.Component {
     }
 
     this.handleCreateSmoothie = this.handleCreateSmoothie.bind(this);
+    this.handleSavedSmoothies = this.handleSavedSmoothies.bind(this);
+
   }
 
   componentWillMount() {
-    this.findUnsubscribe = CreateSmoothieStore.listen(this.handleCreateSmoothie)
+    this.findUnsubscribe = CreateSmoothieStore.listen(this.handleCreateSmoothie);
+    this.saveUnsubscribe = SavedStore.listen(this.handleSavedSmoothies);
+
   }
 
   componentWillUnmount() {
     this.findUnsubscribe();
+    this.saveUnsubscribe();
   }
 
   handleCreateSmoothie(res) {
@@ -33,6 +39,10 @@ export default class Main extends React.Component {
     this.setState({
       ingredients: res
     });
+  }
+
+  handleSavedSmoothies(res) {
+    console.log('main handle save ', res);
   }
 
   render() {

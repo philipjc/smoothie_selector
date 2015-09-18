@@ -1,14 +1,19 @@
 .section-mid {
-
   width: 100%;
 
   &__form {
     background: plum;
+    padding: $padding;
 
     &--inputs {
-
       width: 20%;
-      padding: $padding;
+
+      .label {
+        width: 100%;
+        display: block;
+        padding: 1%;
+        cursor: pointer;
+      }
 
       .input {
         padding: $padding * 2;
@@ -28,10 +33,10 @@
 
     &--button {
       width: 20%;
-      padding: 0 $padding $padding;
-
+      margin-top: $padding;
       .button-generate {
-        padding: $padding * 2;
+        background: #fff;
+        padding: $padding * 3;
         cursor: pointer;
         border: $light-border;
 

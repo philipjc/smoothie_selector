@@ -12,13 +12,17 @@ export default class Input extends React.Component {
 
   /**
    * @desc update the store type. Pass type to Button as props.
+   * // TODO Set up user pushing Enter.
    */
   inputHandler(e) {
     let state = e.target.checked;
 
+    this.setState({
+      input: true
+    });
+
     if (state) {
       let input = this.props.value;
-      console.log(input);
       Actions.requiredType(input);
 
     } else {
@@ -31,8 +35,9 @@ export default class Input extends React.Component {
 
     return (
       <div className="input">
-        <label>
+        <label className="label" for={name}>
         {value} <input type={type}
+                 id={name}
                  name={name}
                  onChange={this.inputHandler}
                  onKeyDown={this.pressEnterHandler}

@@ -2,6 +2,8 @@
 
   &__block {
 
+    padding: $padding;
+
     .card {
       width: 20%;
       background: #fff;
@@ -17,7 +19,7 @@
 
         &--item {
 
-          padding: $padding * 2;
+          padding: $padding * 3;
           border: $light-border;
           border-bottom: none;
 
@@ -25,6 +27,14 @@
             border-bottom: $light-border;
           }
         }
+      }
+
+      .button-save-card {
+        width: 100%;
+        background: lighten(plum, 5%);
+        text-align: center;
+        padding: $padding * 5 $padding * 2;
+        cursor: pointer;
       }
     }
   }
