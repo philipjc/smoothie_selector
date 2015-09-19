@@ -15,27 +15,35 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors.
 
   ingredientRender() {
-    let { ingredients } = this.props;
-    let nodes = ingredients.map((ingredient, index) => {
-      let props = {
-        item: ingredient,
-        key: index
-      }
-      return (
-        <ListItem {...props} />
-      )
+    // TODO create function to extract cards. can then pass into btn
+    let ingredientsCards = this.props.ingredients;
+    let nodes;
+
+    ingredientsCards.forEach(ingredientsCard => {
+      let ingredients = ingredientsCard.ingredients;
+
+      nodes = ingredients.map((ingredient, index) => {
+        let props = {
+          item: ingredient,
+          key: index
+        }
+        return (
+          <ListItem {...props} />
+        )
+      });
     });
     return nodes;
   }
 
+  // TODO passing ingredietsn into btn. pass through func to extract obj?
   render() {
-    console.log('ingre card props ', this.props);
-    let ingredients = this.props;
+    console.log('ingredient card props', this.props);
+    let ingredients = this.props.ingredients;
     let renderIngredients = this.ingredientRender();
 
-    let saved = false;
+    let savedd = false;
     let renderSaveButton;
-    if (saved === false) {
+    if (savedd === false) {
       renderSaveButton = (
         <Button type="button" name="save-card" ingredients={ingredients} />
       );

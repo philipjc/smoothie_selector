@@ -5,9 +5,14 @@ import Actions from '../actions/SmoothieActions.js';
 
 import ingredients from '../constants.js';
 
-let storeData = {
+let storeIngredients = {
   ingredients
 };
+
+let storeData = {
+  ingredients: [],
+  saved: false
+}
 
 const CreateSmoothieStore = Reflux.createStore({
   listenables: Actions,
@@ -20,7 +25,11 @@ const CreateSmoothieStore = Reflux.createStore({
   singleSelect(type, amount) {
     let ingredientsToSend = this.createIngredients(type, amount);
 
-    this.trigger(ingredientsToSend);
+    let recipeCard = storeData;
+    recipeCard.ingredients = ingredientsToSend;
+    console.log('recipe card from store ', recipeCard);
+
+    this.trigger(recipeCard);
   },
 
   multiSelect() {
@@ -35,7 +44,7 @@ const CreateSmoothieStore = Reflux.createStore({
 
   createIngredients(type, amount) {
     let recipe = [];
-    let ingredients = storeData.ingredients[type];
+    let ingredients = storeIngredients.ingredients[type];
     let ingredientsLength = ingredients.length;
     let oldNumbers = [];
 

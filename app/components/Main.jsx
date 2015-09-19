@@ -36,9 +36,14 @@ export default class Main extends React.Component {
     // this.saveUnsubscribe();
   }
 
+  // TODO make state.ingredients array of strings again. add saved prop if saving?
   handleCreateSmoothie(res) {
+    let state = this.state.ingredients;
+    state.pop();
+    state.push(res);
+
     this.setState({
-      ingredients: res
+      ingredients: state
     });
   }
 
@@ -50,6 +55,7 @@ export default class Main extends React.Component {
   render() {
     let cards = this.state.storedCards;
     let ingredients = this.state.ingredients;
+    console.log('main render ', ingredients);
 
     return (
       <div className="main-container">
