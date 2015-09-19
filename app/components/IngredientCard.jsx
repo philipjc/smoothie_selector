@@ -1,26 +1,40 @@
 import React from 'react';
 
+// Components ==============================
 import Button from './parts/Button.jsx';
+import ListItem from './parts/ListItem.jsx';
+// =========================================
 
 export default class IngredientCard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.ingredientRender = this.ingredientRender.bind(this);
   }
 
   // TODO Add CSS Object to style dynamic colors.
 
-  render() {
-    let saved = false;
+  ingredientRender() {
     let { ingredients } = this.props;
-    let renderIngredients;
-    let renderSaveButton;
-
-    renderIngredients = ingredients.map((item, index) => {
+    let nodes = ingredients.map((ingredient, index) => {
+      let props = {
+        item: ingredient,
+        key: index
+      }
       return (
-        <li className={'card__list--item card__list--item-' + index}>{item}</li>
+        <ListItem {...props} />
       )
     });
+    return nodes;
+  }
 
+  render() {
+    console.log('ingre card props ', this.props);
+    let ingredients = this.props;
+    let renderIngredients = this.ingredientRender();
+
+    let saved = false;
+    let renderSaveButton;
     if (saved === false) {
       renderSaveButton = (
         <Button type="button" name="save-card" ingredients={ingredients} />

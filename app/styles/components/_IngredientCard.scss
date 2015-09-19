@@ -1,42 +1,44 @@
-.section-mid {
+.card {
+  width: 20%;
+  background: #fff;
 
-  &__block {
+  &__heading {
+    width: 100%;
+    background: #bada55;
+    text-align: center;
+    padding: $padding * 5 $padding * 2;
+  }
 
-    padding: $padding;
+  &__list {
 
-    .card {
-      width: 20%;
-      background: #fff;
+    &--item {
 
-      &__heading {
-        width: 100%;
-        background: #bada55;
-        text-align: center;
-        padding: $padding * 5 $padding * 2;
-      }
+      padding: $padding * 3;
+      border: $light-border;
+      border-bottom: none;
 
-      &__list {
-
-        &--item {
-
-          padding: $padding * 3;
-          border: $light-border;
-          border-bottom: none;
-
-          &:last-child {
-            border-bottom: $light-border;
-          }
-        }
-      }
-
-      .button-save-card {
-        width: 100%;
-        background: lighten(plum, 5%);
-        text-align: center;
-        padding: $padding * 5 $padding * 2;
-        cursor: pointer;
+      &:last-child {
+        border-bottom: $light-border;
       }
     }
   }
 
+  .button-save-card {
+    width: 100%;
+    background: lighten(plum, 5%);
+    cursor: pointer;
+    text-align: justify;
+
+    .btn {
+      content: '';
+      width: 50%;
+      display: inline-block;
+      text-align: center;
+      padding: $padding * 4;
+
+      &:hover {
+        background: plum;
+      }
+    }
+  }
 }

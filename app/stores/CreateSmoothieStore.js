@@ -5,7 +5,7 @@ import Actions from '../actions/SmoothieActions.js';
 
 import ingredients from '../constants.js';
 
-let data = {
+let storeData = {
   ingredients
 };
 
@@ -35,7 +35,7 @@ const CreateSmoothieStore = Reflux.createStore({
 
   createIngredients(type, amount) {
     let recipe = [];
-    let ingredients = data.ingredients[type];
+    let ingredients = storeData.ingredients[type];
     let ingredientsLength = ingredients.length;
     let oldNumbers = [];
 
@@ -59,6 +59,9 @@ const CreateSmoothieStore = Reflux.createStore({
     return recipe;
   },
 
+  /**
+   * Generate random number. Re-generate if the same number
+   */
   numberGen(maxVal, old) {
     let number = Math.random() * (maxVal);
     number = Math.floor(number);

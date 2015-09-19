@@ -13,21 +13,21 @@ export default class Button extends React.Component {
 
   generateSmoothie() {
     let type = this.props.recipeType;
-    console.log(type);
-
     Actions.findIngredients(type);
   }
 
   saveCard() {
     let data = this.props.ingredients;
-    console.log('saving', data);
     Actions.saveThisCard(data);
   }
 
 // TODO Set default props rather than in render
+// TODO re-blend btn. listen to type gen store for type prop
   render() {
-    console.log(this.props);
-    let {type, name, ...other } = this.props;
+    let { type, name, ...other } = this.props;
+    // if (this.props.recipeType) {
+      // let { type, name, recipeType } = this.props;
+    // }
 
     if (name === 'generate') {
       return (
@@ -38,16 +38,22 @@ export default class Button extends React.Component {
       );
     } else if (name === 'save-card') {
       return (
-        <div className={'button-' + name}
-             onClick={this.saveCard}>
-          Save Blend?
-        </div>
+        <ul className={'button-' + name}>
+          <li className="btn"
+               onClick={this.saveCard}>
+            Save Blend?
+          </li>
+          <li className="btn"
+               onClick={this.saveCard}>
+            todo Blend?
+          </li>
+        </ul>
       );
 
     } else {
       return (
         <button type={type} className={'button__' + name}>
-          Not generate
+          Default Button
         </button>
       );
     }

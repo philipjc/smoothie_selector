@@ -1,8 +1,9 @@
 import React from 'react';
 
-// Components ====================
+// Components ===============================
 import Input from './parts/Input.jsx';
 import Button from './parts/Button.jsx';
+// ==========================================
 
 // Reflux ===================================
 import TypeSelectionStore from '../stores/TypeSelectionStore.js';
@@ -26,7 +27,7 @@ export default class GenerateSmoothie extends React.Component {
   }
 
   handleGenerateChange(type) {
-    console.log(type);
+    console.log('generate compo type ', type);
     this.setState({
       type: type
     });

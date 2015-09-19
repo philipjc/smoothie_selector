@@ -7,18 +7,23 @@ import Actions from '../actions/SmoothieActions.js';
 //   saved: true,
 //   ingredients: []
 // }
-
-let data = {
+let storeData = {
   cards: []
-}
+};
 
 const SavedStore = Reflux.createStore({
   listenables: Actions,
 
   onSaveThisCard(data) {
-    console.log('from save store ', data);
+    let allCards = storeData.cards;
 
-    this.trigger(data);
+    let card = {};
+    card.ingredients = data;
+    card.saved = true;
+
+    allCards.push(card);
+
+    this.trigger(allCards);
   }
 
 });

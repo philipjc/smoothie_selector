@@ -1,12 +1,15 @@
 import React from 'react';
 
-// Components ===============================
-import GenerateSmoothie from './GenerateSmoothie.jsx'
-import IngredientCard from './IngredientCard.jsx';
-
-// Reflux ===================================
+// Reflux ============================================
 import CreateSmoothieStore from '../stores/CreateSmoothieStore.js';
 import SavedStore from '../stores/SavedStore.js';
+// ===================================================
+
+// Components ========================================
+import GenerateSmoothie from './GenerateSmoothie.jsx'
+import IngredientCard from './IngredientCard.jsx';
+import SavedSmoothies from './SavedSmoothies.jsx';
+// ===================================================
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 
@@ -15,62 +18,78 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       title: this.props.title,
-      ingredients: []
+      ingredients: [],
+      storedCards: []
     }
 
     this.handleCreateSmoothie = this.handleCreateSmoothie.bind(this);
-    this.handleSavedSmoothies = this.handleSavedSmoothies.bind(this);
-
+    // this.handleSavedSmoothie = this.handleSavedSmoothie.bind(this);
   }
 
   componentWillMount() {
-    this.findUnsubscribe = CreateSmoothieStore.listen(this.handleCreateSmoothie);
-    this.saveUnsubscribe = SavedStore.listen(this.handleSavedSmoothies);
-
+    this.createUnsubscribe = CreateSmoothieStore.listen(this.handleCreateSmoothie);
+    // this.saveUnsubscribe = SavedStore.listen(this.handleSavedSmoothie);
   }
 
   componentWillUnmount() {
-    this.findUnsubscribe();
-    this.saveUnsubscribe();
+    this.createUnsubscribe();
+    // this.saveUnsubscribe();
   }
 
   handleCreateSmoothie(res) {
-    console.log(res);
     this.setState({
       ingredients: res
     });
   }
 
-  handleSavedSmoothies(res) {
-    console.log('main handle save ', res);
-  }
+  // handleSavedSmoothie(res) {
+  //
+  // }
 
+// TODO Use props? expect an Array for save and create.
   render() {
+    let cards = this.state.storedCards;
     let ingredients = this.state.ingredients;
 
     return (
       <div className="main-container">
+
         <div className="section-upper">
-          <div className="section-upper__header">
-            <h1 className="section-upper__header--title">{this.props.title}</h1>
-            <div className="section-upper__header--logo">
-              <img src="" alt="" />
+          <div className="row">
+            <div className="section-upper__header">
+              <h1 className="section-upper__header--title">{this.props.title}</h1>
+              <div className="section-upper__header--logo">
+                <img src="" alt="" />
+              </div>
             </div>
           </div>
 
-          <div className="section-upper__intro">
-            <div className="section-upper__intro--heading">
-              <h3>What Do you fancy Today?</h3>
+          <div className="row">
+            <div className="section-upper__intro">
+              <div className="section-upper__intro--heading">
+                <h3>What Do you fancy Today?</h3>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="section-mid">
-          <GenerateSmoothie />
 
-          <div className="section-mid__block">
-            <IngredientCard ingredients={ingredients} />
+          <div className="row">
+            <GenerateSmoothie />
           </div>
+
+          <div className="row">
+            <div className="section-mid__block">
+              <IngredientCard ingredients={ingredients} />
+            </div>
+          </div>
+
+          <div className="row">
+            <SavedSmoothies cards={cards} />
+          </div>
+
+
         </div>
 
       </div>
@@ -78,5 +97,11 @@ export default class Main extends React.Component {
   }
 }
 
-Main.propTypes = { title: React.PropTypes.string };
-Main.defaultProps = { title: 'Smoothie Selector' };
+Main.propTypes = {
+  title: React.PropTypes.string,
+  ingredients: React.PropTypes.array,
+  storedCards: React.PropTypes.array
+};
+Main.defaultProps = {
+  title: 'Smoothie Selector'
+};
