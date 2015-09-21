@@ -7,11 +7,12 @@ import SavedStore from '../stores/SavedStore.js';
 
 // Components ========================================
 import GenerateSmoothie from './GenerateSmoothie.jsx'
-import IngredientCard from './IngredientCard.jsx';
+import CurrentSmoothies from './CurrentSmoothies.jsx';
 import SavedSmoothies from './SavedSmoothies.jsx';
 // ===================================================
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
+// TODO Think? this.props is an Object. Think your passing an Array? Think again.
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class Main extends React.Component {
     this.state = {
       title: this.props.title,
       ingredients: [],
-      storedCards: []
+      savedCards: []
     }
 
     this.handleCreateSmoothie = this.handleCreateSmoothie.bind(this);
@@ -52,9 +53,18 @@ export default class Main extends React.Component {
   // }
 
 // TODO Use props? expect an Array for save and create.
+// TODO listen to all stores in here?
   render() {
-    let cards = this.state.storedCards;
-    let ingredients = this.state.ingredients;
+    let { ingredients, savedCards } = this.state;
+    let currentSmoothies;
+
+    if (ingredients.length) {
+      currentSmoothies = (
+        <div className="row">
+          <CurrentSmoothies ingredients={ingredients} />
+        </div>
+      );
+    }
     console.log('main render ', ingredients);
 
     return (
@@ -85,14 +95,10 @@ export default class Main extends React.Component {
             <GenerateSmoothie />
           </div>
 
-          <div className="row">
-            <div className="section-mid__block">
-              <IngredientCard ingredients={ingredients} />
-            </div>
-          </div>
+          {currentSmoothies}
 
           <div className="row">
-            <SavedSmoothies cards={cards} />
+            <SavedSmoothies cards={savedCards} />
           </div>
 
 
@@ -106,7 +112,7 @@ export default class Main extends React.Component {
 Main.propTypes = {
   title: React.PropTypes.string,
   ingredients: React.PropTypes.array,
-  storedCards: React.PropTypes.array
+  savedCards: React.PropTypes.array
 };
 Main.defaultProps = {
   title: 'Smoothie Selector'

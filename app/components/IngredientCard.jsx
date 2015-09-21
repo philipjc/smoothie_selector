@@ -9,22 +9,25 @@ export default class IngredientCard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.ingredientRender = this.ingredientRender.bind(this);
+    this.ingredientsRender = this.ingredientsRender.bind(this);
   }
 
   // TODO Add CSS Object to style dynamic colors.
 
-  ingredientRender() {
+  ingredientsRender() {
     // TODO create function to extract cards. can then pass into btn
     let ingredientsCards = this.props.ingredients;
     let nodes;
 
-    ingredientsCards.forEach(ingredientsCard => {
-      let ingredients = ingredientsCard.ingredients;
+    ingredientsCards.forEach(card => {
+      let ingredients = card.ingredients;
+      let saved = card.saved;
+      console.log('single card ', card);
 
       nodes = ingredients.map((ingredient, index) => {
         let props = {
           item: ingredient,
+          saved: saved,
           key: index
         }
         return (
@@ -38,14 +41,16 @@ export default class IngredientCard extends React.Component {
   // TODO passing ingredietsn into btn. pass through func to extract obj?
   render() {
     console.log('ingredient card props', this.props);
-    let ingredients = this.props.ingredients;
-    let renderIngredients = this.ingredientRender();
+    let ingredients = this.props;
+    let [ card ] = this.props.ingredients;
+    let { saved } = card;
+    console.log('card', card);
+    let renderIngredients = this.ingredientsRender();
 
-    let savedd = false;
     let renderSaveButton;
-    if (savedd === false) {
+    if (saved === false) {
       renderSaveButton = (
-        <Button type="button" name="save-card" ingredients={ingredients} />
+        <Button type="button" name="save-card" ingredients={card} />
       );
     }
 

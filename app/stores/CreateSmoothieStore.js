@@ -27,8 +27,7 @@ const CreateSmoothieStore = Reflux.createStore({
 
     let recipeCard = storeData;
     recipeCard.ingredients = ingredientsToSend;
-    console.log('recipe card from store ', recipeCard);
-
+    console.log('recipe card from single store ', recipeCard);
     this.trigger(recipeCard);
   },
 
@@ -36,10 +35,12 @@ const CreateSmoothieStore = Reflux.createStore({
     let qty = 2;
     let fruitToSend = this.createIngredients('fruit', qty);
     let vegToSend = this.createIngredients('vegetable', qty);
-
     let ingredientsToSend = [].concat(fruitToSend, vegToSend);
 
-    this.trigger(ingredientsToSend);
+    let recipeCard = storeData;
+    recipeCard.ingredients = ingredientsToSend;
+    console.log('recipe card from single store ', recipeCard);
+    this.trigger(recipeCard);
   },
 
   createIngredients(type, amount) {
@@ -50,11 +51,9 @@ const CreateSmoothieStore = Reflux.createStore({
 
     // loop through - use for of
     while (recipe.length < amount) {
-
       ingredients.forEach((ingredient, index) => {
 
         let number = this.numberGen(ingredientsLength, oldNumbers);
-
         // find the index
         if (index === number) {
           // push useed number
@@ -64,10 +63,8 @@ const CreateSmoothieStore = Reflux.createStore({
         }
       });
     }
-
     return recipe;
   },
-
   /**
    * Generate random number. Re-generate if the same number
    */
@@ -78,10 +75,8 @@ const CreateSmoothieStore = Reflux.createStore({
     if (old.indexOf(number) !== -1) {
       this.numberGen(maxVal, old);
     }
-
     return number;
   }
-
 });
 
 export default CreateSmoothieStore;
