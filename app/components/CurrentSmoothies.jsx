@@ -8,8 +8,8 @@ class CurrentSmoothies extends React.Component{
  }
 
  render() {
-   console.log(this.props);
-
+   // perform logic in here to pass IngredientCard just an Object.
+   console.log('from current IC pass in ', this.props.ingredients);
    // Passing the Array rather than props Object.
    return (
      <div className="section-mid__block">

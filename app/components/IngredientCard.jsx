@@ -15,7 +15,7 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors.
 
   ingredientsRender() {
-    // TODO create function to extract cards. can then pass into btn
+    // TODO This component should just take an Object and display it, nothing else.
     let ingredientsCards = this.props.ingredients;
     let nodes;
 
@@ -42,7 +42,7 @@ export default class IngredientCard extends React.Component {
   render() {
     console.log('ingredient card props', this.props);
     let ingredients = this.props;
-  
+
     let [ card ] = this.props.ingredients;
     let { saved } = card;
     console.log('card', card);

@@ -59,13 +59,15 @@ export default class Main extends React.Component {
 
 // TODO Use props? expect an Array for save and create.
 // TODO listen to all stores in here?
+// A store can trigger more than one lot of data. Perform a condition in the component
+// to see what prop has changed.
   render() {
     let { ingredients, savedCards } = this.state;
     console.log('passing single card to current smoothie ', ingredients);
     console.log('passing all cards to saved smoothies ', savedCards);
 
-    let currentSmoothies,
-      savedSmoothies;
+    let currentSmoothies;
+    let savedSmoothies;
 
     if (ingredients.length) {
       currentSmoothies = (
@@ -117,7 +119,7 @@ export default class Main extends React.Component {
           </div>
 
           {currentSmoothies}
-          
+          {savedSmoothies}
 
         </div>
 
