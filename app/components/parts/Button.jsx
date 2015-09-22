@@ -11,12 +11,14 @@ export default class Button extends React.Component {
     this.saveCard = this.saveCard.bind(this);
   }
 
+  // TODO can I abstract Button more? OOP
   generateSmoothie() {
     let type = this.props.recipeType;
     Actions.findIngredients(type);
   }
 
   saveCard() {
+    console.log('saving card');
     let data = this.props.ingredients;
     Actions.saveThisCard(data);
   }
@@ -25,6 +27,7 @@ export default class Button extends React.Component {
 // TODO re-blend btn. listen to type gen store for type prop
   render() {
     let { type, name, ...other } = this.props;
+    console.log('other ', other);
     // if (this.props.recipeType) {
       // let { type, name, recipeType } = this.props;
     // }

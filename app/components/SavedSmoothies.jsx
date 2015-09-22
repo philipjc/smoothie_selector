@@ -10,19 +10,21 @@ class SavedSmoothies extends React.Component {
  }
 
  renderCards(cards) {
-   let items = cards.map((card, index) => {
-     return (
-       <IngredientCard ingredients={card} />
-     );
+   let item;
+   cards.forEach((card, index) => {
+     console.log('each card from saved ', card);
+     item = <IngredientCard ingredients={card} />
    });
-   return items;
+   return item;
  }
 
+ // TODO Need to get saved and current to pass the same structure to IngredientCard.
  render() {
-   let { cards } = this.props;
+   let cards = this.props.cards;
+   console.log('from saved smoothies ', this.props);
    let cardsDisplay = this.renderCards(cards);
 
-   return(
+   return (
      <div>
        {cardsDisplay}
      </div>

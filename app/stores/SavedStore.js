@@ -15,13 +15,12 @@ const SavedStore = Reflux.createStore({
   listenables: Actions,
 
   onSaveThisCard(data) {
+    console.log('after saving, card from store ', data);
     let allCards = storeData.cards;
 
-    let card = {};
-    card.ingredients = data;
-    card.saved = true;
+    allCards.push(data);
 
-    allCards.push(card);
+    console.log('card added to cards array ', allCards);
 
     this.trigger(allCards);
   }

@@ -24,17 +24,18 @@ export default class Main extends React.Component {
     }
 
     this.handleCreateSmoothie = this.handleCreateSmoothie.bind(this);
-    // this.handleSavedSmoothie = this.handleSavedSmoothie.bind(this);
+    this.handleSavedSmoothie = this.handleSavedSmoothie.bind(this);
   }
 
   componentWillMount() {
     this.createUnsubscribe = CreateSmoothieStore.listen(this.handleCreateSmoothie);
-    // this.saveUnsubscribe = SavedStore.listen(this.handleSavedSmoothie);
+    this.saveUnsubscribe = SavedStore.listen(this.handleSavedSmoothie);
   }
 
+  // TODO put calls in to an Array?? loop and call all items in array on unmount.
   componentWillUnmount() {
     this.createUnsubscribe();
-    // this.saveUnsubscribe();
+    this.saveUnsubscribe();
   }
 
   // TODO make state.ingredients array of strings again. add saved prop if saving?
@@ -48,15 +49,23 @@ export default class Main extends React.Component {
     });
   }
 
-  // handleSavedSmoothie(res) {
-  //
-  // }
+  handleSavedSmoothie(res) {
+    console.log('cards array from save store ', res);
+
+    this.setState({
+      savedCards: res
+    });
+  }
 
 // TODO Use props? expect an Array for save and create.
 // TODO listen to all stores in here?
   render() {
     let { ingredients, savedCards } = this.state;
-    let currentSmoothies;
+    console.log('passing single card to current smoothie ', ingredients);
+    console.log('passing all cards to saved smoothies ', savedCards);
+
+    let currentSmoothies,
+      savedSmoothies;
 
     if (ingredients.length) {
       currentSmoothies = (
@@ -66,6 +75,18 @@ export default class Main extends React.Component {
       );
     }
     console.log('main render ', ingredients);
+
+    // TODO passing in differnt data struc, can't handle it.
+    // TODO Need to get saved and current to pass the same structure to IngredientCard.
+
+    if (savedCards.length) {
+      console.log(savedCards.length);
+      savedSmoothies = (
+        <div className="row">
+          <SavedSmoothies cards={savedCards} />
+        </div>
+      );
+    }
 
     return (
       <div className="main-container">
@@ -96,11 +117,7 @@ export default class Main extends React.Component {
           </div>
 
           {currentSmoothies}
-
-          <div className="row">
-            <SavedSmoothies cards={savedCards} />
-          </div>
-
+          
 
         </div>
 

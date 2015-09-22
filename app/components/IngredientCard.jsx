@@ -42,6 +42,7 @@ export default class IngredientCard extends React.Component {
   render() {
     console.log('ingredient card props', this.props);
     let ingredients = this.props;
+  
     let [ card ] = this.props.ingredients;
     let { saved } = card;
     console.log('card', card);
