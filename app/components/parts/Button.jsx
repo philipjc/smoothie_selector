@@ -11,23 +11,22 @@ export default class Button extends React.Component {
     this.saveCard = this.saveCard.bind(this);
   }
 
-  // TODO can I abstract Button more? OOP
   generateSmoothie() {
     let type = this.props.recipeType;
+    console.log('generate smoothie type ',type);
     Actions.findIngredients(type);
   }
 
   saveCard() {
-    console.log('saving card');
     let data = this.props.ingredients;
+    console.log('saving', data);
     Actions.saveThisCard(data);
   }
 
 // TODO Set default props rather than in render
-// TODO re-blend btn. listen to type gen store for type prop
   render() {
-    let { type, name, ...other } = this.props;
-    console.log('other ', other);
+    console.log('button props ', this.props);
+    let {type, name, ...other } = this.props;
     // if (this.props.recipeType) {
       // let { type, name, recipeType } = this.props;
     // }
@@ -41,22 +40,16 @@ export default class Button extends React.Component {
       );
     } else if (name === 'save-card') {
       return (
-        <ul className={'button-' + name}>
-          <li className="btn"
-               onClick={this.saveCard}>
-            Save Blend?
-          </li>
-          <li className="btn"
-               onClick={this.saveCard}>
-            todo Blend?
-          </li>
-        </ul>
+        <div className={'button-' + name}
+             onClick={this.saveCard}>
+          Save Blend?
+        </div>
       );
 
     } else {
       return (
         <button type={type} className={'button__' + name}>
-          Default Button
+          Not generate
         </button>
       );
     }

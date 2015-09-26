@@ -1,40 +1,17 @@
 import React from 'react';
 
-// Components ===============================
+// Components ====================
 import Input from './parts/Input.jsx';
 import Button from './parts/Button.jsx';
-// ==========================================
 
 // Reflux ===================================
-import TypeSelectionStore from '../stores/TypeSelectionStore.js';
 
 export default class GenerateSmoothie extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      type: ''
-    }
-
-    this.handleGenerateChange = this.handleGenerateChange.bind(this);
-  }
-
-  componentWillMount() {
-    let unSubscribe = TypeSelectionStore.listen(this.handleGenerateChange);
-  }
-
-  componentWillUnmount() {
-    this.unSubscribe();
-  }
-
-  handleGenerateChange(type) {
-    console.log('generate compo type ', type);
-    this.setState({
-      type: type
-    });
   }
 
   render() {
-    let recipeType = this.state.type;
 
     return (
       <div className="section-mid__form">
@@ -46,10 +23,14 @@ export default class GenerateSmoothie extends React.Component {
           </div>
 
           <div className="section-mid__form--button">
-            <Button type="submit" name="generate" recipeType={recipeType} />
+            <Button type="submit" name="generate" recipeType={this.props.type} />
           </div>
         </form>
       </div>
     )
   }
+}
+
+GenerateSmoothie.propTypes = {
+  type: React.PropTypes.string
 }

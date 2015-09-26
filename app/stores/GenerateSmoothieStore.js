@@ -14,7 +14,7 @@ let storeData = {
   saved: false
 }
 
-const CreateSmoothieStore = Reflux.createStore({
+const GenerateSmoothieStore = Reflux.createStore({
   listenables: Actions,
 
   onFindIngredients(type) {
@@ -79,4 +79,4 @@ const CreateSmoothieStore = Reflux.createStore({
   }
 });
 
-export default CreateSmoothieStore;
+export default GenerateSmoothieStore;

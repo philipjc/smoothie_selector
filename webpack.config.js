@@ -37,7 +37,7 @@ var common = {
 
   plugins: [
     new HtmlwebpackPlugin({
-      title: 'App'
+      title: 'Smoothie Roulette'
     })
   ]
 };

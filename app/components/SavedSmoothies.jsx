@@ -18,6 +18,7 @@ class SavedSmoothies extends React.Component {
    return item;
  }
 
+ // TODO Want to displap multi Cards? .map ingredientsCard 
  // TODO Need to get saved and current to pass the same structure to IngredientCard.
  render() {
    let cards = this.props.cards;

@@ -8,7 +8,7 @@ class ListItem extends React.Component{
  render() {
    let { item, key } = this.props;
    return (
-     <li className={'card__list--item card__list--item-' + key}>
+     <li className={'card__list--ingredient card__list--item-' + key}>
        {item}
      </li>
    );
