@@ -11,12 +11,13 @@ class GeneratedSmoothie extends React.Component{
 
  render() {
    let { ingredientsCard } = this.props;
-   console.log('GeneratedSmoothie Compo ingredients ', ingredientsCard);
 
    if (ingredientsCard) {
      return(
        <div className="section-mid__block">
-         <IngredientCard ingredientsCard={ingredientsCard} />
+         <div className="section-mid__block--element">
+           <IngredientCard ingredientsCard={ingredientsCard} />
+          </div>
        </div>
      );
    } else {

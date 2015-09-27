@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Reflux ===================================================
+import Actions from '../actions/SmoothieActions.js';
+
 // Components ===============================================
 import Button from './parts/Button.jsx';
 import ListItem from './parts/ListItem.jsx';
@@ -9,6 +12,7 @@ class IngredientCard extends React.Component {
     super(props);
 
     this.renderSmoothieCard = this.renderSmoothieCard.bind(this);
+    this.saveCard = this.saveCard.bind(this);
   }
 
   renderSmoothieCard(ingredients) {
@@ -20,8 +24,14 @@ class IngredientCard extends React.Component {
     return card;
   }
 
-  // TODO Add CSS Object to style dynamic colors.
+  saveCard() {
+    let card = this.props.ingredientsCard;
+    Actions.saveThisCard(card);
+  }
+
+  // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
+    console.log('card  props ', this.props);
     let { ingredientsCard } = this.props;
     let { ingredients } = ingredientsCard;
 
@@ -36,6 +46,7 @@ class IngredientCard extends React.Component {
           <ul className="card__list">
             {smoothieCard}
           </ul>
+          <Button type="button" name="save-card" save={this.saveCard} />
       </div>
     );
   }

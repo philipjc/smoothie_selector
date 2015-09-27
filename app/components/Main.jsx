@@ -8,6 +8,7 @@ import SavedStore from '../stores/SavedStore.js';
 // Components ======================================
 import GenerateSmoothie from './GenerateSmoothie.jsx'
 import GeneratedSmoothie from './GeneratedSmoothie.jsx';
+import SavedSmoothies from './SavedSmoothies.jsx';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 
@@ -46,7 +47,10 @@ export default class Main extends React.Component {
   }
 
   handleSavedStoreUpdate(res) {
-    console.log('Main handle saved cards ', res);
+    console.log('Main, handle saved cards result ', res);
+    this.setState({
+      savedCards: res
+    });
   }
 
   handleTypeStore(res) {
@@ -58,6 +62,8 @@ export default class Main extends React.Component {
 
   render() {
     let { title, type, ingredientsCard, savedCards } = this.state;
+    let openingQuestion = type ? `What Do you fancy Today, ${type}?` : `What Do you fancy Today?`;
+
     console.log('Destructored type ', type);
     console.log('Destructored ingredientsCard ', ingredientsCard);
 
@@ -73,7 +79,7 @@ export default class Main extends React.Component {
 
           <div className="section-upper__intro">
             <div className="section-upper__intro--heading">
-              <h3>What Do you fancy Today?</h3>
+              <h3>{openingQuestion}</h3>
             </div>
           </div>
         </div>
@@ -82,6 +88,8 @@ export default class Main extends React.Component {
           <GenerateSmoothie type={type} />
 
           <GeneratedSmoothie ingredientsCard={ingredientsCard} />
+
+          <SavedSmoothies savedCards={savedCards} />
         </div>
 
       </div>
