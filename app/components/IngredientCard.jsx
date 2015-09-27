@@ -40,13 +40,20 @@ class IngredientCard extends React.Component {
       smoothieCard = this.renderSmoothieCard(ingredients);
     }
 
+    let saveButton;
+    if (!ingredientsCard.saved) {
+      saveButton = (
+        <Button type="button" name="save-card" save={this.saveCard} />
+      )
+    }
+
     return (
       <div className="card">
         <h2 className="card__heading">Ingredient Card</h2>
           <ul className="card__list">
             {smoothieCard}
           </ul>
-          <Button type="button" name="save-card" save={this.saveCard} />
+          {saveButton}
       </div>
     );
   }

@@ -43,12 +43,12 @@ body {
 
       &__block {
         width: 100%;
-        padding: $padding;
+        // padding: $padding;
 
         &--element {
           width: 20%;
           display: inline-block;
-          margin-right: $small-margin;
+          padding: $padding;
         }
       }
 

@@ -19,6 +19,8 @@ const SavedStore = Reflux.createStore({
 
     let cardToSave = JSON.parse(JSON.stringify(card));
 
+    cardToSave.saved = true;
+
     storeData.cards.push(cardToSave);
 
     let cardsCopy = JSON.parse(JSON.stringify(storeData.cards));
