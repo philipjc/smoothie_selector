@@ -11,11 +11,12 @@ class IngredientCard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.renderSmoothieCard = this.renderSmoothieCard.bind(this);
+    this.renderSmoothieIngredients = this.renderSmoothieIngredients.bind(this);
+    this.trashSavedCard = this.trashSavedCard.bind(this);
     this.saveCard = this.saveCard.bind(this);
   }
 
-  renderSmoothieCard(ingredients) {
+  renderSmoothieIngredients(ingredients) {
     let card = ingredients.map((ingredient, index) => {
       return (
         <ListItem item={ingredient} key={index} />
@@ -29,27 +30,33 @@ class IngredientCard extends React.Component {
     Actions.saveThisCard(card);
   }
 
+  trashSavedCard(e) {
+    
+  }
+
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
     console.log('card  props ', this.props);
-    let { ingredientsCard } = this.props;
+    let { ingredientsCard, index } = this.props;
     let { ingredients } = ingredientsCard;
 
-    let smoothieCard;
-    if (ingredients) {
-      smoothieCard = this.renderSmoothieCard(ingredients);
-    }
+    let smoothieCard = smoothieCard = this.renderSmoothieIngredients(ingredients);
 
     let saveButton;
+    let trashButton;
     if (!ingredientsCard.saved) {
       saveButton = (
         <Button type="button" name="save-card" save={this.saveCard} />
+      )
+    } else {
+      trashButton = (
+        <i className="fa fa-trash-o" onClick={this.trashSavedCard}></i>
       )
     }
 
     return (
       <div className="card">
-        <h2 className="card__heading">Ingredient Card</h2>
+        <h2 className="card__heading">Ingredient Card {trashButton}</h2>
           <ul className="card__list">
             {smoothieCard}
           </ul>

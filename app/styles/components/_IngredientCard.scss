@@ -6,14 +6,20 @@
     width: 100%;
     background: #bada55;
     text-align: center;
-    padding: $padding * 5 $padding * 2;
+    padding: $padding * 10 $padding * 2;
+
+    i {
+      float: right;
+      margin-right: 10px;
+    }
   }
 
   &__list {
+    height: 160px;
 
     &--ingredient {
 
-      padding: $padding * 3;
+      padding: $padding * 4;
       border: $light-border;
       border-bottom: none;
 
@@ -28,6 +34,7 @@
     background: lighten(plum, 5%);
     cursor: pointer;
     text-align: justify;
+    user-select: none;
 
     .btn {
       content: '';
@@ -37,7 +44,7 @@
       padding: $padding * 4;
 
       &:hover {
-        background: plum;
+        background: darken(plum, 10%);
       }
     }
   }

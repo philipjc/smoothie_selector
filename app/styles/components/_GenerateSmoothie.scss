@@ -2,7 +2,7 @@
   width: 100%;
 
   &__form {
-    background: plum;
+    // background: plum;
     padding: $padding;
 
     &--inputs {
@@ -45,6 +45,6 @@
 
   &__block {
 
-    background: darken(plum, 10%);
+    background: #aaa;
   }
 }
