@@ -26,12 +26,14 @@ class IngredientCard extends React.Component {
   }
 
   saveCard() {
+    console.log('now ', this.props);
     let card = this.props.ingredientsCard;
     Actions.saveThisCard(card);
   }
 
-  trashSavedCard(e) {
-    
+  trashSavedCard() {
+    let card = this.props.index;
+    Actions.trashThisCard(card);
   }
 
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
@@ -69,5 +71,6 @@ class IngredientCard extends React.Component {
 module.exports = IngredientCard;
 
 IngredientCard.propTypes = {
-  ingredientsCard: React.PropTypes.object
+  ingredientsCard: React.PropTypes.object,
+  index: React.PropTypes.number
 };

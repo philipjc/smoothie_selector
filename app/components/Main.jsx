@@ -27,6 +27,7 @@ export default class Main extends React.Component {
     this.handleTypeStore = this.handleTypeStore.bind(this);
   }
 
+  // To use the same Store, you can check a property, if found perform method.
   componentWillMount() {
     this.GenerateUnsubscribe = GenerateSmoothieStore.listen(this.handleGenerateStoreUpdate);
     this.saveUnsubscribe = SavedStore.listen(this.handleSavedStoreUpdate);

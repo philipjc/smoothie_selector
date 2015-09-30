@@ -28,6 +28,12 @@ const SavedStore = Reflux.createStore({
     console.log('cards copy ', cardsCopy);
 
     this.trigger(cardsCopy);
+  },
+
+  onTrashThisCard(card) {
+    storeData.cards.splice(card, 1);
+
+    this.trigger(storeData.cards);
   }
 
 });
