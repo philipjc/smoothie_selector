@@ -1,33 +1,7 @@
-'use strict';
+import numberGen from './Utiles.js';
 
-import Reflux from 'reflux';
-import Actions from '../actions/SmoothieActions.js';
-import numberGen from './Utils.js';
+let ingredientMaker = (() => {
 
-import ingredients from '../constants.js';
-
-let storeIngredients = {
-  ingredients
-};
-
-let storeData = {
-  cards: []
-}
-
-const GenerateSmoothieStore = Reflux.createStore({
-  listenables: Actions,
-
-  onTrashGeneratedCard(card) {
-    storeData.cards.splice(card, 1);
-    this.sendCards();
-  },
-
-  onFindIngredients(type) {
-    type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4);
-  },
-
-  // TODO put in a helper module?
-  // TODO clean up.
   singleSelect(type, amount) {
     let ingredientsToSend = this.createIngredients(type, amount);
 
@@ -35,9 +9,7 @@ const GenerateSmoothieStore = Reflux.createStore({
     recipeCard.saved = false;
     recipeCard.ingredients = ingredientsToSend;
 
-    storeData.cards.push(recipeCard);
-
-    this.sendCards();
+    return recipeCard;
   },
 
   multiSelect() {
@@ -50,9 +22,7 @@ const GenerateSmoothieStore = Reflux.createStore({
     recipeCard.saved = false;
     recipeCard.ingredients = ingredientsToSend;
 
-    storeData.cards.push(recipeCard);
-
-    this.sendCards();
+    return recipeCard;
   },
 
   createIngredients(type, amount) {
@@ -73,12 +43,11 @@ const GenerateSmoothieStore = Reflux.createStore({
     }
 
     return recipe;
-  },
-
-  sendCards() {
-    let cardsCopy = JSON.parse(JSON.stringify(storeData.cards));
-    this.trigger(cardsCopy);
   }
-});
 
-export default GenerateSmoothieStore;
+  return {
+    single: singleSelect,
+    multi: multiSelect
+  }
+
+})(type, amount, numberGen);

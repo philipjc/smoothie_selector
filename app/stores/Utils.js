@@ -6,9 +6,9 @@ const numberGen = function(maxVal, old) {
   let number = Math.random() * (maxVal);
   number = Math.floor(number);
 
-  if (old.indexOf(number) !== -1) {
-    numberGen(maxVal, old);
-  }
+  // if (old.indexOf(number) !== -1) {
+  //   numberGen(maxVal, old);
+  // }
   return number;
 };
 
