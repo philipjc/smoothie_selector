@@ -16,7 +16,7 @@ class SavedSmoothies extends React.Component {
     let cards = this.props.savedCards.map((card, index) => {
       return (
         <div className="section-mid__block--element">
-          <IngredientCard ingredientsCard={card} index={index} />
+          <IngredientCard ingredientsCard={card} key={index} />
         </div>
       );
     });

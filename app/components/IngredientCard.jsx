@@ -32,7 +32,7 @@ class IngredientCard extends React.Component {
   }
 
   trashSavedCard() {
-    let card = this.props.index;
+    let card = this.props.key;
     Actions.trashThisCard(card);
   }
 
@@ -72,5 +72,5 @@ module.exports = IngredientCard;
 
 IngredientCard.propTypes = {
   ingredientsCard: React.PropTypes.object,
-  index: React.PropTypes.number
+  key: React.PropTypes.number
 };
