@@ -31,6 +31,7 @@ const SavedStore = Reflux.createStore({
   },
 
   onTrashThisCard(card) {
+    console.log('from trash store ', card);
     storeData.cards.splice(card, 1);
 
     this.trigger(storeData.cards);

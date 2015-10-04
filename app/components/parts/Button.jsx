@@ -9,12 +9,6 @@ export default class Button extends React.Component {
     this.state = {
       loading: false
     }
-    this.generateSmoothie = this.generateSmoothie.bind(this);
-  }
-
-  generateSmoothie() {
-    let type = this.props.recipeType;
-    Actions.findIngredients(type);
   }
 
 // TODO Set default props rather than in render
@@ -24,7 +18,7 @@ export default class Button extends React.Component {
     if (name === 'generate') {
       return (
         <div className={'button-' + name}
-             onClick={this.generateSmoothie}>
+             onClick={this.props.blend}>
           Blend!!!!
         </div>
       );

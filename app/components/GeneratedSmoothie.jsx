@@ -16,7 +16,7 @@ class GeneratedSmoothie extends React.Component{
      return(
        <div className="section-mid__block">
          <div className="section-mid__block--element">
-           <IngredientCard ingredientsCard={ingredientsCard} />
+           <IngredientCard ingredientCard={ingredientsCard} />
           </div>
        </div>
      );

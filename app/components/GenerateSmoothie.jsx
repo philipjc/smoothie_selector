@@ -5,13 +5,23 @@ import Input from './parts/Input.jsx';
 import Button from './parts/Button.jsx';
 
 // Reflux ===================================
+import Actions from '../actions/SmoothieActions.js';
 
 export default class GenerateSmoothie extends React.Component {
   constructor(props) {
     super(props);
+
+    this.generateSmoothie = this.generateSmoothie.bind(this);
+  }
+
+  generateSmoothie() {
+    let type = this.props.type;
+    console.log(type);
+    Actions.findIngredients(type);
   }
 
   render() {
+    let { type } = this.props.type;
 
     return (
       <div className="section-mid__form">
@@ -23,7 +33,7 @@ export default class GenerateSmoothie extends React.Component {
           </div>
 
           <div className="section-mid__form--button">
-            <Button type="submit" name="generate" recipeType={this.props.type} />
+            <Button type="submit" name="generate" blend={this.generateSmoothie} />
           </div>
         </form>
       </div>

@@ -27,26 +27,29 @@ class IngredientCard extends React.Component {
 
   saveCard() {
     console.log('now ', this.props);
-    let card = this.props.ingredientsCard;
+    let card = this.props.ingredientCard;
     Actions.saveThisCard(card);
   }
 
   trashSavedCard() {
     let card = this.props.key;
+    console.log('card to del', card);
     Actions.trashThisCard(card);
   }
 
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
-    console.log('card  props ', this.props);
-    let { ingredientsCard, index } = this.props;
-    let { ingredients } = ingredientsCard;
+    console.log('props from I C', this.props.key);
+    let { ingredientCard, ...other } = this.props;
+    console.log('ingredient Card', ingredientCard);
 
-    let smoothieCard = smoothieCard = this.renderSmoothieIngredients(ingredients);
+    let ingredients = ingredientCard.ingredients;
+
+    let ingredientsList = this.renderSmoothieIngredients(ingredients);
 
     let saveButton;
     let trashButton;
-    if (!ingredientsCard.saved) {
+    if (!ingredientCard.saved) {
       saveButton = (
         <Button type="button" name="save-card" save={this.saveCard} />
       )
@@ -60,7 +63,7 @@ class IngredientCard extends React.Component {
       <div className="card">
         <h2 className="card__heading">Ingredient Card {trashButton}</h2>
           <ul className="card__list">
-            {smoothieCard}
+            {ingredientsList}
           </ul>
           {saveButton}
       </div>
