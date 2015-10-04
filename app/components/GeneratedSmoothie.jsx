@@ -10,28 +10,25 @@ class GeneratedSmoothie extends React.Component{
  }
 
  render() {
-   let { ingredientsCard } = this.props;
-
-   if (ingredientsCard) {
-     return(
-       <div className="section-mid__block">
-         <div className="section-mid__block--element">
-           <IngredientCard ingredientCard={ingredientsCard} />
-          </div>
+   let cards = this.props.ingredientsCard.map((card, index) => {
+     let key = index;
+     return (
+       <div className="section-mid__block--element">
+         <IngredientCard ingredientCard={card} index={index} key={key} />
        </div>
      );
-   } else {
-     return (
-       <div className="section-mid__block">
-         <p>Get Blending!</p>
-       </div>
-     )
-   }
+   });
+
+   return (
+     <div className="section-mid__block">
+       { cards }
+     </div>
+   );
  }
 }
 
 module.exports = GeneratedSmoothie;
 
 GeneratedSmoothie.propTypes = {
-  ingredientsCard: React.PropTypes.object
+  ingredientsCard: React.PropTypes.array
 }

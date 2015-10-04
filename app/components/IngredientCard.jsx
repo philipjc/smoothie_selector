@@ -12,7 +12,7 @@ class IngredientCard extends React.Component {
     super(props);
 
     this.renderSmoothieIngredients = this.renderSmoothieIngredients.bind(this);
-    this.trashSavedCard = this.trashSavedCard.bind(this);
+    this.trashCard = this.trashCard.bind(this);
     this.saveCard = this.saveCard.bind(this);
   }
 
@@ -26,42 +26,47 @@ class IngredientCard extends React.Component {
   }
 
   saveCard() {
-    console.log('now ', this.props);
     let card = this.props.ingredientCard;
     Actions.saveThisCard(card);
   }
 
-  trashSavedCard() {
-    let card = this.props.key;
-    console.log('card to del', card);
-    Actions.trashThisCard(card);
+  trashCard() {
+    let card = this.props.ingredientCard;
+    let cardIndex = this.props.index;
+
+    if (card.saved) {
+      Actions.trashSavedCard(cardIndex);
+
+    } else {
+      Actions.trashGeneratedCard(cardIndex);
+    }
   }
 
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
-    console.log('props from I C', this.props.key);
-    let { ingredientCard, ...other } = this.props;
-    console.log('ingredient Card', ingredientCard);
-
+    let { ingredientCard, index } = this.props;
     let ingredients = ingredientCard.ingredients;
-
     let ingredientsList = this.renderSmoothieIngredients(ingredients);
 
     let saveButton;
     let trashButton;
     if (!ingredientCard.saved) {
       saveButton = (
-        <Button type="button" name="save-card" save={this.saveCard} />
+        <Button type="button"
+                name="save-card"
+                save={this.saveCard}
+                trash={this.trashCard}
+                />
       )
     } else {
       trashButton = (
-        <i className="fa fa-trash-o" onClick={this.trashSavedCard}></i>
+        <i className="fa fa-trash-o" onClick={this.trashCard}></i>
       )
     }
 
     return (
       <div className="card">
-        <h2 className="card__heading">Ingredient Card {trashButton}</h2>
+        <h2 className="card__heading">Ingredient Card <span>{trashButton}</span></h2>
           <ul className="card__list">
             {ingredientsList}
           </ul>

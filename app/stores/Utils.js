@@ -1,5 +1,4 @@
 
-
 /**
  * Generate random number. Re-generate if the same number
  */
@@ -11,6 +10,6 @@ const numberGen = function(maxVal, old) {
     numberGen(maxVal, old);
   }
   return number;
-}
+};
 
-export default numberGen
+export default numberGen;

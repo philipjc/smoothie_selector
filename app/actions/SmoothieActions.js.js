@@ -6,7 +6,8 @@ const Actions = Reflux.createActions([
   'findIngredients',
   'requiredType',
   'saveThisCard',
-  'trashThisCard'
+  'trashSavedCard',
+  'trashGeneratedCard'
 ]);
 
 export default Actions;

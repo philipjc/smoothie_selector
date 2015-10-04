@@ -28,11 +28,11 @@ export default class Button extends React.Component {
           <ul className={'button-' + name}>
             <li className="btn"
                 onClick={this.props.save}>
-                Save Blend?
+                <i className="fa fa-save"></i> ?
             </li>
             <li className="btn"
-                onClick={this.saveCard}>
-                todo Blend?
+                onClick={this.props.trash}>
+                <i className="fa fa-trash-o"></i> ?
             </li>
          </ul>
         </div>

@@ -18,7 +18,7 @@ export default class Main extends React.Component {
     this.state = {
       title: this.props.title,
       type: '',
-      ingredientsCard: '',
+      ingredientsCard: [],
       savedCards: []
     }
 

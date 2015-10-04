@@ -13,10 +13,10 @@ class SavedSmoothies extends React.Component {
   // TODO On every n cards return with a element with block css for new row?
   render() {
     let cards = this.props.savedCards.map((card, index) => {
-      console.log('card : index', card,index);
+      let key = index;
       return (
         <div className="section-mid__block--element">
-          <IngredientCard ingredientCard={card} key={index} />
+          <IngredientCard ingredientCard={card} index={index} key={key}/>
         </div>
       );
     });

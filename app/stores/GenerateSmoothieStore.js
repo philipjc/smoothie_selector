@@ -11,12 +11,16 @@ let storeIngredients = {
 };
 
 let storeData = {
-  ingredients: [],
-  saved: false
+  cards: []
 }
 
 const GenerateSmoothieStore = Reflux.createStore({
   listenables: Actions,
+
+  onTrashGeneratedCard(card) {
+    storeData.cards.splice(card, 1);
+    this.sendCards();
+  },
 
   onFindIngredients(type) {
     type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4);
@@ -27,10 +31,13 @@ const GenerateSmoothieStore = Reflux.createStore({
   singleSelect(type, amount) {
     let ingredientsToSend = this.createIngredients(type, amount);
 
-    let recipeCard = storeData;
+    let recipeCard = {};
+    recipeCard.saved = false;
     recipeCard.ingredients = ingredientsToSend;
-    console.log('recipe card from single store ', recipeCard);
-    this.trigger(recipeCard);
+
+    storeData.cards.push(recipeCard);
+
+    this.sendCards();
   },
 
   multiSelect() {
@@ -39,10 +46,13 @@ const GenerateSmoothieStore = Reflux.createStore({
     let vegToSend = this.createIngredients('vegetable', qty);
     let ingredientsToSend = [].concat(fruitToSend, vegToSend);
 
-    let recipeCard = storeData;
+    let recipeCard = {};
+    recipeCard.saved = false;
     recipeCard.ingredients = ingredientsToSend;
-    console.log('recipe card from single store ', recipeCard);
-    this.trigger(recipeCard);
+
+    storeData.cards.push(recipeCard);
+
+    this.sendCards();
   },
 
   createIngredients(type, amount) {
@@ -75,6 +85,11 @@ const GenerateSmoothieStore = Reflux.createStore({
     }
     return recipe;
   },
+
+  sendCards() {
+    let cardsCopy = JSON.parse(JSON.stringify(storeData.cards));
+    this.trigger(cardsCopy);
+  }
 });
 
 export default GenerateSmoothieStore;
