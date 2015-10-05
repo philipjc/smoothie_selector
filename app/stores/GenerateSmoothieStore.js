@@ -22,18 +22,23 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
-  onFindIngredients(type) {
-    type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4);
+  onFindIngredients(type, numCards) {
+    type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4, numCards);
   },
 
-  singleSelect(type, amount) {
-    let ingredientsToSend = this.createIngredients(type, amount);
+  singleSelect(type, amount, numCards) {
+    let numCardsCopy = numCards;
 
-    let recipeCard = {};
-    recipeCard.saved = false;
-    recipeCard.ingredients = ingredientsToSend;
+    while (numCardsCopy > 0) {
+      let ingredientsToSend = this.createIngredients(type, amount);
 
-    storeData.cards.push(recipeCard);
+      let recipeCard = {};
+      recipeCard.saved = false;
+      recipeCard.ingredients = ingredientsToSend;
+
+      storeData.cards.push(recipeCard);
+      numCardsCopy = numCardsCopy - 1;
+    }
 
     this.sendCards();
   },
@@ -58,14 +63,14 @@ const GenerateSmoothieStore = Reflux.createStore({
     let liquid;
     let ingredients = storeIngredients.ingredients[type];
     let ingredientsLength = ingredients.length;
-    let oldNumbers = [];
+    // let oldNumbers = [];
 
     type === 'fruit' ? liquid = 'milk' : liquid = 'water';
 
     recipe.push(liquid);
 
     while (recipe.length < amount) {
-      let number = numberGen(ingredientsLength - 1, oldNumbers);
+      let number = numberGen(ingredientsLength - 1);
       let ingredient = ingredients[number];
       recipe.push(ingredient);
     }

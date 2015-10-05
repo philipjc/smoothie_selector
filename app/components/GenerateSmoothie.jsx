@@ -15,13 +15,13 @@ export default class GenerateSmoothie extends React.Component {
   }
 
   generateSmoothie() {
-    let type = this.props.type;
+    let { type, amount } = this.props;
     if (!type) { return };
-    Actions.findIngredients(type);
+    Actions.findIngredients(type, amount);
   }
 
   render() {
-    let { type } = this.props.type;
+    let { type, amount } = this.props.type;
 
     return (
       <div className="section-upper__form">
@@ -39,9 +39,9 @@ export default class GenerateSmoothie extends React.Component {
         <div className="section-upper__form-block">
           <form>
             <div className="section-upper__form--inputs">
-              <Input type="radio" name="amount" value="1" />
-              <Input type="radio" name="amount" value="4" />
-              <Input type="radio" name="amount" value="7" />
+              <Input type="radio" name="amount" value={1} />
+              <Input type="radio" name="amount" value={5} />
+              <Input type="radio" name="amount" value={7} />
             </div>
           </form>
         </div>

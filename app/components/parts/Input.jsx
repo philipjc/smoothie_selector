@@ -4,9 +4,7 @@ import Actions from '../../actions/SmoothieActions.js';
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
+    
     this.inputHandler = this.inputHandler.bind(this);
   }
 
@@ -15,19 +13,19 @@ export default class Input extends React.Component {
    * // TODO Set up user pushing Enter.
    */
   inputHandler(e) {
-    let state = e.target.checked;
+    let choice = this.props.name;
+    let input = this.props.value;
 
-    this.setState({
-      input: true
-    });
-
-    if (state) {
-      let input = this.props.value;
+    if (choice === 'type') {
       Actions.requiredType(input);
 
-    } else {
-      return;
+    } else if (choice === 'amount') {
+      Actions.requiredAmount(input);
     }
+  }
+
+  pressEnterHandler() {
+    console.log('Push Enter feature?');
   }
 
   render() {

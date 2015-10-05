@@ -18,6 +18,7 @@ export default class Main extends React.Component {
     this.state = {
       title: this.props.title,
       type: '',
+      amount: 0,
       ingredientsCard: [],
       savedCards: []
     }
@@ -53,15 +54,22 @@ export default class Main extends React.Component {
   }
 
   handleTypeStore(res) {
-    this.setState({
-      type: res
-    });
+    if (typeof res === 'string') {
+      this.setState({
+        type: res
+      });
+
+    } else if (typeof res === 'number') {
+      this.setState({
+        amount: res
+      });
+    }
   }
 
   render() {
-    let { title, type, ingredientsCard, savedCards } = this.state;
+    let { title, type, amount, ingredientsCard, savedCards } = this.state;
     let typeQuestion = type ? `What Do you fancy Today, ${type}?` : `What Do you fancy Today?`;
-    let amountQuestion = type ? `How many to blend?` : '';
+    let amountQuestion = type ? `How many, ${amount}?`: `How many?`;
 
     return (
       <div className="main-container">
@@ -75,11 +83,11 @@ export default class Main extends React.Component {
 
           <div className="section-upper__intro">
             <div className="section-upper__intro--heading">
-              <h3>{typeQuestion} {amountQuestion}</h3>
+              <h3><span>{typeQuestion}</span> <span>{amountQuestion}</span></h3>
             </div>
           </div>
 
-          <GenerateSmoothie type={type} />
+          <GenerateSmoothie type={type} amount={amount} />
         </div>
 
         <div className="section-mid">

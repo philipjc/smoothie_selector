@@ -7,7 +7,8 @@ const Actions = Reflux.createActions([
   'requiredType',
   'saveThisCard',
   'trashSavedCard',
-  'trashGeneratedCard'
+  'trashGeneratedCard',
+  'requiredAmount'
 ]);
 
 export default Actions;

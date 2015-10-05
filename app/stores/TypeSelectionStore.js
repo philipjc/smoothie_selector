@@ -5,7 +5,8 @@ import Actions from '../actions/SmoothieActions.js';
 
 let data = {
   loading: false,
-  type: ''
+  type: '',
+  amount: 0
 }
 
 const TypeSelectionStore = Reflux.createStore({
@@ -19,6 +20,16 @@ const TypeSelectionStore = Reflux.createStore({
     newData.type = type;
 
     this.trigger(type);
+  },
+
+  onRequiredAmount(amount) {
+    if (!amount) return;
+
+    let newData = data;
+
+    newData.amount = amount;
+
+    this.trigger(amount);
   }
 
 });
