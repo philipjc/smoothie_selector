@@ -41,21 +41,18 @@ export default class Main extends React.Component {
   }
 
   handleGenerateStoreUpdate(res) {
-    console.log('Main handle create card ', res);
     this.setState({
       ingredientsCard: res
     })
   }
 
   handleSavedStoreUpdate(res) {
-    console.log('Main, handle saved cards result ', res);
     this.setState({
       savedCards: res
     });
   }
 
   handleTypeStore(res) {
-    console.log('Main handle type change ', res);
     this.setState({
       type: res
     });
@@ -63,10 +60,8 @@ export default class Main extends React.Component {
 
   render() {
     let { title, type, ingredientsCard, savedCards } = this.state;
-    let openingQuestion = type ? `What Do you fancy Today, ${type}?` : `What Do you fancy Today?`;
-
-    console.log('Destructored type ', type);
-    console.log('Destructored ingredientsCard ', ingredientsCard);
+    let typeQuestion = type ? `What Do you fancy Today, ${type}?` : `What Do you fancy Today?`;
+    let amountQuestion = type ? `How many to blend?` : '';
 
     return (
       <div className="main-container">
@@ -80,14 +75,14 @@ export default class Main extends React.Component {
 
           <div className="section-upper__intro">
             <div className="section-upper__intro--heading">
-              <h3>{openingQuestion}</h3>
+              <h3>{typeQuestion} {amountQuestion}</h3>
             </div>
           </div>
+
+          <GenerateSmoothie type={type} />
         </div>
 
         <div className="section-mid">
-          <GenerateSmoothie type={type} />
-
           <GeneratedSmoothie ingredientsCard={ingredientsCard} />
 
           <SavedSmoothies savedCards={savedCards} />
@@ -98,5 +93,9 @@ export default class Main extends React.Component {
   }
 }
 
-Main.propTypes = { title: React.PropTypes.string };
-Main.defaultProps = { title: 'Smoothie Selector' };
+Main.propTypes = {
+  title: React.PropTypes.string
+};
+Main.defaultProps = {
+  title: 'Smoothie Selector'
+};

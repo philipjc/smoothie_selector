@@ -36,6 +36,11 @@ body {
           }
         }
       }
+
+      &__form {
+        width: 100%;
+        padding: $padding;
+      }
     }
 
 
@@ -43,7 +48,7 @@ body {
 
       &__block {
         width: 100%;
-        padding: $padding;
+        padding: $padding * 1.5;
 
         &--element {
           width: 20%;

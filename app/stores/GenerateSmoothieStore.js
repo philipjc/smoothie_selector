@@ -26,8 +26,6 @@ const GenerateSmoothieStore = Reflux.createStore({
     type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4);
   },
 
-  // TODO put in a helper module?
-  // TODO clean up.
   singleSelect(type, amount) {
     let ingredientsToSend = this.createIngredients(type, amount);
 
@@ -41,7 +39,7 @@ const GenerateSmoothieStore = Reflux.createStore({
   },
 
   multiSelect() {
-    let qty = 3;
+    let qty = 2;
     let fruitToSend = this.createIngredients('fruit', qty);
     let vegToSend = this.createIngredients('vegetable', qty);
     let ingredientsToSend = [].concat(fruitToSend, vegToSend);

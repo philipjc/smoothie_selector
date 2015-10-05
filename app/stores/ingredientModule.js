@@ -1,31 +1,13 @@
-import numberGen from './Utiles.js';
+// import numberGen from './Utils.js';
+// import ingredients from '../constants.js';
 
-let ingredientMaker = (() => {
+let ingredientMaker = ((type, amount, numberGen, ingredients) => {
 
-  singleSelect(type, amount) {
-    let ingredientsToSend = this.createIngredients(type, amount);
+  let storeIngredients = {
+    ingredients
+  };
 
-    let recipeCard = {};
-    recipeCard.saved = false;
-    recipeCard.ingredients = ingredientsToSend;
-
-    return recipeCard;
-  },
-
-  multiSelect() {
-    let qty = 3;
-    let fruitToSend = this.createIngredients('fruit', qty);
-    let vegToSend = this.createIngredients('vegetable', qty);
-    let ingredientsToSend = [].concat(fruitToSend, vegToSend);
-
-    let recipeCard = {};
-    recipeCard.saved = false;
-    recipeCard.ingredients = ingredientsToSend;
-
-    return recipeCard;
-  },
-
-  createIngredients(type, amount) {
+  function createIngredients(type, amount) {
     let recipe = [];
     let liquid;
     let ingredients = storeIngredients.ingredients[type];
@@ -43,11 +25,37 @@ let ingredientMaker = (() => {
     }
 
     return recipe;
-  }
+  };
+
+  function singleSelect(type, amount) {
+    console.log('type from single ', type);
+    let ingredientsToSend = createIngredients(type, amount);
+
+    let recipeCard = {};
+    recipeCard.saved = false;
+    recipeCard.ingredients = ingredientsToSend;
+
+    return recipeCard;
+  };
+
+  function multiSelect() {
+    let qty = 3;
+    let fruitToSend = createIngredients('fruit', qty);
+    let vegToSend = createIngredients('vegetable', qty);
+    let ingredientsToSend = [].concat(fruitToSend, vegToSend);
+
+    let recipeCard = {};
+    recipeCard.saved = false;
+    recipeCard.ingredients = ingredientsToSend;
+
+    return recipeCard;
+  };
 
   return {
     single: singleSelect,
     multi: multiSelect
   }
 
-})(type, amount, numberGen);
+})();
+
+export default ingredientMaker;
