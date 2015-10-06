@@ -68,8 +68,8 @@ export default class Main extends React.Component {
 
   render() {
     let { title, type, amount, ingredientsCard, savedCards } = this.state;
-    let typeQuestion = type ? `What Do you fancy Today, ${type}?` : `What Do you fancy Today?`;
-    let amountQuestion = type ? `How many, ${amount}?`: `How many?`;
+    let typeQuestion = type ? `What Do you fancy, ${type}?` : `What Do you fancy?`;
+    let amountQuestion = type ? `How many days, ${amount}?`: `How many days?`;
 
     return (
       <div className="main-container">

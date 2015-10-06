@@ -37,7 +37,7 @@ const GenerateSmoothieStore = Reflux.createStore({
       recipeCard.ingredients = ingredientsToSend;
 
       storeData.cards.push(recipeCard);
-      numCardsCopy = numCardsCopy - 1;
+      numCardsCopy--;
     }
 
     this.sendCards();
