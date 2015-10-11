@@ -3,18 +3,21 @@ import React from 'react';
 // Components ======================================
 import IngredientCard from './IngredientCard.jsx'
 
+const propTypes = {
+  ingredientsCard: React.PropTypes.array
+};
 
-class GeneratedSmoothie extends React.Component{
+export default class GeneratedSmoothie extends React.Component{
  constructor(props) {
    super(props);
  }
 
  render() {
    let cards = this.props.ingredientsCard.map((card, index) => {
-     let key = index;
+     let count = index;
      return (
        <div className="section-mid__block--element">
-         <IngredientCard ingredientCard={card} index={index} key={key} />
+         <IngredientCard ingredientCard={card} index={count} key={index} />
        </div>
      );
    });
@@ -27,8 +30,4 @@ class GeneratedSmoothie extends React.Component{
  }
 }
 
-module.exports = GeneratedSmoothie;
-
-GeneratedSmoothie.propTypes = {
-  ingredientsCard: React.PropTypes.array
-}
+GeneratedSmoothie.propTypes = propTypes;

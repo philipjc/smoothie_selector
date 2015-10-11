@@ -7,22 +7,26 @@ import Actions from '../actions/SmoothieActions.js';
 import Button from './parts/Button.jsx';
 import ListItem from './parts/ListItem.jsx';
 
-class IngredientCard extends React.Component {
+const propTypes = {
+  ingredientsCard: React.PropTypes.object,
+  key: React.PropTypes.number
+};
+
+const defaultProps = {
+
+};
+
+export default class IngredientCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      checkedItems: []
+    }
 
-    this.renderSmoothieIngredients = this.renderSmoothieIngredients.bind(this);
-    this.trashCard = this.trashCard.bind(this);
     this.saveCard = this.saveCard.bind(this);
-  }
-
-  renderSmoothieIngredients(ingredients) {
-    let card = ingredients.map((ingredient, index) => {
-      return (
-        <ListItem item={ingredient} key={index} />
-      );
-    });
-    return card;
+    this.trashCard = this.trashCard.bind(this);
+    this.handleCheckedItem = this.handleCheckedItem.bind(this);
+    this.renderEachIngredient = this.renderEachIngredient.bind(this);
   }
 
   saveCard() {
@@ -42,16 +46,47 @@ class IngredientCard extends React.Component {
     }
   }
 
+  handleCheckedItem(item, state) {
+    let itemStr = item.trim();
+
+    if (state) {
+      let checkedItemsCopy = this.state.checkedItems;
+      checkedItemsCopy.push(itemStr);
+      this.setState({
+        checkedItems: checkedItemsCopy
+      });
+
+    } else {
+      let checkedItemsCopy = this.state.checkedItems;
+      let idx = checkedItemsCopy.indexOf(itemStr);
+      checkedItemsCopy.splice(idx, 1);
+      this.setState({
+        checkedItems: checkedItemsCopy
+      });
+    }
+  }
+
+  renderEachIngredient(ingredientCard) {
+    let ingredients = ingredientCard.ingredients;
+    let isSaved = ingredientCard.saved;
+
+    let card = ingredients.map((ingredient, index) => {
+      return (
+        <ListItem item={ingredient} saved={isSaved} itemChecked={this.handleCheckedItem} key={index} />
+      );
+    });
+    return card;
+  }
+
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
     let { ingredientCard, index } = this.props;
-    let ingredients = ingredientCard.ingredients;
-    let ingredientsList = this.renderSmoothieIngredients(ingredients);
+    let ingredientsList = this.renderEachIngredient(ingredientCard);
 
-    let saveButton;
+    let buttons;
     let trashButton;
     if (!ingredientCard.saved) {
-      saveButton = (
+      buttons = (
         <Button type="button"
                 name="save-card"
                 save={this.saveCard}
@@ -64,21 +99,26 @@ class IngredientCard extends React.Component {
       )
     }
 
+    let reBlend;
+    if (this.state.checkedItems.length) {
+      reBlend = (
+        <div className="card__refresh">Blend non-checked
+          <i className="card__refresh--btn fa fa-refresh"></i>
+        </div>
+      );
+    }
+
     return (
       <div className="card">
         <h2 className="card__heading">Ingredient Card <span>{trashButton}</span></h2>
           <ul className="card__list">
             {ingredientsList}
           </ul>
-          {saveButton}
+          {buttons}
+          {reBlend}
       </div>
     );
   }
 }
 
-module.exports = IngredientCard;
-
-IngredientCard.propTypes = {
-  ingredientsCard: React.PropTypes.object,
-  key: React.PropTypes.number
-};
+IngredientCard.propTypes = propTypes;

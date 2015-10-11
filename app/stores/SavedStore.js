@@ -15,10 +15,13 @@ const SavedStore = Reflux.createStore({
   listenables: Actions,
 
   onSaveThisCard(card) {
+    let cardsLength = storeData.cards.length;
 
     let cardToSave = JSON.parse(JSON.stringify(card));
 
     cardToSave.saved = true;
+
+    cardToSave.name = "saved-card__" + (cardsLength + 1);
 
     storeData.cards.push(cardToSave);
 

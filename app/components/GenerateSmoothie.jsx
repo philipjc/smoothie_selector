@@ -7,6 +7,10 @@ import Button from './parts/Button.jsx';
 // Reflux ===================================
 import Actions from '../actions/SmoothieActions.js';
 
+const propTypes = {
+  type: React.PropTypes.string
+}
+
 export default class GenerateSmoothie extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +58,4 @@ export default class GenerateSmoothie extends React.Component {
   }
 }
 
-GenerateSmoothie.propTypes = {
-  type: React.PropTypes.string
-}
+GenerateSmoothie.propTypes = propTypes;

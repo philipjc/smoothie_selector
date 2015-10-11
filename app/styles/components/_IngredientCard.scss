@@ -22,13 +22,22 @@
     height: 160px;
 
     &--ingredient {
-
       padding: $padding * 4;
       border: $light-border;
       border-bottom: none;
 
+      cursor: pointer;
+
       &:last-child {
         border-bottom: $light-border;
+      }
+
+      .fa-check {
+        float: right;
+        color: plum;
+      }
+      .fa-check-opac {
+        color: lighten(plum, 15%);
       }
     }
   }
@@ -50,6 +59,18 @@
       &:hover {
         background: darken(plum, 10%);
       }
+    }
+  }
+
+  .card__refresh {
+    padding: $padding * 2;
+    background-color: darken(plum, 10%);
+
+    cursor: pointer;
+
+    &--btn {
+      float: right;
+      margin-right: 15px;
     }
   }
 }
