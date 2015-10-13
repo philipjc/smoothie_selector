@@ -9,6 +9,7 @@ import ListItem from './parts/ListItem.jsx';
 
 const propTypes = {
   ingredientsCard: React.PropTypes.object,
+  index: React.PropTypes.number,
   key: React.PropTypes.number
 };
 
@@ -26,6 +27,7 @@ export default class IngredientCard extends React.Component {
     this.saveCard = this.saveCard.bind(this);
     this.trashCard = this.trashCard.bind(this);
     this.handleCheckedItem = this.handleCheckedItem.bind(this);
+    this.handleReplaceIngredients = this.handleReplaceIngredients.bind(this);
     this.renderEachIngredient = this.renderEachIngredient.bind(this);
   }
 
@@ -66,6 +68,18 @@ export default class IngredientCard extends React.Component {
     }
   }
 
+  handleReplaceIngredients() {
+    // reblend will need to remove the card array and replace with new.
+    let { ingredientCard, index } = this.props;
+    let firstIngredient = ingredientCard.ingredients[0];
+    let checkedItems = this.state.checkedItems;
+
+    let amount = 4 - (checkedItems.length);
+    let type;
+    firstIngredient === 'milk' ? type = 'fruit' : type = 'vegetable';
+    Actions.replaceIngredients(type, amount, index, checkedItems);
+  }
+
   renderEachIngredient(ingredientCard) {
     let ingredients = ingredientCard.ingredients;
     let isSaved = ingredientCard.saved;
@@ -81,6 +95,7 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
     let { ingredientCard, index } = this.props;
+    console.log(ingredientCard, index);
     let ingredientsList = this.renderEachIngredient(ingredientCard);
 
     let buttons;
@@ -102,8 +117,9 @@ export default class IngredientCard extends React.Component {
     let reBlend;
     if (this.state.checkedItems.length) {
       reBlend = (
-        <div className="card__refresh">Blend non-checked
-          <i className="card__refresh--btn fa fa-refresh"></i>
+        <div className="card__refresh"
+             onClick={this.handleReplaceIngredients}>
+             Blend non-checked<i className="card__refresh--btn fa fa-refresh"></i>
         </div>
       );
     }

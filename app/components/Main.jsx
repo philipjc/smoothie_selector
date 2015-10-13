@@ -11,6 +11,13 @@ import GeneratedSmoothie from './GeneratedSmoothie.jsx';
 import SavedSmoothies from './SavedSmoothies.jsx';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
+const propTypes = {
+  title: React.PropTypes.string
+};
+
+const defaultProps = {
+  title: 'Smoothie Selector'
+};
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -101,9 +108,5 @@ export default class Main extends React.Component {
   }
 }
 
-Main.propTypes = {
-  title: React.PropTypes.string
-};
-Main.defaultProps = {
-  title: 'Smoothie Selector'
-};
+Main.propTypes = propTypes;
+Main.defaultProps = defaultProps;

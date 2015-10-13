@@ -26,6 +26,20 @@ const GenerateSmoothieStore = Reflux.createStore({
     type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4, numCards);
   },
 
+  onReplaceIngredients(type, amount, cardIndex, keepThese) {
+    console.log('before change', storeData.cards[cardIndex]);
+    let newItems = this.createIngredients(type, amount);
+    newItems = newItems.concat(keepThese);
+    storeData.cards[cardIndex].ingredients = newItems;
+    console.log('after change', storeData.cards[cardIndex]);
+
+    this.sendCards();
+  },
+
+  replaceIngredients(items) {
+    // TODO Stop liquid being added twice. Keep original items order.
+  },
+
   singleSelect(type, amount, numCards) {
     let numCardsCopy = numCards;
 

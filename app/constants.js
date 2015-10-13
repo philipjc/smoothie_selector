@@ -1,5 +1,5 @@
 let ingredients = {
-  fruit: ['apple', 'apricots', 'avocado', 'banana', 'cherryies', 'dates', 'figs',
+  fruit: ['apple', 'apricots', 'avocado', 'banana', 'cherries', 'dates', 'figs',
   'grapes', 'guava', 'melon', 'oats', 'kiwi', 'lemon', 'mango', 'nectarine', 'almonds', 'orange',
   'pear', 'pineapple', 'raisins', 'strawberries', 'tomato', 'plum', 'honey'],
 

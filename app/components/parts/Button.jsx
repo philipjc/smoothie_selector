@@ -3,6 +3,10 @@ import React from 'react';
 // Reflux ===================================================
 import Actions from '../../actions/SmoothieActions.js';
 
+const propTypes = {
+  type: React.PropTypes.string
+};
+
 export default class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -28,11 +32,11 @@ export default class Button extends React.Component {
           <ul className={'button-' + name}>
             <li className="btn"
                 onClick={this.props.save}>
-                <i className="fa fa-save"></i> ?
+                <i className="fa fa-save"></i>
             </li>
             <li className="btn"
                 onClick={this.props.trash}>
-                <i className="fa fa-trash-o"></i> ?
+                <i className="fa fa-trash-o"></i>
             </li>
          </ul>
         </div>
@@ -48,6 +52,4 @@ export default class Button extends React.Component {
   }
 }
 
-Button.propTypes = {
-  type: React.PropTypes.string
-}
+Button.propTypes = propTypes;
