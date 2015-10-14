@@ -1,7 +1,7 @@
 import './styles/_app.scss';
 // import 'font-awesome/css/font-awesome.css';
-
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Main from './components/Main.jsx';
 
 main();
@@ -26,5 +26,5 @@ function main() {
   document.head.appendChild(FA_LINK);
   document.head.appendChild(UBUNTU_LINK);
 
-  React.render(<Main />, app);
+  ReactDOM.render(<Main />, app);
 }
