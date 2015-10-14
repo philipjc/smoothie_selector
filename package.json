@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "repository" :
-  { "type" : "git",
-    "url" : "https://github.com/philipjc/smoothie_selector.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philipjc/smoothie_selector.git"
   },
   "scripts": {
     "start": "webpack-dev-server",
@@ -31,7 +31,7 @@
   "dependencies": {
     "font-awesome": "^4.4.0",
     "octicons": "^2.4.1",
-    "react": "^0.13.3",
-    "reflux": "^0.2.12"
+    "react": "^0.14.0",
+    "reflux": "^0.3.0"
   }
 }
