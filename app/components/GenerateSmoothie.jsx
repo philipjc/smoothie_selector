@@ -40,12 +40,18 @@ export default class GenerateSmoothie extends React.Component {
       values: [1, 5, 7]
     };
 
+    let liquidForm = {
+      type: 'radio',
+      name: 'liquid',
+      values: ['water', 'milk', 'juice']
+    };
+
     return (
       <div className="section-upper__form">
 
         <Form formConfig={typeForm} />
-
         <Form formConfig={amountForm} />
+        <Form formConfig={liquidForm} />
 
         <div className="section-upper__form--button">
           <Button type="submit" name="generate" blend={this.generateSmoothie} />

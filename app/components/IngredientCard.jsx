@@ -70,9 +70,12 @@ export default class IngredientCard extends React.Component {
 
   handleReplaceIngredients() {
     // reblend will need to remove the card array and replace with new.
+    let checkedItems = this.state.checkedItems;
+    if (checkedItems.length === 4) {
+      return;
+    }
     let { ingredientCard, index } = this.props;
     let firstIngredient = ingredientCard.ingredients[0];
-    let checkedItems = this.state.checkedItems;
 
     let amount = 4 - (checkedItems.length);
     let type;

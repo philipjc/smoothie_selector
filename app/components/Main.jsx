@@ -16,7 +16,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  title: 'Smoothie Selector'
+  title: 'Smoothie Selector. What Do you fancy?'
 };
 
 export default class Main extends React.Component {
@@ -75,8 +75,9 @@ export default class Main extends React.Component {
 
   render() {
     let { title, type, amount, ingredientsCard, savedCards } = this.state;
-    let typeQuestion = type ? `What Do you fancy, ${type}?` : `What Do you fancy?`;
-    let amountQuestion = type ? `How many days, ${amount}?`: `How many days?`;
+    let typeString = type ? `${type} smoothies `: ``;
+    let amountString = amount ? `${amount}, `: ``;
+    let liquidString = 'with water. (temp)';
 
     return (
       <div className="main-container">
@@ -90,7 +91,7 @@ export default class Main extends React.Component {
 
           <div className="section-upper__intro">
             <div className="section-upper__intro--heading">
-              <h3><span>{typeQuestion}</span> <span>{amountQuestion}</span></h3>
+              <h3>{amountString + typeString + liquidString}</h3>
             </div>
           </div>
 

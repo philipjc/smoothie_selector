@@ -33,6 +33,10 @@ body {
 
           h3 {
             font-size: 1.2em;
+            margin-bottom: 10px;
+            &:last-child {
+              margin-bottom: 0px;
+            }
 
             span {
               margin-right: 3.5%;

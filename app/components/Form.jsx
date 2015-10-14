@@ -9,9 +9,7 @@ const propTypes = {
 export default class Form extends React.Component{
  constructor(props) {
    super(props);
-   this.state = {
-
-   }
+   this.renderInputs = this.renderInputs.bind(this);
  }
 
  renderInputs() {
