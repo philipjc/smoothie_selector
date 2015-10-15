@@ -38,6 +38,7 @@ const GenerateSmoothieStore = Reflux.createStore({
 
   replaceIngredients(items) {
     // TODO Stop liquid being added twice. Keep original items order.
+    // TODO make a system where liquid, is selected.
   },
 
   singleSelect(type, amount, numCards) {
@@ -48,6 +49,7 @@ const GenerateSmoothieStore = Reflux.createStore({
 
       let recipeCard = {};
       recipeCard.saved = false;
+      recipeCard.type = type;
       recipeCard.ingredients = ingredientsToSend;
 
       storeData.cards.push(recipeCard);
@@ -65,6 +67,7 @@ const GenerateSmoothieStore = Reflux.createStore({
 
     let recipeCard = {};
     recipeCard.saved = false;
+    recipeCard.type = "mixed";
     recipeCard.ingredients = ingredientsToSend;
 
     storeData.cards.push(recipeCard);

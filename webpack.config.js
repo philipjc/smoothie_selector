@@ -13,7 +13,7 @@ var ROOT_PATH = path.resolve(__dirname);
 var common = {
   entry: path.resolve(ROOT_PATH, 'app/App.js'),
   output: {
-    path: path.resolve(ROOT_PATH, 'build'),
+    path: path.resolve(ROOT_PATH, './build'),
     filename: 'bundle.js'
   },
 
@@ -23,11 +23,8 @@ var common = {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass'],
         include: path.resolve(ROOT_PATH, 'app')
-      }
-      // , {
-      //   test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
-      //   loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
-      // }
+      },
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=100000' }
     ]
   },
 

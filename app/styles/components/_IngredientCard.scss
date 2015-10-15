@@ -5,8 +5,10 @@
   &__heading {
     width: 100%;
     background: #bada55;
-    text-align: center;
     padding: $padding * 10 $padding * 2;
+    h2 {
+      text-align: center;
+    }
 
     span {
       cursor: pointer;
@@ -15,6 +17,16 @@
     i {
       float: right;
       margin-right: 10px;
+    }
+
+    &--mixed {
+      background: url(./mixed.jpg);
+    }
+    &--fruit {
+
+    }
+    &--vegetable {
+
     }
   }
 

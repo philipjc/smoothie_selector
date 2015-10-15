@@ -98,7 +98,8 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
     let { ingredientCard, index } = this.props;
-    console.log(ingredientCard, index);
+    console.log(ingredientCard);
+    let type = ingredientCard.type;
     let ingredientsList = this.renderEachIngredient(ingredientCard);
 
     let buttons;
@@ -127,9 +128,26 @@ export default class IngredientCard extends React.Component {
       );
     }
 
+    let background;
+    switch (type) {
+      case 'mixed':
+        background = "mixed";
+        break
+      case 'fruit':
+        background = "fruit";
+        break;
+      case 'vegetable':
+        background = "vegetable";
+        break;
+      default:
+        background = '';
+    }
+
     return (
       <div className="card">
-        <h2 className="card__heading">Ingredient Card <span>{trashButton}</span></h2>
+        <div className={'card__heading card__heading--' + background}>
+          <h2>Ingredient Card <span>{trashButton}</span></h2>
+        </div>
           <ul className="card__list">
             {ingredientsList}
           </ul>
