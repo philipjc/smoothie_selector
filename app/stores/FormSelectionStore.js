@@ -6,10 +6,11 @@ import Actions from '../actions/SmoothieActions.js';
 let data = {
   loading: false,
   type: '',
-  amount: 0
+  amount: 0,
+  liquid: ''
 }
 
-const TypeSelectionStore = Reflux.createStore({
+const FormSelectionStore = Reflux.createStore({
   listenables: Actions,
 
   onRequiredType(type) {
@@ -30,8 +31,18 @@ const TypeSelectionStore = Reflux.createStore({
     newData.amount = amount;
 
     this.trigger(amount);
+  },
+
+  onRequiredLiquid(liquid) {
+    if (!liquid) return;
+
+    let newData = data;
+
+    newData.liquid = liquid;
+
+    this.trigger(liquid);
   }
 
 });
 
-export default TypeSelectionStore;
+export default FormSelectionStore;

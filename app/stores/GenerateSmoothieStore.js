@@ -23,30 +23,28 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
-  onFindIngredients(type, numCards) {
-    type === 'mixed' ? this.multiSelect() : this.singleSelect(type, 4, numCards);
+  onFindIngredients(type, numCards, liquidType) {
+    let ingredientsQty = 4;
+    type === 'mixed' ? this.multiSelect(numCards, liquidType) : this.singleSelect(type, numCards, ingredientsQty, liquidType);
   },
 
-  onReplaceIngredients(type, amount, cardIndex, keepThese) {
-    console.log('before change', storeData.cards[cardIndex]);
-    let newItems = this.createIngredients(type, amount);
+  onReplaceIngredients(type, amountToReplace, cardIndex, keepThese) {
+    let newItems = this.createIngredients(type, amountToReplace);
     newItems = newItems.concat(keepThese);
     storeData.cards[cardIndex].ingredients = newItems;
-    console.log('after change', storeData.cards[cardIndex]);
 
     this.sendCards();
   },
 
   replaceIngredients(items) {
     // TODO Stop liquid being added twice. Keep original items order.
-    // TODO make a system where liquid, is selected.
   },
 
-  singleSelect(type, amount, numCards) {
+  singleSelect(type, numCards, amountOfIngredients, liquidType) {
     let numCardsCopy = numCards;
 
     while (numCardsCopy > 0) {
-      let ingredientsToSend = this.createIngredients(type, amount);
+      let ingredientsToSend = this.createIngredients(type, amountOfIngredients, liquidType);
 
       let recipeCard = {};
       recipeCard.saved = false;
@@ -60,34 +58,37 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
-  multiSelect() {
-    let qty = 2;
-    let fruitToSend = this.createIngredients('fruit', qty);
-    let vegToSend = this.createIngredients('vegetable', qty);
-    let ingredientsToSend = [].concat(fruitToSend, vegToSend);
+  multiSelect(numCards, liquidType) {
+    let numCardsCopy = numCards;
 
-    let recipeCard = {};
-    recipeCard.saved = false;
-    recipeCard.type = "mixed";
-    recipeCard.ingredients = ingredientsToSend;
+    while (numCardsCopy > 0) {
 
-    storeData.cards.push(recipeCard);
+      let qty = 2;
+      let fruitToSend = this.createIngredients('fruit', qty, liquidType);
+      let vegToSend = this.createIngredients('vegetable', qty, liquidType);
+      let ingredientsToSend = [].concat(fruitToSend, vegToSend);
+
+      let recipeCard = {};
+      recipeCard.saved = false;
+      recipeCard.type = "mixed";
+      recipeCard.ingredients = ingredientsToSend;
+
+      storeData.cards.push(recipeCard);
+      numCardsCopy--;
+    }
 
     this.sendCards();
   },
 
-  createIngredients(type, amount) {
+  createIngredients(type, amountOfIngredients, liquidType) {
     let recipe = [];
-    let liquid;
+    let liquid = liquidType;
     let ingredients = storeIngredients.ingredients[type];
     let ingredientsLength = ingredients.length;
-    // let oldNumbers = [];
-
-    type === 'fruit' ? liquid = 'milk' : liquid = 'water';
 
     recipe.push(liquid);
 
-    while (recipe.length < amount) {
+    while (recipe.length < amountOfIngredients) {
       let number = numberGen(ingredientsLength - 1);
       let ingredient = ingredients[number];
       recipe.push(ingredient);

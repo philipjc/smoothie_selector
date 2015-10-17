@@ -84,6 +84,7 @@ export default class IngredientCard extends React.Component {
   }
 
   renderEachIngredient(ingredientCard) {
+    // console.log(ingredientCard);
     let ingredients = ingredientCard.ingredients;
     let isSaved = ingredientCard.saved;
 

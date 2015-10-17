@@ -4,7 +4,7 @@ import Actions from '../../actions/SmoothieActions.js';
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.inputHandler = this.inputHandler.bind(this);
   }
 
@@ -15,12 +15,17 @@ export default class Input extends React.Component {
   inputHandler(e) {
     let choice = this.props.name;
     let input = this.props.value;
-
-    if (choice === 'type') {
-      Actions.requiredType(input);
-
-    } else if (choice === 'amount') {
-      Actions.requiredAmount(input);
+    
+    switch (choice) {
+      case 'type':
+        Actions.requiredType(input);
+      break;
+      case 'amount':
+        Actions.requiredAmount(input);
+      break;
+      case 'liquid':
+        Actions.requiredLiquid(input);
+      break;
     }
   }
 

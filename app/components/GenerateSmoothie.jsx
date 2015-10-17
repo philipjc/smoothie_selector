@@ -21,9 +21,9 @@ export default class GenerateSmoothie extends React.Component {
   }
 
   generateSmoothie() {
-    let { type, amount } = this.props;
+    let { type, amount, liquid } = this.props;
     if (!type) { return };
-    Actions.findIngredients(type, amount);
+    Actions.findIngredients(type, amount, liquid);
   }
 
   render() {

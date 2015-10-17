@@ -2,7 +2,7 @@ import React from 'react';
 
 // Reflux Stores ===================================
 import GenerateSmoothieStore from '../stores/GenerateSmoothieStore.js';
-import TypeSelectionStore from '../stores/TypeSelectionStore.js';
+import FormSelectionStore from '../stores/FormSelectionStore.js';
 import SavedStore from '../stores/SavedStore.js';
 
 // Components ======================================
@@ -26,26 +26,27 @@ export default class Main extends React.Component {
       title: this.props.title,
       type: '',
       amount: 0,
+      liquid: '',
       ingredientsCard: [],
       savedCards: []
     }
 
     this.handleGenerateStoreUpdate = this.handleGenerateStoreUpdate.bind(this);
     this.handleSavedStoreUpdate = this.handleSavedStoreUpdate.bind(this);
-    this.handleTypeStore = this.handleTypeStore.bind(this);
+    this.handleFormSelectionStore = this.handleFormSelectionStore.bind(this);
   }
 
   // To use the same Store, you can check a property, if found perform method.
   componentWillMount() {
     this.GenerateUnsubscribe = GenerateSmoothieStore.listen(this.handleGenerateStoreUpdate);
     this.saveUnsubscribe = SavedStore.listen(this.handleSavedStoreUpdate);
-    let typeUnSubscribe = TypeSelectionStore.listen(this.handleTypeStore);
+    this.formUnSubscribe = FormSelectionStore.listen(this.handleFormSelectionStore);
   }
 
   componentWillUnmount() {
     this.GenerateUnsubscribe();
     this.saveUnsubscribe();
-    this.typeUnSubscribe();
+    this.formUnSubscribe();
   }
 
   handleGenerateStoreUpdate(res) {
@@ -60,10 +61,16 @@ export default class Main extends React.Component {
     });
   }
 
-  handleTypeStore(res) {
-    if (typeof res === 'string') {
+  handleFormSelectionStore(res) {
+    console.log('handleFormSelectionStore', res);
+    if (res === 'fruit' || res === 'vegetable' || res === 'mixed') {
       this.setState({
         type: res
+      });
+
+    } else if (res === 'water' || res === 'milk' || res === 'juice') {
+      this.setState({
+        liquid: res
       });
 
     } else if (typeof res === 'number') {
@@ -74,10 +81,10 @@ export default class Main extends React.Component {
   }
 
   render() {
-    let { title, type, amount, ingredientsCard, savedCards } = this.state;
+    let { title, type, amount, liquid, ingredientsCard, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;
-    let liquidString = 'with water. (temp)';
+    let liquidString = `with ${liquid}`;
 
     return (
       <div className="main-container">
@@ -95,7 +102,7 @@ export default class Main extends React.Component {
             </div>
           </div>
 
-          <GenerateSmoothie type={type} amount={amount} />
+          <GenerateSmoothie type={type} amount={amount} liquid={liquid} />
         </div>
 
         <div className="section-mid">
