@@ -1,4 +1,5 @@
 import React from 'react';
+import { TYPE_FORM, AMOUNT_FORM, LIQUID_FORM } from './constants/forms.js';
 
 // Components ====================
 import Input from './parts/Input.jsx';
@@ -28,30 +29,12 @@ export default class GenerateSmoothie extends React.Component {
   render() {
     let { type, amount } = this.props.type;
 
-    let typeForm = {
-      type: 'radio',
-      name: 'type',
-      values: ['fruit', 'vegetable', 'mixed']
-    };
-
-    let amountForm = {
-      type: 'radio',
-      name: 'amount',
-      values: [1, 5, 7]
-    };
-
-    let liquidForm = {
-      type: 'radio',
-      name: 'liquid',
-      values: ['water', 'milk', 'juice']
-    };
-
     return (
       <div className="section-upper__form">
 
-        <Form formConfig={typeForm} />
-        <Form formConfig={amountForm} />
-        <Form formConfig={liquidForm} />
+        <Form formConfig={TYPE_FORM} />
+        <Form formConfig={AMOUNT_FORM} />
+        <Form formConfig={LIQUID_FORM} />
 
         <div className="section-upper__form--button">
           <Button type="submit" name="generate" blend={this.generateSmoothie} />

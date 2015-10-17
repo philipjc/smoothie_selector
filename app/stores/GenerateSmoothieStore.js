@@ -6,6 +6,7 @@ import numberGen from './Utils.js';
 
 import ingredients from '../constants.js';
 
+
 let storeIngredients = {
   ingredients
 };

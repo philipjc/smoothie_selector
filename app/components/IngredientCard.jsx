@@ -98,7 +98,6 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
     let { ingredientCard, index } = this.props;
-    console.log(ingredientCard);
     let type = ingredientCard.type;
     let ingredientsList = this.renderEachIngredient(ingredientCard);
 
