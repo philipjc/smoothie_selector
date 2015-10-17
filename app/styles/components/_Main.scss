@@ -56,13 +56,19 @@ body {
 
       &__block {
         width: 100%;
-        padding: $padding * 1.5;
+        padding: 0px $padding $padding;
 
         &--element {
-          width: 20%;
+          width: 14.2857%;
           display: inline-block;
 
           padding: 5px;
+          &:first-child {
+            padding-left: 0px;
+          }
+          &:last-child {
+            padding-right: 0px;
+          }
 
           vertical-align: top;
 

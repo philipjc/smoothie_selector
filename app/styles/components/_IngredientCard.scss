@@ -2,10 +2,9 @@
   width: 100%;
   background: #fff;
 
-  &__heading {
+  &__image {
     width: 100%;
-    background: #bada55;
-    padding: $padding * 10 $padding * 2;
+
     h2 {
       text-align: center;
     }
@@ -16,22 +15,40 @@
 
     i {
       float: right;
-      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+
+      background: plum;
+      border-radius: 25px;
+
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
     }
 
     &--mixed {
-      background: url(./mixed.jpg);
+      width: 100%;
+      height: 100px;
+      background-image: url(../img/mixed.jpg);
+      background-size: cover;
     }
     &--fruit {
+      width: 100%;
+      height: 100px;
+      background-image: url(../img/fruits.jpg);
+      background-size: cover;
 
     }
     &--vegetable {
-
+      width: 100%;
+      height: 100px;
+      background-image: url(../img/vegetables.jpg);
+      background-size: cover;
     }
   }
 
   &__list {
-    height: 160px;
 
     &--ingredient {
       padding: $padding * 4;

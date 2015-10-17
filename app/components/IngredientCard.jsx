@@ -145,8 +145,10 @@ export default class IngredientCard extends React.Component {
 
     return (
       <div className="card">
-        <div className={'card__heading card__heading--' + background}>
-          <h2>Ingredient Card <span>{trashButton}</span></h2>
+        <div className="card__image">
+          <div className={'card__image--' + background}>
+            <span>{trashButton}</span>
+          </div>
         </div>
           <ul className="card__list">
             {ingredientsList}
