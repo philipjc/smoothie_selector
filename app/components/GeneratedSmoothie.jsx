@@ -4,7 +4,7 @@ import React from 'react';
 import IngredientCard from './IngredientCard.jsx'
 
 const propTypes = {
-  ingredientsCard: React.PropTypes.array
+  currentIngredientsCards: React.PropTypes.array
 };
 
 export default class GeneratedSmoothie extends React.Component{
@@ -13,7 +13,7 @@ export default class GeneratedSmoothie extends React.Component{
  }
 
  render() {
-   let cards = this.props.ingredientsCard.map((card, index) => {
+   let cards = this.props.currentIngredientsCards.map((card, index) => {
      let count = index;
      return (
        <div className="section-mid__block--element">

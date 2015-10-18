@@ -27,7 +27,7 @@ export default class Main extends React.Component {
       type: '',
       amount: 0,
       liquid: '',
-      ingredientsCard: [],
+      currentIngredientsCards: [],
       savedCards: []
     }
 
@@ -51,7 +51,7 @@ export default class Main extends React.Component {
 
   handleGenerateStoreUpdate(res) {
     this.setState({
-      ingredientsCard: res
+      currentIngredientsCards: res
     })
   }
 
@@ -62,7 +62,6 @@ export default class Main extends React.Component {
   }
 
   handleFormSelectionStore(res) {
-    console.log('handleFormSelectionStore', res);
     if (res === 'fruit' || res === 'vegetable' || res === 'mixed') {
       this.setState({
         type: res
@@ -81,7 +80,7 @@ export default class Main extends React.Component {
   }
 
   render() {
-    let { title, type, amount, liquid, ingredientsCard, savedCards } = this.state;
+    let { title, type, amount, liquid, currentIngredientsCards, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;
     let liquidString = `with ${liquid}`;
@@ -102,11 +101,15 @@ export default class Main extends React.Component {
             </div>
           </div>
 
-          <GenerateSmoothie type={type} amount={amount} liquid={liquid} />
+          <GenerateSmoothie type={type}
+                            amount={amount}
+                            liquid={liquid}
+                            currentCards={currentIngredientsCards}
+                            />
         </div>
 
         <div className="section-mid">
-          <GeneratedSmoothie ingredientsCard={ingredientsCard} />
+          <GeneratedSmoothie currentIngredientsCards={currentIngredientsCards} />
 
           <SavedSmoothies savedCards={savedCards} />
         </div>

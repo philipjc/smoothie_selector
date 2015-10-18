@@ -5,10 +5,6 @@
   &__image {
     width: 100%;
 
-    h2 {
-      text-align: center;
-    }
-
     span {
       cursor: pointer;
     }
@@ -19,7 +15,7 @@
       height: 30px;
       margin: 5px;
 
-      background: plum;
+      background: $plum;
       border-radius: 25px;
 
       text-align: center;
@@ -48,32 +44,45 @@
     }
   }
 
+  &__header {
+    padding: $padding * 12;
+    text-align: center;
+    border-bottom: $light-border;
+    color: #969787;
+    // text-transform: capitalize;
+  }
+
   &__list {
 
     &--ingredient {
-      padding: $padding * 4;
-      border: $light-border;
+      padding: $padding *6 $padding * 4;
+      // border: $light-border;
       border-bottom: none;
+
+      color: #969787;
 
       cursor: pointer;
 
       &:last-child {
         border-bottom: $light-border;
       }
+      &:nth-child(2n) {
+        background: #f5f5f5;
+      }
 
       .fa-check {
         float: right;
-        color: plum;
+        color: $plum;
       }
       .fa-check-opac {
-        color: lighten(plum, 15%);
+        color: lighten($plum, 15%);
       }
     }
   }
 
   .button-save-card {
     width: 100%;
-    background: lighten(plum, 5%);
+    background: lighten($plum, 5%);
     cursor: pointer;
     text-align: justify;
     user-select: none;
@@ -86,14 +95,14 @@
       padding: $padding * 4;
 
       &:hover {
-        background: darken(plum, 10%);
+        background: darken($plum, 10%);
       }
     }
   }
 
   .card__refresh {
     padding: $padding * 2;
-    background-color: darken(plum, 10%);
+    background-color: darken($plum, 10%);
 
     cursor: pointer;
 

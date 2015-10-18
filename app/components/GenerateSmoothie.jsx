@@ -21,9 +21,19 @@ export default class GenerateSmoothie extends React.Component {
   }
 
   generateSmoothie() {
-    let { type, amount, liquid } = this.props;
+    let { type, amount, liquid, currentCards } = this.props;
+    let difference = amount - currentCards.length;
+
     if (!type) { return };
-    Actions.findIngredients(type, amount, liquid);
+    if (currentCards.length === 7) {
+      return;
+
+    } else if (currentCards.length && currentCards.length < 7) {
+      Actions.findIngredients(type, difference, liquid);
+
+    } else {
+      Actions.findIngredients(type, amount, liquid);
+    }
   }
 
   render() {

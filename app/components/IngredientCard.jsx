@@ -150,6 +150,9 @@ export default class IngredientCard extends React.Component {
             <span>{trashButton}</span>
           </div>
         </div>
+        <div className="card__header">
+          <h2>{type}</h2>
+        </div>
           <ul className="card__list">
             {ingredientsList}
           </ul>
