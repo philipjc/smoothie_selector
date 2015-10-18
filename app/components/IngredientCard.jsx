@@ -84,7 +84,7 @@ export default class IngredientCard extends React.Component {
   }
 
   renderEachIngredient(ingredientCard) {
-    // console.log(ingredientCard);
+    console.log('IngredientCard', ingredientCard);
     let ingredients = ingredientCard.ingredients;
     let isSaved = ingredientCard.saved;
 
@@ -128,25 +128,25 @@ export default class IngredientCard extends React.Component {
       );
     }
 
-    let background;
+    let BGImageType;
     switch (type) {
       case 'mixed':
-        background = "mixed";
+        BGImageType = "mixed";
         break
       case 'fruit':
-        background = "fruit";
+        BGImageType = "fruit";
         break;
       case 'vegetable':
-        background = "vegetable";
+        BGImageType = "vegetable";
         break;
       default:
-        background = '';
+        BGImageType = '';
     }
 
     return (
       <div className="card">
         <div className="card__image">
-          <div className={'card__image--' + background}>
+          <div className={'card__image--' + BGImageType}>
             <span>{trashButton}</span>
           </div>
         </div>
