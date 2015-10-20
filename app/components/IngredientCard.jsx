@@ -84,13 +84,16 @@ export default class IngredientCard extends React.Component {
   }
 
   renderEachIngredient(ingredientCard) {
-    console.log('IngredientCard', ingredientCard);
     let ingredients = ingredientCard.ingredients;
     let isSaved = ingredientCard.saved;
 
     let card = ingredients.map((ingredient, index) => {
       return (
-        <ListItem item={ingredient} saved={isSaved} itemChecked={this.handleCheckedItem} key={index} />
+        <ListItem item={ingredient}
+                  saved={isSaved}
+                  itemChecked={this.handleCheckedItem}
+                  key={index}
+                  />
       );
     });
     return card;
@@ -99,7 +102,7 @@ export default class IngredientCard extends React.Component {
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
   render() {
     let { ingredientCard, index } = this.props;
-    let type = ingredientCard.type;
+    let { type, liquid } = ingredientCard;
     let ingredientsList = this.renderEachIngredient(ingredientCard);
 
     let buttons;
@@ -154,6 +157,9 @@ export default class IngredientCard extends React.Component {
           <h2>{type}</h2>
         </div>
           <ul className="card__list">
+            <li className="card__list--ingredient">
+              {liquid}
+            </li>
             {ingredientsList}
           </ul>
           {buttons}

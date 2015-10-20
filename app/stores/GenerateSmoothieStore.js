@@ -30,6 +30,7 @@ const GenerateSmoothieStore = Reflux.createStore({
 
   onReplaceIngredients(type, amountToReplace, cardIndex, keepThese) {
     let newItems = this.createIngredients(type, amountToReplace);
+    // keep keepthese at same index
     newItems = newItems.concat(keepThese);
     storeData.cards[cardIndex].ingredients = newItems;
 
@@ -44,11 +45,12 @@ const GenerateSmoothieStore = Reflux.createStore({
     let numCardsCopy = numCards;
 
     while (numCardsCopy > 0) {
-      let ingredientsToSend = this.createIngredients(type, amountOfIngredients, liquidType);
+      let ingredientsToSend = this.createIngredients(type, amountOfIngredients);
 
       let recipeCard = {};
       recipeCard.saved = false;
       recipeCard.type = type;
+      recipeCard.liquid = liquidType;
       recipeCard.ingredients = ingredientsToSend;
 
       storeData.cards.push(recipeCard);
@@ -64,13 +66,14 @@ const GenerateSmoothieStore = Reflux.createStore({
     while (numCardsCopy > 0) {
 
       let qty = 2;
-      let fruitToSend = this.createIngredients('fruit', qty, liquidType);
-      let vegToSend = this.createIngredients('vegetable', qty, liquidType);
+      let fruitToSend = this.createIngredients('fruit', qty);
+      let vegToSend = this.createIngredients('vegetable', qty);
       let ingredientsToSend = [].concat(fruitToSend, vegToSend);
 
       let recipeCard = {};
       recipeCard.saved = false;
       recipeCard.type = "mixed";
+      recipeCard.liquid = liquidType;
       recipeCard.ingredients = ingredientsToSend;
 
       storeData.cards.push(recipeCard);
@@ -80,13 +83,10 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
-  createIngredients(type, amountOfIngredients, liquidType) {
+  createIngredients(type, amountOfIngredients) {
     let recipe = [];
-    let liquid = liquidType;
     let ingredients = storeIngredients.ingredients[type];
     let ingredientsLength = ingredients.length;
-
-    recipe.push(liquid);
 
     while (recipe.length < amountOfIngredients) {
       let number = numberGen(ingredientsLength - 1);

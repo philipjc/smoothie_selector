@@ -10,6 +10,7 @@ function main() {
   const app = document.createElement('div');
   const FA_CDN = "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css";
   const UBUNTU_FONT = "https://fonts.googleapis.com/css?family=Ubuntu";
+  const ITALIANA_FONT = "https://fonts.googleapis.com/css?family=Italiana";
 
   const FA_LINK = document.createElement('link');
   const UBUNTU_LINK = document.createElement('link');
