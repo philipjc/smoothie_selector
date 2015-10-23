@@ -62,21 +62,11 @@ export default class Main extends React.Component {
   }
 
   handleFormSelectionStore(res) {
-    if (res === 'fruit' || res === 'vegetable' || res === 'mixed') {
-      this.setState({
-        type: res
-      });
-
-    } else if (res === 'water' || res === 'milk' || res === 'juice') {
-      this.setState({
-        liquid: res
-      });
-
-    } else if (typeof res === 'number') {
-      this.setState({
-        amount: res
-      });
-    }
+    this.setState({
+      type: res.type,
+      amount: res.amount,
+      liquid: res.liquid
+    });
   }
 
   render() {

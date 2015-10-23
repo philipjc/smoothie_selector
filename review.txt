@@ -1,7 +1,7 @@
 Stores: use init from Reflux to set a store state object.
 No need to have an object at the top of the file.
 
-This was, the form handler in Main can stop type checking and just setState
+This way, the form handler in Main can stop type checking and just setState
 from the entire store init object, type: res.type, liquid: res.liquid
 
 Set all proptypes at the top of the page. set isRequired if they are.
@@ -21,3 +21,4 @@ If creating jsx place into a method, from render set a variable calling the meth
  then place the var in the render to display it.
 
 Store data as Immutable lists and maps.
+Once the Store data is Immutable, we can stop copying 

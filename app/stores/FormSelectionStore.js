@@ -8,8 +8,9 @@ const FormSelectionStore = Reflux.createStore({
   listenables: Actions,
 
   init() {
+    this.loading = false;
+
     this.data = {
-      loading: false,
       type: '',
       amount: 0,
       liquid: ''
@@ -19,31 +20,25 @@ const FormSelectionStore = Reflux.createStore({
   onRequiredType(type) {
     if (!type) return;
 
-    let newData = this.data;
+    this.data.type = type;
 
-    newData.type = type;
-
-    this.trigger(type);
+    this.trigger(this.data);
   },
 
   onRequiredAmount(amount) {
     if (!amount) return;
 
-    let newData = this.data;
+    this.data.amount = amount;
 
-    newData.amount = amount;
-
-    this.trigger(amount);
+    this.trigger(this.data);
   },
 
   onRequiredLiquid(liquid) {
     if (!liquid) return;
 
-    let newData = this.data;
+    this.data.liquid = liquid;
 
-    newData.liquid = liquid;
-
-    this.trigger(liquid);
+    this.trigger(this.data);
   }
 
 });
