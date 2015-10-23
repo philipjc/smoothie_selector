@@ -4,7 +4,8 @@ import React from 'react';
 import Actions from '../../actions/SmoothieActions.js';
 
 const propTypes = {
-  type: React.PropTypes.string
+  type: React.PropTypes.string,
+  name: React.PropTypes.string
 };
 
 export default class Button extends React.Component {

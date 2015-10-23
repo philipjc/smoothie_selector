@@ -12,11 +12,7 @@ import SavedSmoothies from './SavedSmoothies.jsx';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 const propTypes = {
-  title: React.PropTypes.string
-};
-
-const defaultProps = {
-  title: 'Smoothie Selector. What Do you fancy?'
+  title: React.PropTypes.string.isRequired
 };
 
 export default class Main extends React.Component {
@@ -38,13 +34,13 @@ export default class Main extends React.Component {
 
   // To use the same Store, you can check a property, if found perform method.
   componentWillMount() {
-    this.GenerateUnsubscribe = GenerateSmoothieStore.listen(this.handleGenerateStoreUpdate);
+    this.generateUnsubscribe = GenerateSmoothieStore.listen(this.handleGenerateStoreUpdate);
     this.saveUnsubscribe = SavedStore.listen(this.handleSavedStoreUpdate);
     this.formUnSubscribe = FormSelectionStore.listen(this.handleFormSelectionStore);
   }
 
   componentWillUnmount() {
-    this.GenerateUnsubscribe();
+    this.generateUnsubscribe();
     this.saveUnsubscribe();
     this.formUnSubscribe();
   }
@@ -107,7 +103,6 @@ export default class Main extends React.Component {
       </div>
     );
   }
-}
+};
 
 Main.propTypes = propTypes;
-Main.defaultProps = defaultProps;

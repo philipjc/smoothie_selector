@@ -43,6 +43,8 @@ export default class ListItem extends React.Component{
  }
 
  render() {
+   let { item, saved } = this.props;
+
    let checked = this.state.checked;
    let checkClasses = classnames('fa', {
      'fa fa-check': checked
@@ -54,8 +56,6 @@ export default class ListItem extends React.Component{
    });
 
    let mouseClasses = `${checkClasses} ${mouseOverClasses}`;
-
-   let { item, saved } = this.props;
 
    if (!saved) {
      return (

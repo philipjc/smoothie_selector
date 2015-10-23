@@ -27,5 +27,5 @@ function main() {
   document.head.appendChild(FA_LINK);
   document.head.appendChild(UBUNTU_LINK);
 
-  ReactDOM.render(<Main />, app);
+  ReactDOM.render(<Main title="Smoothie Selector. What Do you fancy?" />, app);
 }

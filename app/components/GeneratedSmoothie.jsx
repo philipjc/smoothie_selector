@@ -12,7 +12,7 @@ export default class GeneratedSmoothie extends React.Component{
    super(props);
  }
 
- render() {
+ renderCards() {
    let cards = this.props.currentIngredientsCards.map((card, index) => {
      let count = index;
      return (
@@ -21,6 +21,11 @@ export default class GeneratedSmoothie extends React.Component{
        </div>
      );
    });
+   return cards;
+ }
+
+ render() {
+   let cards = this.renderCards();
 
    return (
      <div className="section-mid__block">

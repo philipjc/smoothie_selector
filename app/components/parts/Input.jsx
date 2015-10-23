@@ -1,6 +1,12 @@
 import React from 'react';
 import Actions from '../../actions/SmoothieActions.js';
 
+const propTypes = {
+  type: React.PropTypes.string,
+  name: React.PropTypes.string,
+  value: React.PropTypes.number
+};
+
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
@@ -9,13 +15,13 @@ export default class Input extends React.Component {
   }
 
   /**
-   * @desc update the store type. Pass type to Button as props.
-   * // TODO Set up user pushing Enter.
+   * @desc updates the store type.
+   * Passes type to Blend Button as props.
    */
   inputHandler(e) {
     let choice = this.props.name;
     let input = this.props.value;
-    
+
     switch (choice) {
       case 'type':
         Actions.requiredType(input);
@@ -49,4 +55,6 @@ export default class Input extends React.Component {
       </div>
     )
   }
-}
+};
+
+Input.propTypes = propTypes;

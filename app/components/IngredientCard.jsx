@@ -13,10 +13,6 @@ const propTypes = {
   key: React.PropTypes.number
 };
 
-const defaultProps = {
-
-};
-
 export default class IngredientCard extends React.Component {
   constructor(props) {
     super(props);

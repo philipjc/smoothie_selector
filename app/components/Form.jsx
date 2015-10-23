@@ -3,7 +3,7 @@ import React from 'react';
 import Input from './parts/Input.jsx';
 
 const propTypes = {
-
+  formConfig: React.PropTypes.object
 };
 
 export default class Form extends React.Component{
@@ -17,7 +17,10 @@ export default class Form extends React.Component{
    let { name, type, values } = formConfig;
    let inputs = values.map((value) => {
      return (
-       <Input type={type} name={name} value={value} />
+       <Input type={type}
+              name={name}
+              value={value}
+              />
       );
    });
    return inputs;
