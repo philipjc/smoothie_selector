@@ -7,19 +7,20 @@ import numberGen from './Utils.js';
 import ingredients from '../constants.js';
 
 
-let storeIngredients = {
-  ingredients
-};
-
-let storeData = {
-  cards: []
-}
-
 const GenerateSmoothieStore = Reflux.createStore({
   listenables: Actions,
 
+  init() {
+    this.storeIngredients = {
+      ingredients
+    };
+    this.storeData = {
+      cards: []
+    };
+  },
+
   onTrashGeneratedCard(card) {
-    storeData.cards.splice(card, 1);
+    this.storeData.cards.splice(card, 1);
     this.sendCards();
   },
 
@@ -32,7 +33,7 @@ const GenerateSmoothieStore = Reflux.createStore({
     let newItems = this.createIngredients(type, amountToReplace);
     // keep keepthese at same index
     newItems = newItems.concat(keepThese);
-    storeData.cards[cardIndex].ingredients = newItems;
+    this.storeData.cards[cardIndex].ingredients = newItems;
 
     this.sendCards();
   },
@@ -53,7 +54,7 @@ const GenerateSmoothieStore = Reflux.createStore({
       recipeCard.liquid = liquidType;
       recipeCard.ingredients = ingredientsToSend;
 
-      storeData.cards.push(recipeCard);
+      this.storeData.cards.push(recipeCard);
       numCardsCopy--;
     }
 
@@ -76,7 +77,7 @@ const GenerateSmoothieStore = Reflux.createStore({
       recipeCard.liquid = liquidType;
       recipeCard.ingredients = ingredientsToSend;
 
-      storeData.cards.push(recipeCard);
+      this.storeData.cards.push(recipeCard);
       numCardsCopy--;
     }
 
@@ -85,7 +86,7 @@ const GenerateSmoothieStore = Reflux.createStore({
 
   createIngredients(type, amountOfIngredients) {
     let recipe = [];
-    let ingredients = storeIngredients.ingredients[type];
+    let ingredients = this.storeIngredients.ingredients[type];
     let ingredientsLength = ingredients.length;
 
     while (recipe.length < amountOfIngredients) {
@@ -98,7 +99,7 @@ const GenerateSmoothieStore = Reflux.createStore({
   },
 
   sendCards() {
-    let cardsCopy = JSON.parse(JSON.stringify(storeData.cards));
+    let cardsCopy = JSON.parse(JSON.stringify(this.storeData.cards));
     this.trigger(cardsCopy);
   }
 });

@@ -1,0 +1,23 @@
+Stores: use init from Reflux to set a store state object.
+No need to have an object at the top of the file.
+
+This was, the form handler in Main can stop type checking and just setState
+from the entire store init object, type: res.type, liquid: res.liquid
+
+Set all proptypes at the top of the page. set isRequired if they are.
+
+Split out Buttons into separate button .jsx files.
+
+Can I have more than one action file? Do multiple stores listen to the same action?
+
+Take BGimage switch out of render and place into a method, Don't even need the switch,
+ think in a single state of an individual card, just set the type as the class,
+  if the type = mixed, will get the mixed.jpg etc.
+
+Responsive images? USe src set
+
+Keep render clean, place more code into methods, render is the most important area. Be consistent.
+If creating jsx place into a method, from render set a variable calling the method,
+ then place the var in the render to display it.
+
+Store data as Immutable lists and maps.

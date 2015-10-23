@@ -3,19 +3,18 @@
 import Reflux from 'reflux';
 import Actions from '../actions/SmoothieActions.js';
 
-// card: {
-//   saved: true,
-//   ingredients: []
-// }
-let storeData = {
-  cards: []
-};
 
 const SavedStore = Reflux.createStore({
   listenables: Actions,
 
+  init() {
+    this.storeData = {
+      cards: []
+    }
+  },
+
   onSaveThisCard(card) {
-    let cardsLength = storeData.cards.length;
+    let cardsLength = this.storeData.cards.length;
 
     let cardToSave = JSON.parse(JSON.stringify(card));
 
@@ -23,17 +22,17 @@ const SavedStore = Reflux.createStore({
 
     cardToSave.name = "saved-card__" + (cardsLength + 1);
 
-    storeData.cards.push(cardToSave);
+    this.storeData.cards.push(cardToSave);
 
-    let cardsCopy = JSON.parse(JSON.stringify(storeData.cards));
+    let cardsCopy = JSON.parse(JSON.stringify(this.storeData.cards));
 
     this.trigger(cardsCopy);
   },
 
   onTrashSavedCard(card) {
-    storeData.cards.splice(card, 1);
+    this.storeData.cards.splice(card, 1);
 
-    this.trigger(storeData.cards);
+    this.trigger(this.storeData.cards);
   }
 
 });
