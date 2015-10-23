@@ -4,7 +4,8 @@ import React from 'react';
 import Actions from '../actions/SmoothieActions.js';
 
 // Components ===============================================
-import Button from './parts/Button.jsx';
+import CardButtons from './parts/CardButtons.jsx';
+import ReBlendButton from './parts/ReBlendButton.jsx';
 import ListItem from './parts/ListItem.jsx';
 
 const propTypes = {
@@ -66,6 +67,7 @@ export default class IngredientCard extends React.Component {
 
   handleReplaceIngredients() {
     // reblend will need to remove the card array and replace with new.
+    // Put all logic in Store? set checked items as property?
     let checkedItems = this.state.checkedItems;
     if (checkedItems.length === 4) {
       return;
@@ -83,7 +85,7 @@ export default class IngredientCard extends React.Component {
     let ingredients = ingredientCard.ingredients;
     let isSaved = ingredientCard.saved;
 
-    let card = ingredients.map((ingredient, index) => {
+    let items = ingredients.map((ingredient, index) => {
       return (
         <ListItem item={ingredient}
                   saved={isSaved}
@@ -92,7 +94,7 @@ export default class IngredientCard extends React.Component {
                   />
       );
     });
-    return card;
+    return items;
   }
 
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
@@ -100,66 +102,49 @@ export default class IngredientCard extends React.Component {
     let { ingredientCard, index } = this.props;
     let { type, liquid } = ingredientCard;
     let ingredientsList = this.renderEachIngredient(ingredientCard);
+    let trashButton, reBlendButton;
 
-    let buttons;
-    let trashButton;
-    if (!ingredientCard.saved) {
-      buttons = (
-        <Button type="button"
-                name="save-card"
-                save={this.saveCard}
-                trash={this.trashCard}
-                />
-      )
-    } else {
+    if (ingredientCard.saved) {
       trashButton = (
         <i className="fa fa-trash-o" onClick={this.trashCard}></i>
-      )
-    }
-
-    let reBlend;
-    if (this.state.checkedItems.length) {
-      reBlend = (
-        <div className="card__refresh"
-             onClick={this.handleReplaceIngredients}>
-             Blend non-checked<i className="card__refresh--btn fa fa-refresh"></i>
-        </div>
       );
-    }
+    };
 
-    let BGImageType;
-    switch (type) {
-      case 'mixed':
-        BGImageType = "mixed";
-        break
-      case 'fruit':
-        BGImageType = "fruit";
-        break;
-      case 'vegetable':
-        BGImageType = "vegetable";
-        break;
-      default:
-        BGImageType = '';
+    if (this.state.checkedItems.length) {
+      reBlendButton = (
+        <ReBlendButton reblend={this.handleReplaceIngredients} />
+      );
     }
 
     return (
       <div className="card">
+
         <div className="card__image">
-          <div className={'card__image--' + BGImageType}>
+          <div className={'card__image--type card__image--' + type}>
             <span>{trashButton}</span>
           </div>
         </div>
+
         <div className="card__header">
           <h2>{type}</h2>
         </div>
-          <ul className="card__list">
+
+        <div className="card__list">
+          <ul>
             <li className="card__list--ingredient">
               {liquid}
             </li>
             {ingredientsList}
           </ul>
-          {buttons}
-          {reBlend}
+        </div>
+
+        <CardButtons name="save-card"
+                     save={this.saveCard}
+                     trash={this.trashCard}
+        />
+
+      { reBlendButton }
+
       </div>
     );
   }

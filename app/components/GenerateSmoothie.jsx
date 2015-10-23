@@ -3,7 +3,7 @@ import { TYPE_FORM, AMOUNT_FORM, LIQUID_FORM } from './constants/forms.js';
 
 // Components ====================
 import Input from './parts/Input.jsx';
-import Button from './parts/Button.jsx';
+import BlendButton from './parts/BlendButton.jsx';
 import Form from './Form.jsx';
 
 // Reflux ===================================
@@ -48,7 +48,7 @@ export default class GenerateSmoothie extends React.Component {
         <Form formConfig={LIQUID_FORM} />
 
         <div className="section-upper__form--button">
-          <Button type="submit" name="generate" blend={this.generateSmoothie} />
+          <BlendButton name="generate" blend={this.generateSmoothie} />
         </div>
       </div>
     )

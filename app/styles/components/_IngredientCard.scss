@@ -23,24 +23,19 @@
       line-height: 1.5;
     }
 
-    &--mixed {
+    &--type {
       width: 100%;
       height: 100px;
-      background-image: url(../img/mixed.jpg);
       background-size: cover;
+    }
+    &--mixed {
+      background-image: url(../img/mixed.jpg);
     }
     &--fruit {
-      width: 100%;
-      height: 100px;
       background-image: url(../img/fruits.jpg);
-      background-size: cover;
-
     }
     &--vegetable {
-      width: 100%;
-      height: 100px;
       background-image: url(../img/vegetables.jpg);
-      background-size: cover;
     }
   }
 
@@ -80,13 +75,14 @@
     }
   }
 
-  .button-save-card {
-    width: 100%;
-    background: lighten($plum, 5%);
-    cursor: pointer;
-    text-align: justify;
-    user-select: none;
-
+  &__buttons {
+    &--save-card {
+      width: 100%;
+      background: lighten($plum, 5%);
+      cursor: pointer;
+      text-align: justify;
+      user-select: none;
+    }
     .btn {
       content: '';
       width: 50%;
@@ -100,15 +96,25 @@
     }
   }
 
-  .card__refresh {
+  &__refresh {
     padding: $padding * 2;
     background-color: darken($plum, 10%);
 
     cursor: pointer;
+    user-select: none;
+
+    &--text {
+      font-size: 18px;
+      width: 80%;
+      display: inline-block;
+    }
 
     &--btn {
-      float: right;
-      margin-right: 15px;
+      position: relative;
+      bottom: 8px;
+      width: 20%;
+      display: inline-block;
+      text-align: center;
     }
   }
 }
