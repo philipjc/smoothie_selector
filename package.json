@@ -34,6 +34,7 @@
     "octicons": "^2.4.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "reflux": "^0.3.0"
+    "reflux": "^0.3.0",
+    "store-chest": "1.0.1-beta.0"
   }
 }

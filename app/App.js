@@ -1,5 +1,6 @@
 import './styles/_app.scss';
 // import 'font-awesome/css/font-awesome.css';
+import User from './User.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './components/Main.jsx';
@@ -26,6 +27,9 @@ function main() {
   document.body.appendChild(app);
   document.head.appendChild(FA_LINK);
   document.head.appendChild(UBUNTU_LINK);
+
+  console.log('before user');
+  console.log(User.createUser);
 
   ReactDOM.render(<Main title="Smoothie Selector. What Do you fancy?" />, app);
 }
