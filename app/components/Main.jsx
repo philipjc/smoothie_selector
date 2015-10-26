@@ -12,7 +12,8 @@ import SavedSmoothies from './SavedSmoothies.jsx';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 const propTypes = {
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  logout: React.PropTypes.func.isRequired
 };
 
 export default class Main extends React.Component {
@@ -79,6 +80,7 @@ export default class Main extends React.Component {
             <div className="section-upper__header--logo">
               <img src="" alt="" />
             </div>
+            <button onClick={this.props.logout}>logout</button>
           </div>
 
           <div className="section-upper__intro">
