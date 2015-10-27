@@ -1,34 +1,46 @@
 import './styles/_app.scss';
-// import 'font-awesome/css/font-awesome.css';
-import User from './User.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './components/Main.jsx';
-import Access from './components/Account/Access.jsx';
 
-// perfrom local storage checks
+import Main from './components/Main.jsx';
+import UserStore from './stores/UserStore.js';
+import Account from './components/Account/Account.jsx';
+
+// TODO perform local storage checks. Job of Module?
+UserStore.listen(setUserDetails);
 var chest = require('store-chest/src/store-chest');
 chest.get();
 
+// Initiate App with a user check.
 checkUser();
 
+/**
+*
+*/
 function checkUser() {
+  // Add initial DOM Elements and tags.
   setUpPage();
   let user = window.localStorage;
   let temp = window.sessionStorage;
+
   if (user.smoothieProfileName && user.smoothieAccess && user.smoothieAccess === temp.tempSmoothieAccess) {
     const userName = user.smoothieProfileName;
+    // Enter App with User name
     enter(userName);
 
   } else if (user.smoothieProfileName && user.smoothieAccess && !user.tempSmoothieAccess) {
+    // Go to Login Page
     login();
 
   } else {
-    console.log('no profile name');
+    // Go to Create Page
     create();
   }
 }
 
+/**
+*
+*/
 function setUpPage() {
   const app = document.createElement('div');
   app.id = 'appBody';
@@ -52,31 +64,46 @@ function setUpPage() {
   document.head.appendChild(UBUNTU_LINK);
 }
 
-function setUserDetails(name, pw) {
-  chest.set('smoothieProfileName', name);
-  chest.set('smoothieAccess', pw);
-  window.sessionStorage.setItem('tempSmoothieAccess', pw);
+/**
+*
+*/
+function setUserDetails(user) {
+  chest.set('smoothieProfileName', user.name);
+  chest.set('smoothieAccess', user.pw);
+  window.sessionStorage.setItem('tempSmoothieAccess', user.pw);
 
   checkUser();
 }
 
+/**
+*
+*/
 function logout() {
   window.sessionStorage.removeItem('tempSmoothieAccess');
   checkUser();
 }
 
+/**
+*
+*/
 function enter(name) {
   const app = document.getElementById('appBody');
   let intro = `Welcome to Smoothie Selector, ${name}. What Do you fancy?`;
   ReactDOM.render(<Main title={intro} user={name} logout={logout} />, app);
 }
 
+/**
+*
+*/
 function login() {
   const app = document.getElementById('appBody');
-  ReactDOM.render(<Access flag="login" />, app);
+  ReactDOM.render(<Account flag="login" />, app);
 }
 
+/**
+*
+*/
 function create() {
   const app = document.getElementById('appBody');
-  ReactDOM.render(<Access flag="create" createUser={setUserDetails} />, app);
+  ReactDOM.render(<Account flag="create" />, app);
 }

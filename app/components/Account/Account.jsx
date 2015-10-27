@@ -1,5 +1,6 @@
 import React from 'react';
-import LoginForm from './LoginForm';
+import Create from './Create';
+import Login from './Login';
 
 const propTypes = {
   flag: React.PropTypes.string.isRequired
@@ -8,32 +9,23 @@ const propTypes = {
 export default class Access extends React.Component {
  constructor(props) {
    super(props);
-   this.state = {
 
-   }
-
-   this.createUserHandler = this.createUserHandler.bind(this);
    this.renderCreate = this.renderCreate.bind(this);
    this.renderLogin = this.renderLogin.bind(this);
- }
-
- createUserHandler(name, pw) {
-   this.props.createUser(name, pw);
  }
 
  renderCreate() {
    return (
      <div className="login-container">
-       <LoginForm createUser={this.createUserHandler} user={this.props.user} />
+       <Create />
      </div>
    );
  }
 
-// TODO add form to just enter pw to temp sessionStorage
  renderLogin() {
    return (
      <div className="login-container">
-       <p>Login form here</p>
+       <Login />
      </div>
    );
  }
@@ -41,12 +33,7 @@ export default class Access extends React.Component {
  render() {
    let flag = this.props.flag;
    let displayForm;
-   if (flag === 'create') {
-      displayForm = this.renderCreate();
-
-   } else {
-     displayForm = this.renderLogin();
-   }
+   flag === 'create' ? displayForm = this.renderCreate() : displayForm = this.renderLogin();
 
    return (
      <div>

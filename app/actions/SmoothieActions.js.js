@@ -10,7 +10,8 @@ const Actions = Reflux.createActions([
   'saveThisCard',
   'trashSavedCard',
   'trashGeneratedCard',
-  'replaceIngredients'
+  'replaceIngredients',
+  'updateUserDetails'
 ]);
 
 export default Actions;

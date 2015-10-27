@@ -1,24 +1,35 @@
 import React from 'react';
 
+import Actions from '../../actions/SmoothieActions.js';
+import UserStore from '../../stores/UserStore.js';
+
 const propTypes = {
-  user: React.PropTypes.object
+
 };
 
-export default class LoginForm extends React.Component {
+export default class Login extends React.Component {
  constructor(props) {
    super(props);
    this.state = {
-
+     name: 'Philip'
    }
-   this.createUser = this.createUser.bind(this);
-   this.nameHandler = this.nameHandler.bind(this);
+
+   this.loginUser = this.loginUser.bind(this);
    this.passwordHandler = this.passwordHandler.bind(this);
+   this.handleUpdateUser = this.handleUpdateUser.bind(this);
  }
 
- nameHandler(e) {
-   let name = e.target.value
+ componentWillMount() {
+   this.handleUserUnsubscribe = UserStore.listen(this.handleUpdateUser);
+ }
+
+ componentWillUnmount() {
+   this.handleUserUnsubscribe();
+ }
+
+ handleUpdateUser(user) {
    this.setState({
-     name: name
+     name: user.name
    });
  }
 
@@ -29,34 +40,29 @@ export default class LoginForm extends React.Component {
    });
  }
 
- createUser(e) {
+ loginUser(e) {
    e.preventDefault();
-   let name = this.state.name;
-   let pw = this.state.pw;
    this.setState({
-     name: '',
      pw: ''
-   }, this.props.createUser(name, pw));
+   });
+   Actions.updateUserDetails(this.state);
  }
 
  render() {
-   return(
+   return (
      <div className="login-container__form">
        <div className="login-container__form--header">
-         <h1>Create Account</h1>
-       </div>
-       <div className="login-container__form--row">
-         <input type="text" onChange={this.nameHandler} value={this.state.name} />
+         <h1>Login, {this.state.name}</h1>
        </div>
        <div className="login-container__form--row">
          <input type="password" onChange={this.passwordHandler} value={this.state.pw} />
        </div>
        <div className="login-container__form--row">
-         <button type="button" onClick={this.createUser}>Create</button>
+         <button type="button" onClick={this.loginUser}>Enter</button>
        </div>
      </div>
    );
  }
 };
 
-LoginForm.propTypes = propTypes;
+Login.propTypes = propTypes;

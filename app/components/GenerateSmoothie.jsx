@@ -20,6 +20,9 @@ export default class GenerateSmoothie extends React.Component {
     this.generateSmoothie = this.generateSmoothie.bind(this);
   }
 
+  // TODO Generate, Generated and Saved Smoothie, turn into one Component.
+  // Call generate on Main? Or wrap in another operational Component...
+
   generateSmoothie() {
     // as long as length < amount ?
     let { type, amount, liquid, currentCards } = this.props;
