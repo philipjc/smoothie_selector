@@ -70,7 +70,8 @@ export default class Main extends React.Component {
     let { title, type, amount, liquid, currentIngredientsCards, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;
-    let liquidString = `with ${liquid}`;
+    let liquidString;
+    liquid ? liquidString = `with ${liquid}` : liquidString = '';
 
     return (
       <div className="main-container">

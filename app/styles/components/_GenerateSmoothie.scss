@@ -2,11 +2,22 @@
   width: 100%;
 
   &__form {
+    display: flex;
+    flex-direction: row;
 
     &-block {
-      width: 20%;
-      display: inline-block;
-      margin-right: 2%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &--square {
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        background: red;
+        margin-bottom: 20px;
+      }
     }
 
     &--inputs {

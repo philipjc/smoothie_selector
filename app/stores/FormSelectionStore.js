@@ -17,21 +17,9 @@ const FormSelectionStore = Reflux.createStore({
     }
   },
 
-  onRequiredType(type) {
+  onUpdateForm(type, selection) {
     if (!type) return;
-    this.data.type = type;
-    this.trigger(this.data);
-  },
-
-  onRequiredAmount(amount) {
-    if (!amount) return;
-    this.data.amount = amount;
-    this.trigger(this.data);
-  },
-
-  onRequiredLiquid(liquid) {
-    if (!liquid) return;
-    this.data.liquid = liquid;
+    this.data[type] = selection;
     this.trigger(this.data);
   }
 

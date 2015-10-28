@@ -1,6 +1,8 @@
 import React from 'react';
 
-import Input from './parts/Input.jsx';
+import Actions from '../actions/SmoothieActions.js';
+
+import Square from './parts/Square.jsx';
 
 const propTypes = {
   formConfig: React.PropTypes.object
@@ -9,33 +11,36 @@ const propTypes = {
 export default class Form extends React.Component{
  constructor(props) {
    super(props);
-   this.renderInputs = this.renderInputs.bind(this);
+
+   this.formHandler = this.formHandler.bind(this);
+   this.renderSquares = this.renderSquares.bind(this);
  }
 
- renderInputs() {
-   let { formConfig } = this.props;
-   let { name, type, values } = formConfig;
-   let inputs = values.map((value) => {
-     return (
-       <Input type={type}
-              name={name}
-              value={value}
-              />
-      );
+ formHandler(e) {
+   let formField = this.props.formConfig.name;
+   let selection = e.target.textContent;
+   Actions.updateForm(formField, selection);
+   this.setState({
+     [formField]: selection
    });
-   return inputs;
+ }
+
+ renderSquares(names) {
+   let render = names.map(name => {
+     return (
+       <Square name={name} onClick={this.formHandler} />
+     )
+   });
+   return render;
  }
 
  render() {
-   let inputs = this.renderInputs();
 
-   return(
+   let display = this.renderSquares(this.props.formConfig.values);
+
+   return (
      <div className="section-upper__form-block">
-       <form>
-         <div className="section-upper__form--inputs">
-           {inputs}
-         </div>
-       </form>
+       {display}
      </div>
    );
  }

@@ -44,17 +44,17 @@ export default class GenerateSmoothie extends React.Component {
     let { type, amount } = this.props.type;
 
     return (
-      <div className="section-upper__form">
-
-        <Form formConfig={TYPE_FORM} />
-        <Form formConfig={AMOUNT_FORM} />
-        <Form formConfig={LIQUID_FORM} />
-
+      <div>
+        <div className="section-upper__form">
+          <Form formConfig={TYPE_FORM} />
+          <Form formConfig={AMOUNT_FORM} />
+          <Form formConfig={LIQUID_FORM} />
+        </div>
         <div className="section-upper__form--button">
           <BlendButton name="generate" blend={this.generateSmoothie} />
         </div>
       </div>
-    )
+    );
   }
 }
 
