@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Main from './components/Main.jsx';
 import UserStore from './stores/UserStore.js';
-import Account from './components/Account/Account.jsx';
+import Account from './components/Account/';
 
 // TODO perform local storage checks. Job of Module?
 UserStore.listen(setUserDetails);
