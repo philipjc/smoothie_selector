@@ -5,55 +5,36 @@
     display: flex;
     flex-direction: row;
 
-    &-block {
+    &--block {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
 
-      &--square {
-        margin: auto;
-        width: 100px;
-        height: 100px;
-        background: red;
-        margin-bottom: 20px;
-      }
-    }
+      .square {
+        width: 40%;
+        height: 120px;
 
-    &--inputs {
-      width: 100%;
-
-      .label {
-        width: 100%;
-        display: block;
-        padding: 1%;
+        background: #bada55;
         cursor: pointer;
+
+        margin: 0 auto 20px;
       }
-
-      .input {
-        padding: $padding * 2;
-        border: $light-border;
-        border-bottom: none;
-
-        &:last-child {
-          border-bottom: $light-border;
-        }
-
-        input {
-          float: right;
-        }
-      }
-
     }
 
     &--button {
       width: 100%;
       margin-top: $padding;
-      .button-generate {
+
+      .generate-button {
         background: plum;
         padding: $padding;
         cursor: pointer;
         border: $light-border;
+
+        &__message {
+          float: right;
+        }
       }
     }
   }

@@ -19,16 +19,28 @@ const GenerateSmoothieStore = Reflux.createStore({
     };
   },
 
+  /**
+  *
+  */
   onTrashGeneratedCard(card) {
     this.storeData.cards.splice(card, 1);
     this.sendCards();
   },
 
-  onFindIngredients(type, numCards, liquidType) {
+  /**
+  *
+  */
+  onFindIngredients(type, numCards, liquidType, extras) {
+    console.log('from find ingredients ', extras);
     let ingredientsQty = 4;
-    type === 'mixed' ? this.multiSelect(numCards, liquidType) : this.singleSelect(type, numCards, ingredientsQty, liquidType);
+    type === 'mixed'
+      ? this.mixedSelector(numCards, liquidType, extras)
+      : this.singleSelector(type, numCards, ingredientsQty, liquidType, extras);
   },
 
+  /**
+  *
+  */
   onReplaceIngredients(type, amountToReplace, cardIndex, keepThese) {
     let newItems = this.createIngredients(type, amountToReplace);
     // keep keepthese at same index
@@ -42,7 +54,10 @@ const GenerateSmoothieStore = Reflux.createStore({
     // TODO Stop liquid being added twice. Keep original items order.
   },
 
-  singleSelect(type, numCards, amountOfIngredients, liquidType) {
+  /**
+  *
+  */
+  singleSelector(type, numCards, amountOfIngredients, liquidType, extras) {
     let numCardsCopy = numCards;
 
     while (numCardsCopy > 0) {
@@ -61,7 +76,10 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
-  multiSelect(numCards, liquidType) {
+  /**
+  *
+  */
+  mixedSelector(numCards, liquidType, extras) {
     let numCardsCopy = numCards;
 
     while (numCardsCopy > 0) {
@@ -84,6 +102,9 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
+  /**
+  *
+  */
   createIngredients(type, amountOfIngredients) {
     let recipe = [];
     let ingredients = this.storeIngredients.ingredients[type];

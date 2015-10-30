@@ -1,5 +1,5 @@
 import React from 'react';
-import { TYPE_FORM, AMOUNT_FORM, LIQUID_FORM } from './constants/forms.js';
+import { TYPE_FORM, AMOUNT_FORM, LIQUID_FORM, EXTRAS_FORM } from './constants/forms.js';
 
 // Components ====================
 import Input from './parts/Input.jsx';
@@ -16,6 +16,9 @@ const propTypes = {
 export default class GenerateSmoothie extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      message: ''
+    }
 
     this.generateSmoothie = this.generateSmoothie.bind(this);
   }
@@ -25,18 +28,26 @@ export default class GenerateSmoothie extends React.Component {
 
   generateSmoothie() {
     // as long as length < amount ?
-    let { type, amount, liquid, currentCards } = this.props;
+    let { type, amount, liquid, extras, currentCards } = this.props;
     let difference = 7 - currentCards.length;
 
-    if (!type) { return };
+    if (!type || !amount || !liquid || !extras) { return };
+
     if (currentCards.length === 7) {
+      this.setState({
+        message: 'You already have 7 smoothies, delete some?'
+      });
       return;
 
     } else if (currentCards.length && currentCards.length < 7) {
-      Actions.findIngredients(type, difference, liquid);
+      // TODO place in Store
+      this.setState({
+        message: 'You have room for ' + difference + ' more smoothies.'
+      });
+      Actions.findIngredients(type, difference, liquid, extras);
 
     } else {
-      Actions.findIngredients(type, amount, liquid);
+      Actions.findIngredients(type, amount, liquid, extras);
     }
   }
 
@@ -49,9 +60,13 @@ export default class GenerateSmoothie extends React.Component {
           <Form formConfig={TYPE_FORM} />
           <Form formConfig={AMOUNT_FORM} />
           <Form formConfig={LIQUID_FORM} />
+          <Form formConfig={EXTRAS_FORM} />
+
         </div>
-        <div className="section-upper__form--button">
-          <BlendButton name="generate" blend={this.generateSmoothie} />
+        <div className="section-upper__form">
+          <BlendButton blend={this.generateSmoothie}
+                       message={this.state.message}
+                       />
         </div>
       </div>
     );

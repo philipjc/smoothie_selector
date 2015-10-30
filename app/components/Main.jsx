@@ -24,6 +24,7 @@ export default class Main extends React.Component {
       type: '',
       amount: 0,
       liquid: '',
+      extras: '',
       currentIngredientsCards: [],
       savedCards: []
     }
@@ -62,12 +63,13 @@ export default class Main extends React.Component {
     this.setState({
       type: res.type,
       amount: res.amount,
-      liquid: res.liquid
+      liquid: res.liquid,
+      extras: res.extras
     });
   }
 
   render() {
-    let { title, type, amount, liquid, currentIngredientsCards, savedCards } = this.state;
+    let { title, type, amount, liquid, extras, currentIngredientsCards, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;
     let liquidString;
@@ -93,6 +95,7 @@ export default class Main extends React.Component {
           <GenerateSmoothie type={type}
                             amount={amount}
                             liquid={liquid}
+                            extras={extras}
                             currentCards={currentIngredientsCards}
                             />
         </div>

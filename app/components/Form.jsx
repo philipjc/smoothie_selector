@@ -39,7 +39,7 @@ export default class Form extends React.Component{
    let display = this.renderSquares(this.props.formConfig.values);
 
    return (
-     <div className="section-upper__form-block">
+     <div className="section-upper__form--block">
        {display}
      </div>
    );

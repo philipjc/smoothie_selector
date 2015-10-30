@@ -13,7 +13,8 @@ const FormSelectionStore = Reflux.createStore({
     this.data = {
       type: '',
       amount: 0,
-      liquid: ''
+      liquid: '',
+      extras: ''
     }
   },
 

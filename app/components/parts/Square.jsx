@@ -14,7 +14,7 @@ export default class Square extends React.Component {
     let { name } = this.props;
 
     return (
-      <div className="section-upper__form-block--square"
+      <div className="section-upper__form--block square"
            data-name={name}
            onClick={this.props.onClick}>
         { name }
