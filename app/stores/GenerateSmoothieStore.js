@@ -44,13 +44,18 @@ const GenerateSmoothieStore = Reflux.createStore({
   onReplaceIngredients(type, amountToReplace, cardIndex, keepThese) {
     let newItems = this.createIngredients(type, amountToReplace);
     // keep keepthese at same index
-    newItems = newItems.concat(keepThese);
+    newItems = this.replaceIngredients(newItems, keepThese);
     this.storeData.cards[cardIndex].ingredients = newItems;
 
     this.sendCards();
   },
 
-  replaceIngredients(items) {
+  replaceIngredients(newItems, keepItems) {
+    console.log(newItems);
+    console.log(keepItems);
+    let items = newItems.concat(keepItems);
+    console.log(items);
+    return items;
     // TODO Stop liquid being added twice. Keep original items order.
   },
 

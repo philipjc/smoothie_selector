@@ -4,9 +4,8 @@ import React from 'react';
 import Actions from '../actions/SmoothieActions.js';
 
 // Components ===============================================
-import CardButtons from './parts/CardButtons.jsx';
 import ReBlendButton from './parts/ReBlendButton.jsx';
-import ListItem from './parts/ListItem.jsx';
+import Card from './parts/Card.jsx';
 
 const propTypes = {
   ingredientsCard: React.PropTypes.object,
@@ -25,7 +24,6 @@ export default class IngredientCard extends React.Component {
     this.trashCard = this.trashCard.bind(this);
     this.handleCheckedItem = this.handleCheckedItem.bind(this);
     this.handleReplaceIngredients = this.handleReplaceIngredients.bind(this);
-    this.renderEachIngredient = this.renderEachIngredient.bind(this);
   }
 
   saveCard() {
@@ -73,78 +71,26 @@ export default class IngredientCard extends React.Component {
       return;
     }
     let { ingredientCard, index } = this.props;
-    let firstIngredient = ingredientCard.ingredients[0];
-
+    let { type } = ingredientCard;
     let amount = 4 - (checkedItems.length);
-    let type;
-    firstIngredient === 'milk' ? type = 'fruit' : type = 'vegetable';
+
     Actions.replaceIngredients(type, amount, index, checkedItems);
   }
 
-  renderEachIngredient(ingredientCard) {
-    let ingredients = ingredientCard.ingredients;
-    let isSaved = ingredientCard.saved;
-
-    let items = ingredients.map((ingredient, index) => {
-      return (
-        <ListItem item={ingredient}
-                  saved={isSaved}
-                  itemChecked={this.handleCheckedItem}
-                  key={index}
-                  />
-      );
-    });
-    return items;
-  }
 
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
+  // TODO return diff IC based on conditions? instead of modifying one card.
+  // TODO make ingredientCard Card component to separate out further
   render() {
     let { ingredientCard, index } = this.props;
-    let { type, liquid } = ingredientCard;
-    let ingredientsList = this.renderEachIngredient(ingredientCard);
-    let trashButton, reBlendButton;
-
-    if (ingredientCard.saved) {
-      trashButton = (
-        <i className="fa fa-trash-o" onClick={this.trashCard}></i>
-      );
-    };
-
-    if (this.state.checkedItems.length) {
-      reBlendButton = (
-        <ReBlendButton reblend={this.handleReplaceIngredients} />
-      );
-    }
 
     return (
       <div className="card">
-
-        <div className="card__image">
-          <div className={'card__image--type card__image--' + type}>
-            <span>{trashButton}</span>
-          </div>
-        </div>
-
-        <div className="card__header">
-          <h2>{type}</h2>
-        </div>
-
-        <div className="card__list">
-          <ul>
-            <li className="card__list--ingredient">
-              {liquid}
-            </li>
-            {ingredientsList}
-          </ul>
-        </div>
-
-        <CardButtons name="save-card"
-                     save={this.saveCard}
-                     trash={this.trashCard}
-        />
-
-      { reBlendButton }
-
+        <Card
+          saveCard={this.saveCard}
+          trashCard={this.trashCard}
+          card={ingredientCard}
+          checkedLength={this.state.checkedItems.length}/>
       </div>
     );
   }

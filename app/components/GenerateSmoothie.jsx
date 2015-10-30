@@ -21,6 +21,7 @@ export default class GenerateSmoothie extends React.Component {
     }
 
     this.generateSmoothie = this.generateSmoothie.bind(this);
+    this.setMessage = this.setMessage.bind(this);
   }
 
   // TODO Generate, Generated and Saved Smoothie, turn into one Component.
@@ -34,21 +35,25 @@ export default class GenerateSmoothie extends React.Component {
     if (!type || !amount || !liquid || !extras) { return };
 
     if (currentCards.length === 7) {
-      this.setState({
-        message: 'You already have 7 smoothies, delete some?'
-      });
+      this.setMessage('You already have 7 smoothies, delete some?');
       return;
 
     } else if (currentCards.length && currentCards.length < 7) {
       // TODO place in Store
-      this.setState({
-        message: 'You have room for ' + difference + ' more smoothies.'
-      });
+      let message = `You have room for ${difference} more smoothies.`;
+      this.setMessage(message);
       Actions.findIngredients(type, difference, liquid, extras);
 
     } else {
+      this.setMessage('Let\'s see what you got!')
       Actions.findIngredients(type, amount, liquid, extras);
     }
+  }
+
+  setMessage(message) {
+    this.setState({
+      message: message
+    });
   }
 
   render() {
