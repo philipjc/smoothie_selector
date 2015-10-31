@@ -2,47 +2,58 @@
   width: 100%;
 
   &__form {
+    display: flex;
+    flex-direction: row;
 
-    &-block {
-      width: 20%;
-      display: inline-block;
-      margin-right: 2%;
+    &--col {
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+
+      display: flex;
+      flex-direction: column;
+
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      .col-title {
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: capitalize;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+      }
     }
 
-    &--inputs {
-      width: 100%;
+    .option-block {
+      margin-bottom: 10px;
+      padding: 1%;
+      background: white;
 
-      .label {
-        width: 100%;
-        display: block;
-        padding: 1%;
-        cursor: pointer;
+      &__label {
+
       }
 
-      .input {
-        padding: $padding * 2;
-        border: $light-border;
-        border-bottom: none;
+      &__state {
 
-        &:last-child {
-          border-bottom: $light-border;
-        }
-
-        input {
-          float: right;
-        }
       }
-
     }
 
     &--button {
       width: 100%;
       margin-top: $padding;
-      .button-generate {
+
+      .generate-button {
         background: plum;
         padding: $padding;
         cursor: pointer;
         border: $light-border;
+
+        &__message {
+          float: right;
+        }
       }
     }
   }

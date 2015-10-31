@@ -13,6 +13,9 @@ const SavedStore = Reflux.createStore({
     }
   },
 
+  /**
+  *
+  */
   onSaveThisCard(card) {
     let cardsLength = this.storeData.cards.length;
 
@@ -29,6 +32,9 @@ const SavedStore = Reflux.createStore({
     this.trigger(cardsCopy);
   },
 
+  /**
+  *
+  */
   onTrashSavedCard(card) {
     this.storeData.cards.splice(card, 1);
     this.trigger(this.storeData.cards);

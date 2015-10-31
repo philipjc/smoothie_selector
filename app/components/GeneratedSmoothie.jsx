@@ -12,6 +12,9 @@ export default class GeneratedSmoothie extends React.Component{
    super(props);
  }
 
+ /**
+ *
+ */
  renderCards() {
    let cards = this.props.currentIngredientsCards.map((card, index) => {
      let count = index;
