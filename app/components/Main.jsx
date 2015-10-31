@@ -47,18 +47,27 @@ export default class Main extends React.Component {
     this.formUnSubscribe();
   }
 
+  /**
+  *
+  */
   handleGenerateStoreUpdate(res) {
     this.setState({
       currentIngredientsCards: res
     })
   }
 
+  /**
+  *
+  */
   handleSavedStoreUpdate(res) {
     this.setState({
       savedCards: res
     });
   }
 
+  /**
+  *
+  */
   handleFormSelectionStore(res) {
     this.setState({
       type: res.type,
@@ -68,7 +77,11 @@ export default class Main extends React.Component {
     });
   }
 
+  /**
+  *
+  */
   render() {
+    // TODO one variable for string. if true string = this text. if this && this string = this etc
     let { title, type, amount, liquid, extras, currentIngredientsCards, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;

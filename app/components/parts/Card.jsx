@@ -19,18 +19,27 @@ export default class Card extends React.Component {
    this.renderEachIngredient = this.renderEachIngredient.bind(this);
  }
 
+ /**
+ *
+ */
  makeTrashButton() {
    return (
      <i className="fa fa-trash-o" onClick={this.trashCard}></i>
    );
  }
 
+ /**
+ *
+ */
  makeReblendButton() {
    return (
      <ReBlendButton reblend={this.handleReplaceIngredients} />
    );
  }
 
+ /**
+ *
+ */
  renderEachIngredient(ingredientCard) {
    let { ingredients, isSaved } = ingredientCard;
 

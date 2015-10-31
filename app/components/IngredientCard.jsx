@@ -26,11 +26,17 @@ export default class IngredientCard extends React.Component {
     this.handleReplaceIngredients = this.handleReplaceIngredients.bind(this);
   }
 
+  /**
+  *
+  */
   saveCard() {
     let card = this.props.ingredientCard;
     Actions.saveThisCard(card);
   }
 
+  /**
+  *
+  */
   trashCard() {
     let card = this.props.ingredientCard;
     let cardIndex = this.props.index;
@@ -43,6 +49,9 @@ export default class IngredientCard extends React.Component {
     }
   }
 
+  /**
+  *
+  */
   handleCheckedItem(item, state) {
     let itemStr = item.trim();
 
@@ -63,6 +72,9 @@ export default class IngredientCard extends React.Component {
     }
   }
 
+  /**
+  *
+  */
   handleReplaceIngredients() {
     // reblend will need to remove the card array and replace with new.
     // Put all logic in Store? set checked items as property?

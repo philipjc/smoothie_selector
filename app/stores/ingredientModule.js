@@ -7,6 +7,9 @@ let ingredientMaker = ((type, amount, numberGen, ingredients) => {
     ingredients
   };
 
+  /**
+  *
+  */
   function createIngredients(type, amount) {
     let recipe = [];
     let liquid;
@@ -27,6 +30,9 @@ let ingredientMaker = ((type, amount, numberGen, ingredients) => {
     return recipe;
   };
 
+  /**
+  *
+  */
   function singleSelect(type, amount) {
     console.log('type from single ', type);
     let ingredientsToSend = createIngredients(type, amount);
@@ -38,6 +44,9 @@ let ingredientMaker = ((type, amount, numberGen, ingredients) => {
     return recipeCard;
   };
 
+  /**
+  *
+  */
   function multiSelect() {
     let qty = 3;
     let fruitToSend = createIngredients('fruit', qty);

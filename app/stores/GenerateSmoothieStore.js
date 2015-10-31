@@ -27,6 +27,8 @@ const GenerateSmoothieStore = Reflux.createStore({
     this.sendCards();
   },
 
+  // TODO Abstract ingredients array into a npm module. Use random array to find ingredients
+  // like starwars names
   /**
   *
   */

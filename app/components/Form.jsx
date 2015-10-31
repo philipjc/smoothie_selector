@@ -13,9 +13,12 @@ export default class Form extends React.Component{
    super(props);
 
    this.formHandler = this.formHandler.bind(this);
-   this.renderSquares = this.renderSquares.bind(this);
+   this.renderOptionBlock = this.renderOptionBlock.bind(this);
  }
 
+ /**
+ *
+ */
  formHandler(e) {
    let formField = this.props.formConfig.name;
    let selection = e.target.textContent;
@@ -25,22 +28,29 @@ export default class Form extends React.Component{
    });
  }
 
- renderSquares(names) {
+ /**
+ *
+ */
+ renderOptionBlock(names) {
    let render = names.map(name => {
      return (
        <Square name={name} onClick={this.formHandler} />
-     )
+     );
    });
    return render;
  }
 
  render() {
-
-   let display = this.renderSquares(this.props.formConfig.values);
+   let type = this.props.formConfig.name;
+   let display = this.renderOptionBlock(this.props.formConfig.values);
 
    return (
-     <div className="section-upper__form--block">
-       {display}
+     <div className="section-upper__form--col">
+       <span className="col-title">
+         { type }
+       </span>
+
+       { display }
      </div>
    );
  }

@@ -27,6 +27,9 @@ export default class GenerateSmoothie extends React.Component {
   // TODO Generate, Generated and Saved Smoothie, turn into one Component.
   // Call generate on Main? Or wrap in another operational Component...
 
+  /**
+  *
+  */
   generateSmoothie() {
     // as long as length < amount ?
     let { type, amount, liquid, extras, currentCards } = this.props;
@@ -50,6 +53,9 @@ export default class GenerateSmoothie extends React.Component {
     }
   }
 
+  /**
+  *
+  */
   setMessage(message) {
     this.setState({
       message: message

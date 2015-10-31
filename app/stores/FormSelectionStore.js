@@ -18,6 +18,9 @@ const FormSelectionStore = Reflux.createStore({
     }
   },
 
+  /**
+  *
+  */
   onUpdateForm(type, selection) {
     if (!type) return;
     this.data[type] = selection;

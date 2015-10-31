@@ -5,20 +5,39 @@
     display: flex;
     flex-direction: row;
 
-    &--block {
+    &--col {
       flex: 1;
-      display: flex;
       flex-direction: column;
       justify-content: center;
 
-      .square {
-        width: 40%;
-        height: 120px;
+      display: flex;
+      flex-direction: column;
 
-        background: #bada55;
-        cursor: pointer;
+      margin-right: 10px;
 
-        margin: 0 auto 20px;
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      .col-title {
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: capitalize;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+      }
+    }
+
+    .option-block {
+      margin-bottom: 10px;
+      padding: 1%;
+      background: white;
+
+      &__label {
+
+      }
+
+      &__state {
+
       }
     }
 

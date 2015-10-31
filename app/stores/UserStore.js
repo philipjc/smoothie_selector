@@ -14,6 +14,9 @@ const UserStore = Reflux.createStore({
     }
   },
 
+  /**
+  *
+  */
   onUpdateUserDetails(user) {
     console.log('from user store ', user);
     this.user.name = user.name;
@@ -22,11 +25,17 @@ const UserStore = Reflux.createStore({
     this.sendUser();
   },
 
+  /**
+  *
+  */
   onsomeotherAction() {
 
-    this.sendUser
+    // this.sendUser();
   },
 
+  /**
+  *
+  */
   sendUser() {
     this.trigger(this.user);
   }

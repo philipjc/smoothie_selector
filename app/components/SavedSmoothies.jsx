@@ -14,6 +14,9 @@ export default class SavedSmoothies extends React.Component {
   this.renderSavedCards = this.renderSavedCards.bind(this);
   }
 
+  /**
+  *
+  */
   renderSavedCards() {
     let cards = this.props.savedCards.map((card, index) => {
       let count = index;
