@@ -27,7 +27,7 @@ export default class Main extends React.Component {
       extras: '',
       currentIngredientsCards: [],
       savedCards: []
-    }
+    };
 
     this.handleGenerateStoreUpdate = this.handleGenerateStoreUpdate.bind(this);
     this.handleSavedStoreUpdate = this.handleSavedStoreUpdate.bind(this);

@@ -11,14 +11,14 @@ import Actions from '../actions/SmoothieActions.js';
 
 const propTypes = {
   type: React.PropTypes.string
-}
+};
 
 export default class GenerateSmoothie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message: ''
-    }
+    };
 
     this.generateSmoothie = this.generateSmoothie.bind(this);
     this.setMessage = this.setMessage.bind(this);
@@ -48,7 +48,7 @@ export default class GenerateSmoothie extends React.Component {
       Actions.findIngredients(type, difference, liquid, extras);
 
     } else {
-      this.setMessage('Let\'s see what you got!')
+      this.setMessage('Let\'s see what you got!');
       Actions.findIngredients(type, amount, liquid, extras);
     }
   }
