@@ -1,11 +1,10 @@
 import React from 'react';
 
-// Reflux ===================================================
+// Reflux ===============================================
 import Actions from '../actions/SmoothieActions.js';
 
 // Components ===============================================
-import ReBlendButton from './parts/ReBlendButton.jsx';
-import Card from './parts/Card.jsx';
+import CardDisplay from './parts/CardDisplay.jsx';
 
 const propTypes = {
   ingredientsCard: React.PropTypes.object,
@@ -16,18 +15,13 @@ const propTypes = {
 export default class IngredientCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      checkedItems: []
-    }
 
     this.saveCard = this.saveCard.bind(this);
     this.trashCard = this.trashCard.bind(this);
-    this.handleCheckedItem = this.handleCheckedItem.bind(this);
-    this.handleReplaceIngredients = this.handleReplaceIngredients.bind(this);
   }
 
   /**
-  *
+  * @desc Call Action to save current card
   */
   saveCard() {
     let card = this.props.ingredientCard;
@@ -35,7 +29,8 @@ export default class IngredientCard extends React.Component {
   }
 
   /**
-  *
+  * @desc get current card. Find its index.
+  * send Action to delete card based on Bool
   */
   trashCard() {
     let card = this.props.ingredientCard;
@@ -49,60 +44,20 @@ export default class IngredientCard extends React.Component {
     }
   }
 
-  /**
-  *
-  */
-  handleCheckedItem(item, state) {
-    let itemStr = item.trim();
-
-    if (state) {
-      let checkedItemsCopy = this.state.checkedItems;
-      checkedItemsCopy.push(itemStr);
-      this.setState({
-        checkedItems: checkedItemsCopy
-      });
-
-    } else {
-      let checkedItemsCopy = this.state.checkedItems;
-      let idx = checkedItemsCopy.indexOf(itemStr);
-      checkedItemsCopy.splice(idx, 1);
-      this.setState({
-        checkedItems: checkedItemsCopy
-      });
-    }
-  }
-
-  /**
-  *
-  */
-  handleReplaceIngredients() {
-    // reblend will need to remove the card array and replace with new.
-    // Put all logic in Store? set checked items as property?
-    let checkedItems = this.state.checkedItems;
-    if (checkedItems.length === 4) {
-      return;
-    }
-    let { ingredientCard, index } = this.props;
-    let { type } = ingredientCard;
-    let amount = 4 - (checkedItems.length);
-
-    Actions.replaceIngredients(type, amount, index, checkedItems);
-  }
-
-
   // TODO Add CSS Object to style dynamic colors. Set default props?so don't ref twice.
-  // TODO return diff IC based on conditions? instead of modifying one card.
+  // TODO return diff IC based on conditions? instead of modifying one card. give diff props
   // TODO make ingredientCard Card component to separate out further
   render() {
     let { ingredientCard, index } = this.props;
 
     return (
       <div className="card">
-        <Card
+        <CardDisplay
           saveCard={this.saveCard}
           trashCard={this.trashCard}
           card={ingredientCard}
-          checkedLength={this.state.checkedItems.length}/>
+          index={index}
+          />
       </div>
     );
   }

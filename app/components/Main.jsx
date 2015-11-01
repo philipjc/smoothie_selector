@@ -3,7 +3,7 @@ import React from 'react';
 // Reflux Stores ===================================
 import GenerateSmoothieStore from '../stores/GenerateSmoothieStore.js';
 import FormSelectionStore from '../stores/FormSelectionStore.js';
-import SavedStore from '../stores/SavedStore.js';
+import SavedSmoothieStore from '../stores/SavedSmoothieStore.js';
 
 // Components ======================================
 import GenerateSmoothie from './GenerateSmoothie.jsx'
@@ -30,14 +30,14 @@ export default class Main extends React.Component {
     };
 
     this.handleGenerateStoreUpdate = this.handleGenerateStoreUpdate.bind(this);
-    this.handleSavedStoreUpdate = this.handleSavedStoreUpdate.bind(this);
+    this.handleSavedSmoothieStoreUpdate = this.handleSavedSmoothieStoreUpdate.bind(this);
     this.handleFormSelectionStore = this.handleFormSelectionStore.bind(this);
   }
 
   // To use the same Store, you can check a property, if found perform method.
   componentWillMount() {
     this.generateUnsubscribe = GenerateSmoothieStore.listen(this.handleGenerateStoreUpdate);
-    this.saveUnsubscribe = SavedStore.listen(this.handleSavedStoreUpdate);
+    this.saveUnsubscribe = SavedSmoothieStore.listen(this.handleSavedSmoothieStoreUpdate);
     this.formUnSubscribe = FormSelectionStore.listen(this.handleFormSelectionStore);
   }
 
@@ -59,7 +59,7 @@ export default class Main extends React.Component {
   /**
   *
   */
-  handleSavedStoreUpdate(res) {
+  handleSavedSmoothieStoreUpdate(res) {
     this.setState({
       savedCards: res
     });
@@ -82,11 +82,13 @@ export default class Main extends React.Component {
   */
   render() {
     // TODO one variable for string. if true string = this text. if this && this string = this etc
-    let { title, type, amount, liquid, extras, currentIngredientsCards, savedCards } = this.state;
+    let { title, type, amount, liquid, extras, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;
     let liquidString;
     liquid ? liquidString = `with ${liquid}` : liquidString = '';
+
+    let cards = GenerateSmoothieStore.storeData.cards;
 
     return (
       <div className="main-container">
@@ -109,12 +111,12 @@ export default class Main extends React.Component {
                             amount={amount}
                             liquid={liquid}
                             extras={extras}
-                            currentCards={currentIngredientsCards}
+                            currentCards={cards}
                             />
         </div>
 
         <div className="section-mid">
-          <GeneratedSmoothie currentIngredientsCards={currentIngredientsCards} />
+          <GeneratedSmoothie currentIngredientsCards={cards} />
 
           <SavedSmoothies savedCards={savedCards} />
         </div>

@@ -76,13 +76,13 @@
   }
 
   &__buttons {
-    &--save-card {
-      width: 100%;
-      background: lighten($plum, 5%);
-      cursor: pointer;
-      text-align: justify;
-      user-select: none;
-    }
+
+    width: 100%;
+    background: lighten($plum, 5%);
+    cursor: pointer;
+    text-align: justify;
+    user-select: none;
+
     .btn {
       content: '';
       width: 50%;
@@ -117,4 +117,5 @@
       text-align: center;
     }
   }
+
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import Actions from '../../actions/SmoothieActions.js';
 
 const propTypes = {
-  name: React.PropTypes.string
+  name: React.PropTypes.number,
+  onClick: React.PropTypes.function
 };
 
 export default class Square extends React.Component {
@@ -19,7 +20,7 @@ export default class Square extends React.Component {
          { name }
        </span>
        <span className="option-block__state">
-         
+
        </span>
       </div>
     )

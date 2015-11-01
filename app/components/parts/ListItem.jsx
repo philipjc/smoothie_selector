@@ -15,26 +15,24 @@ export default class ListItem extends React.Component{
      mouseOver: false
    }
 
-   this.handleCheckedItems = this.handleCheckedItems.bind(this);
    this.handleItemCheck = this.handleItemCheck.bind(this);
    this.handleItemMouseOver = this.handleItemMouseOver.bind(this);
  }
 
- handleCheckedItems(item, state) {
-   this.props.itemChecked(item, state);
- }
-
  handleItemCheck(e) {
+   if (this.props.card.saved) { return; }
    let item = e.target.innerText;
    let state = !this.state.checked;
 
    this.setState({
      checked: state
    });
-   this.handleCheckedItems(item, state);
+   this.props.itemChecked(item, state);
  }
 
  handleItemMouseOver() {
+   if (this.props.card.saved) { return; }
+   
    let state = !this.state.mouseOver;
 
    this.setState({
