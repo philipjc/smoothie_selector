@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components ======================================
-import IngredientCard from './IngredientCard.jsx';
+import IngredientCard from './IngredientCard/IngredientCard.jsx';
 
 const propTypes = {
   savedCards: React.PropTypes.array

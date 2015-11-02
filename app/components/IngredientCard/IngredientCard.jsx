@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Reflux ===============================================
-import Actions from '../actions/SmoothieActions.js';
+import Actions from '../../actions/SmoothieActions.js';
 
 // Components ===============================================
-import CardDisplay from './parts/CardDisplay.jsx';
+import CardDisplay from './CardDisplay.jsx';
 
 const propTypes = {
   ingredientsCard: React.PropTypes.object,

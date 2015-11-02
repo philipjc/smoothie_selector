@@ -5,9 +5,9 @@ import Actions from '../../actions/SmoothieActions.js';
 import CardStore from '../../stores/CardStore.js';
 
 // Components ===================================================
-import CardControl from '../parts/CardControl.jsx';
-import ReBlendButton from '../parts/ReBlendButton.jsx';
-import ListItem from '../parts/ListItem.jsx';
+import CardControl from './CardControl.jsx';
+import ReBlendButton from './ReBlendButton.jsx';
+import ListItem from './ListItem.jsx';
 
 const propTypes = {
   saveCard: React.PropTypes.func,

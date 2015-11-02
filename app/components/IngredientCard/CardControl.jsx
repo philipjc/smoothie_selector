@@ -4,7 +4,7 @@ import React from 'react';
 import Actions from '../../actions/SmoothieActions.js';
 
 // Components =================================================================
-import ReBlendButton from '../parts/ReBlendButton.jsx';
+import ReBlendButton from './ReBlendButton.jsx';
 
 const propTypes = {
   card: React.PropTypes.object,
