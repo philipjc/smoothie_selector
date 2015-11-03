@@ -102,16 +102,15 @@ export default class Card extends React.Component {
 
  renderCardControl() {
    let checkedItemsLength = this.state.checkedItems.length;
-   let { card, index } = this.props;
 
    return (
      <CardControl
-       card={card}
-       index={index}
-       reblend={this.handleReplaceIngredients}
-       checkedItems={checkedItemsLength}
+       card={this.props.card}
+       index={this.props.index}
        save={this.props.saveCard}
        trash={this.props.trashCard}
+       checkedItems={checkedItemsLength}
+       reblend={this.handleReplaceIngredients}
        />
    );
  }
@@ -151,8 +150,8 @@ export default class Card extends React.Component {
            <li className="card__list--ingredient">
              { liquid }
            </li>
-           { ingredientsList }
          </ul>
+         { ingredientsList }
        </div>
 
        { renderCardControls }

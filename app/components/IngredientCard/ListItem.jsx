@@ -3,7 +3,10 @@ import classnames from 'classnames';
 
 
 const propTypes = {
+  card: React.PropTypes.object,
   item: React.PropTypes.string,
+  saved: React.PropTypes.bool,
+  itemChecked: React.PropTypes.bool,
   key: React.PropTypes.number
 };
 
@@ -17,6 +20,8 @@ export default class ListItem extends React.Component{
 
    this.handleItemCheck = this.handleItemCheck.bind(this);
    this.handleItemMouseOver = this.handleItemMouseOver.bind(this);
+   this.renderSavedItem = this.renderSavedItem.bind(this);
+   this.renderUnsavedItem = this.renderUnsavedItem.bind(this);
  }
 
  handleItemCheck(e) {
@@ -32,7 +37,7 @@ export default class ListItem extends React.Component{
 
  handleItemMouseOver() {
    if (this.props.card.saved) { return; }
-   
+
    let state = !this.state.mouseOver;
 
    this.setState({
@@ -40,9 +45,16 @@ export default class ListItem extends React.Component{
    });
  }
 
- render() {
-   let { item, saved } = this.props;
+ renderSavedItem() {
+   let { item } = this.props;
+   return (
+     <li className="card__list--ingredient">
+       {item}
+     </li>
+   );
+ }
 
+ renderUnsavedItem() {
    let checked = this.state.checked;
    let checkClasses = classnames('fa', {
      'fa fa-check': checked
@@ -55,22 +67,28 @@ export default class ListItem extends React.Component{
 
    let mouseClasses = `${checkClasses} ${mouseOverClasses}`;
 
-   if (!saved) {
-     return (
-       <li className="card__list--ingredient"
-           onMouseOver={this.handleItemMouseOver}
-           onMouseOut={this.handleItemMouseOver}
-           onClick={this.handleItemCheck}>
-         {item} <i className={mouseClasses}></i>
-       </li>
-     );
-   } else {
-     return (
-       <li className="card__list--ingredient">
-         {item}
-       </li>
-     );
-   }
+   let { item } = this.props;
+   return (
+     <li className="card__list--ingredient"
+         onMouseOver={this.handleItemMouseOver}
+         onMouseOut={this.handleItemMouseOver}
+         onClick={this.handleItemCheck}>
+       {item} <i className={mouseClasses}></i>
+     </li>
+   );
+ }
+
+ render() {
+   let { saved } = this.props;
+   let item;
+
+   saved ? item = this.renderSavedItem() : item = this.renderUnsavedItem();
+
+   return (
+     <ul>
+       { item }
+     </ul>
+   );
  }
 }
 
