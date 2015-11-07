@@ -15,7 +15,7 @@ const MainStore = Reflux.createStore({
   */
   init() {
     this.listenTo(GenerateSmoothieStore, this.updateCurrentCards);
-    this.listenTo(FormSelectionStore, this.updateOptions);
+    this.listenTo(FormSelectionStore, this.updateFormOptions);
     this.listenTo(SavedSmoothieStore, this.updateSavedCards);
 
     this.state = {
@@ -39,7 +39,7 @@ const MainStore = Reflux.createStore({
   /**
   *
   */
-  updateOptions(data) {
+  updateFormOptions(data) {
     this.state.type = data.type || '';
     this.state.amount = data.amount || 0;
     this.state.liquid = data.liquid || '';

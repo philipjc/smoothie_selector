@@ -17,38 +17,54 @@ export default class GenerateSmoothie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      canGenerate: true,
       message: ''
     };
 
     this.generateSmoothie = this.generateSmoothie.bind(this);
     this.setMessage = this.setMessage.bind(this);
+    this.checkAmount = this.checkAmount.bind(this);
   }
 
   // TODO Generate, Generated and Saved Smoothie, turn into one Component.
   // Call generate on Main? Or wrap in another operational Component...
 
+  componentWillReceiveProps(props) {
+    let amount = Number(props.amount);
+    this.checkAmount(amount);
+  }
+
+  /**
+  *
+  */
+  checkAmount(amount) {
+    let { currentCards } = this.props;
+    let generateMax = 7;
+    let space = (generateMax - currentCards.length);
+
+    if (amount > space) {
+      this.setState({
+        canGenerate: false
+      });
+      this.setMessage('Sorry, not enough space for ' + amount + ' more cards. You need to delete some.');
+
+    } else {
+      this.setState({
+        canGenerate: true
+      });
+      this.setMessage('Can\'t wait to see what we get!');
+    }
+  }
+
   /**
   *
   */
   generateSmoothie() {
-    // as long as length < amount ?
-    let { type, amount, liquid, extras, currentCards } = this.props;
-    let difference = 7 - currentCards.length;
-
+    let { type, amount, liquid, extras } = this.props;
     if (!type || !amount || !liquid || !extras) { return };
 
-    if (currentCards.length === 7) {
-      this.setMessage('You already have 7 smoothies, delete some?');
-      return;
-
-    } else if (currentCards.length && currentCards.length < 7) {
-      // TODO place in Store
-      let message = `You have room for ${difference} more smoothies.`;
-      this.setMessage(message);
-      Actions.findIngredients(type, difference, liquid, extras);
-
-    } else {
-      this.setMessage('Let\'s see what you got!');
+    if (this.state.canGenerate) {
+      this.setMessage('Any good?');
       Actions.findIngredients(type, amount, liquid, extras);
     }
   }
