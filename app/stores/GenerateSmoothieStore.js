@@ -33,11 +33,7 @@ const GenerateSmoothieStore = Reflux.createStore({
   *
   */
   onFindIngredients(type, numCards, liquidType, extras) {
-    console.log('from find ingredients ', extras);
-    let ingredientsQty = 4;
-    type === 'mixed'
-      ? this.mixedSelector(numCards, liquidType, extras)
-      : this.singleSelector(type, numCards, ingredientsQty, liquidType, extras);
+    this.selector(type, numCards, liquidType, extras);
   },
 
   /**
@@ -64,48 +60,36 @@ const GenerateSmoothieStore = Reflux.createStore({
   /**
   *
   */
-  singleSelector(type, numCards, amountOfIngredients, liquidType, extras) {
-    let numCardsCopy = numCards;
+  makeRecipeCard(type, liquidType, ingredientsToSend) {
+    let recipeCard = {};
+    recipeCard.saved = false;
+    recipeCard.type = type;
+    recipeCard.liquid = liquidType;
+    recipeCard.ingredients = ingredientsToSend;
 
-    while (numCardsCopy > 0) {
-      let ingredientsToSend = this.createIngredients(type, amountOfIngredients);
-
-      let recipeCard = {};
-      recipeCard.saved = false;
-      recipeCard.type = type;
-      recipeCard.liquid = liquidType;
-      recipeCard.ingredients = ingredientsToSend;
-
-      this.storeData.cards.push(recipeCard);
-      numCardsCopy--;
-    }
-
-    this.sendCards();
+    this.storeData.cards.push(recipeCard);
   },
 
   /**
   *
   */
-  mixedSelector(numCards, liquidType, extras) {
-    let numCardsCopy = numCards;
+  selector(type, numCards, liquidType, extras) {
+    let qty;
+    while (numCards > 0) {
+      if (type === 'mixed') {
+        qty = 2;
+        let fruitToSend = this.createIngredients('fruit', qty);
+        let vegToSend = this.createIngredients('vegetable', qty);
+        let ingredientsToSend = [].concat(fruitToSend, vegToSend);
 
-    while (numCardsCopy > 0) {
-
-      let qty = 2;
-      let fruitToSend = this.createIngredients('fruit', qty);
-      let vegToSend = this.createIngredients('vegetable', qty);
-      let ingredientsToSend = [].concat(fruitToSend, vegToSend);
-
-      let recipeCard = {};
-      recipeCard.saved = false;
-      recipeCard.type = "mixed";
-      recipeCard.liquid = liquidType;
-      recipeCard.ingredients = ingredientsToSend;
-
-      this.storeData.cards.push(recipeCard);
-      numCardsCopy--;
+        this.makeRecipeCard(type, liquidType, ingredientsToSend);
+      } else {
+        qty = 4;
+        let ingredientsToSend = this.createIngredients(type, qty);
+        this.makeRecipeCard(type, liquidType, ingredientsToSend);
+      }
+      numCards--;
     }
-
     this.sendCards();
   },
 

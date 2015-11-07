@@ -1,9 +1,7 @@
 import React from 'react';
 
 // Reflux Stores ===================================
-import GenerateSmoothieStore from '../stores/GenerateSmoothieStore.js';
-import FormSelectionStore from '../stores/FormSelectionStore.js';
-import SavedSmoothieStore from '../stores/SavedSmoothieStore.js';
+import MainStore from '../stores/MainStore.js';
 
 // Components ======================================
 import GenerateSmoothie from './GenerateSmoothie.jsx'
@@ -29,66 +27,37 @@ export default class Main extends React.Component {
       savedCards: []
     };
 
-    this.handleGenerateStoreUpdate = this.handleGenerateStoreUpdate.bind(this);
-    this.handleSavedSmoothieStoreUpdate = this.handleSavedSmoothieStoreUpdate.bind(this);
-    this.handleFormSelectionStore = this.handleFormSelectionStore.bind(this);
+    this.handleMainStoreUpdate = this.handleMainStoreUpdate.bind(this);
   }
 
   // To use the same Store, you can check a property, if found perform method.
   componentWillMount() {
-    this.generateUnsubscribe = GenerateSmoothieStore.listen(this.handleGenerateStoreUpdate);
-    this.saveUnsubscribe = SavedSmoothieStore.listen(this.handleSavedSmoothieStoreUpdate);
-    this.formUnSubscribe = FormSelectionStore.listen(this.handleFormSelectionStore);
+    this.mainUnsubscribe = MainStore.listen(this.handleMainStoreUpdate);
   }
 
   componentWillUnmount() {
-    this.generateUnsubscribe();
-    this.saveUnsubscribe();
-    this.formUnSubscribe();
+    this.mainUnsubscribe();
   }
 
   /**
   *
   */
-  handleGenerateStoreUpdate(res) {
-    this.setState({
-      currentIngredientsCards: res
-    })
-  }
-
-  /**
-  *
-  */
-  handleSavedSmoothieStoreUpdate(res) {
-    this.setState({
-      savedCards: res
-    });
-  }
-
-  /**
-  *
-  */
-  handleFormSelectionStore(res) {
-    this.setState({
-      type: res.type,
-      amount: res.amount,
-      liquid: res.liquid,
-      extras: res.extras
-    });
+  handleMainStoreUpdate(res) {
+    this.setState(res);
   }
 
   /**
   *
   */
   render() {
-    // TODO one variable for string. if true string = this text. if this && this string = this etc
+    // TODO one variable for string. if true string = this text. if this && this string = this etc. in method?
     let { title, type, amount, liquid, extras, savedCards } = this.state;
     let typeString = type ? `${type} smoothies `: ``;
     let amountString = amount ? `${amount}, `: ``;
     let liquidString;
     liquid ? liquidString = `with ${liquid}` : liquidString = '';
 
-    let cards = GenerateSmoothieStore.storeData.cards;
+    // let cards = GenerateSmoothieStore.storeData.cards;
 
     return (
       <div className="main-container">
@@ -111,12 +80,12 @@ export default class Main extends React.Component {
                             amount={amount}
                             liquid={liquid}
                             extras={extras}
-                            currentCards={cards}
+                            currentCards={this.state.currentIngredientsCards}
                             />
         </div>
 
         <div className="section-mid">
-          <GeneratedSmoothie currentIngredientsCards={cards} />
+          <GeneratedSmoothie currentIngredientsCards={this.state.currentIngredientsCards} />
 
           <SavedSmoothies savedCards={savedCards} />
         </div>
