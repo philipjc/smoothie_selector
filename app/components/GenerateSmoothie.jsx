@@ -8,6 +8,7 @@ import Form from './Form.jsx';
 
 // Reflux ===================================
 import Actions from '../actions/SmoothieActions.js';
+import SavedSmoothieStore from '../stores/SavedSmoothieStore.js';
 
 const propTypes = {
   type: React.PropTypes.string

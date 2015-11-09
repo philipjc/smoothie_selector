@@ -5,8 +5,7 @@ import MainStore from '../stores/MainStore.js';
 
 // Components ======================================
 import GenerateSmoothie from './GenerateSmoothie.jsx'
-import GeneratedSmoothie from './GeneratedSmoothie.jsx';
-import SavedSmoothies from './SavedSmoothies.jsx';
+import CardsDisplays from './CardsDisplays.jsx';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 const propTypes = {
@@ -28,6 +27,7 @@ export default class Main extends React.Component {
     };
 
     this.handleMainStoreUpdate = this.handleMainStoreUpdate.bind(this);
+    this.handleRenderString = this.handleRenderString.bind(this);
   }
 
   // To use the same Store, you can check a property, if found perform method.
@@ -43,7 +43,29 @@ export default class Main extends React.Component {
   *
   */
   handleMainStoreUpdate(res) {
+    this.handleRenderString();
     this.setState(res);
+  }
+
+  /**
+  *
+  */
+  handleRenderString() {
+    let { type, amount, liquid, extras } = this.state;
+    let generated = '';
+    if (type) {
+      generated = `${type}?`;
+    }
+    if (type && amount) {
+      generated = `${amount}, ${type} smoothie with?`;
+    }
+    if (type && amount && liquid) {
+      generated = `${amount}, ${type} smoothie with ${liquid}`;
+    }
+    if (type && amount && liquid && extras) {
+      generated = `${amount}, ${type} smoothie with ${liquid} and ${extras}`;
+    }
+    return generated;
   }
 
   /**
@@ -51,11 +73,8 @@ export default class Main extends React.Component {
   */
   render() {
     // TODO one variable for string. if true string = this text. if this && this string = this etc. in method?
-    let { title, type, amount, liquid, extras, savedCards } = this.state;
-    let typeString = type ? `${type} smoothies `: ``;
-    let amountString = amount ? `${amount}, `: ``;
-    let liquidString;
-    liquid ? liquidString = `with ${liquid}` : liquidString = '';
+    let { title, type, amount, liquid, extras, currentIngredientsCards, savedCards } = this.state;
+    let dynamicString = this.handleRenderString();
 
     // let cards = GenerateSmoothieStore.storeData.cards;
 
@@ -72,7 +91,7 @@ export default class Main extends React.Component {
 
           <div className="section-upper__intro">
             <div className="section-upper__intro--heading">
-              <h3>{amountString + typeString + liquidString}</h3>
+              <h3>{ dynamicString }</h3>
             </div>
           </div>
 
@@ -80,14 +99,14 @@ export default class Main extends React.Component {
                             amount={amount}
                             liquid={liquid}
                             extras={extras}
-                            currentCards={this.state.currentIngredientsCards}
+                            currentCards={currentIngredientsCards}
                             />
         </div>
 
         <div className="section-mid">
-          <GeneratedSmoothie currentIngredientsCards={this.state.currentIngredientsCards} />
+          <CardsDisplays cards={currentIngredientsCards} />
 
-          <SavedSmoothies savedCards={savedCards} />
+          <CardsDisplays cards={savedCards} />
         </div>
 
       </div>

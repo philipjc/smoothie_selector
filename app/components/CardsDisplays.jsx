@@ -4,10 +4,10 @@ import React from 'react';
 import IngredientCard from './IngredientCard/IngredientCard.jsx';
 
 const propTypes = {
-  savedCards: React.PropTypes.array
+  cards: React.PropTypes.array
 };
 
-export default class SavedSmoothies extends React.Component {
+export default class CardsDisplays extends React.Component {
   constructor(props) {
   super(props);
 
@@ -18,7 +18,7 @@ export default class SavedSmoothies extends React.Component {
   *
   */
   renderSavedCards() {
-    let cards = this.props.savedCards.map((card, index) => {
+    let cards = this.props.cards.map((card, index) => {
       let count = index;
       return (
         <div className="section-mid__block--element">
@@ -40,4 +40,4 @@ export default class SavedSmoothies extends React.Component {
   }
 };
 
-SavedSmoothies.propTypes = propTypes;
+CardsDisplays.propTypes = propTypes;
