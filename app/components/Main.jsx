@@ -77,7 +77,7 @@ export default class Main extends React.Component {
     let dynamicString = this.handleRenderString();
 
     // let cards = GenerateSmoothieStore.storeData.cards;
-
+    // TODO make header and other page parts components.
     return (
       <div className="main-container">
         <div className="section-upper">
