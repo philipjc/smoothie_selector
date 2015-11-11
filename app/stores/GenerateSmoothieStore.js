@@ -33,15 +33,14 @@ const GenerateSmoothieStore = Reflux.createStore({
   *
   */
   onFindIngredients(type, numCards, liquidType, extras) {
-    this.selector(type, numCards, liquidType, extras);
+    this.ingredientSelector(type, numCards, liquidType, extras);
   },
 
   /**
   *
   */
   onReplaceIngredients(type, amountToReplace, cardIndex, keepThese) {
-    let newItems = this.createIngredients(type, amountToReplace);
-    // keep keepthese at same index
+    let newItems = this.gatherIngredients(type, amountToReplace);
     newItems = this.replaceIngredients(newItems, keepThese);
     this.storeData.cards[cardIndex].ingredients = newItems;
 
@@ -49,12 +48,8 @@ const GenerateSmoothieStore = Reflux.createStore({
   },
 
   replaceIngredients(newItems, keepItems) {
-    console.log(newItems);
-    console.log(keepItems);
     let items = newItems.concat(keepItems);
-    console.log(items);
     return items;
-    // TODO Stop liquid being added twice. Keep original items order.
   },
 
   /**
@@ -73,19 +68,19 @@ const GenerateSmoothieStore = Reflux.createStore({
   /**
   *
   */
-  selector(type, numCards, liquidType, extras) {
+  ingredientSelector(type, numCards, liquidType, extras) {
     let qty;
     while (numCards > 0) {
       if (type === 'mixed') {
         qty = 2;
-        let fruitToSend = this.createIngredients('fruit', qty);
-        let vegToSend = this.createIngredients('vegetable', qty);
+        let fruitToSend = this.gatherIngredients('fruit', qty);
+        let vegToSend = this.gatherIngredients('vegetable', qty);
         let ingredientsToSend = [].concat(fruitToSend, vegToSend);
 
         this.makeRecipeCard(type, liquidType, ingredientsToSend);
       } else {
         qty = 4;
-        let ingredientsToSend = this.createIngredients(type, qty);
+        let ingredientsToSend = this.gatherIngredients(type, qty);
         this.makeRecipeCard(type, liquidType, ingredientsToSend);
       }
       numCards--;
@@ -96,7 +91,7 @@ const GenerateSmoothieStore = Reflux.createStore({
   /**
   *
   */
-  createIngredients(type, amountOfIngredients) {
+  gatherIngredients(type, amountOfIngredients) {
     let recipe = [];
     let ingredients = this.storeIngredients.ingredients[type];
     let ingredientsLength = ingredients.length;

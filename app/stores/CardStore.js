@@ -13,15 +13,13 @@ const CardStore = Reflux.createStore({
   *
   */
   init() {
-    this.state = {
-      checkedItems: []
-    };
+
   },
 
   /**
   *
   */
-  onCheckCardItem() {
+  onCardStoreSomething() {
 
     this.trigger();
   }

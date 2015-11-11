@@ -5,7 +5,7 @@ import MainStore from '../stores/MainStore.js';
 
 // Components ======================================
 import GenerateSmoothie from './GenerateSmoothie.jsx'
-import CardsDisplays from './CardsDisplays.jsx';
+import CardCollection from './CardCollection.jsx';
 
 // TODO Find out what is poisonous - place warning. Rhubarb leaves!!!
 const propTypes = {
@@ -27,7 +27,7 @@ export default class Main extends React.Component {
     };
 
     this.handleMainStoreUpdate = this.handleMainStoreUpdate.bind(this);
-    this.handleRenderString = this.handleRenderString.bind(this);
+    this.handleRenderSelectionString = this.handleRenderSelectionString.bind(this);
   }
 
   // To use the same Store, you can check a property, if found perform method.
@@ -43,14 +43,14 @@ export default class Main extends React.Component {
   *
   */
   handleMainStoreUpdate(res) {
-    this.handleRenderString();
+    this.handleRenderSelectionString();
     this.setState(res);
   }
 
   /**
   *
   */
-  handleRenderString() {
+  handleRenderSelectionString() {
     let { type, amount, liquid, extras } = this.state;
     let generated = '';
     if (type) {
@@ -74,7 +74,7 @@ export default class Main extends React.Component {
   render() {
     // TODO one variable for string. if true string = this text. if this && this string = this etc. in method?
     let { title, type, amount, liquid, extras, currentIngredientsCards, savedCards } = this.state;
-    let dynamicString = this.handleRenderString();
+    let dynamicString = this.handleRenderSelectionString();
 
     // let cards = GenerateSmoothieStore.storeData.cards;
     // TODO make header and other page parts components.
@@ -104,9 +104,9 @@ export default class Main extends React.Component {
         </div>
 
         <div className="section-mid">
-          <CardsDisplays cards={currentIngredientsCards} />
+          <CardCollection cards={currentIngredientsCards} />
 
-          <CardsDisplays cards={savedCards} />
+          <CardCollection cards={savedCards} />
         </div>
 
       </div>

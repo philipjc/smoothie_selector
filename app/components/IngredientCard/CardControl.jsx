@@ -32,7 +32,6 @@ export default class CardButtons extends React.Component {
 
  render() {
    let reblendButton;
-
    if (this.props.checkedItems && !this.props.card.saved) {
      reblendButton = this.renderReblendButton();
    }

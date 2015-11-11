@@ -6,7 +6,6 @@ import CardStore from '../../stores/CardStore.js';
 
 // Components ===================================================
 import CardControl from './CardControl.jsx';
-import ReBlendButton from './ReBlendButton.jsx';
 import ListItem from './ListItem.jsx';
 
 const propTypes = {
@@ -24,14 +23,17 @@ export default class Card extends React.Component {
    }
 
    this.handleCheckedItems = this.handleCheckedItems.bind(this);
+   this.handleReplaceIngredients = this.handleReplaceIngredients.bind(this);
+
    this.renderCardControl = this.renderCardControl.bind(this);
    this.renderSavedCardTrashButton = this.renderSavedCardTrashButton.bind(this);
    this.renderEachIngredient = this.renderEachIngredient.bind(this);
-   this.handleReplaceIngredients = this.handleReplaceIngredients.bind(this);
  }
 
  /**
- *
+ * Populate checkedItems Array with ingredient name, IF ListItem state.
+ * @param {item} String
+ * @param {state} Boolean
  */
  handleCheckedItems(item, state) {
    let itemStr = item.trim();
@@ -54,7 +56,7 @@ export default class Card extends React.Component {
  }
 
  /**
- *
+ * IF not all checked, replace ticked.
  */
  handleReplaceIngredients() {
    // reblend will need to remove the card array and replace with new.
@@ -67,7 +69,6 @@ export default class Card extends React.Component {
    let { type } = card;
    let amount = 4 - (checkedItems.length);
 
-   console.log(type, amount, index, checkedItems);
    Actions.replaceIngredients(type, amount, index, checkedItems);
  }
 
@@ -84,6 +85,7 @@ export default class Card extends React.Component {
  *
  */
  renderEachIngredient(ingredientCard) {
+   console.log(ingredientCard);
    let { ingredients, isSaved } = ingredientCard;
 
    let items = ingredients.map((ingredient, index) => {
@@ -147,7 +149,7 @@ export default class Card extends React.Component {
        </div>
        <div className="card__list">
          <ul>
-           <li className="card__list--ingredient">
+           <li className="card__list--ingredient-type">
              { liquid }
            </li>
          </ul>

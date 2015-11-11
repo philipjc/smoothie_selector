@@ -73,6 +73,11 @@
       .fa-check-opac {
         color: lighten($plum, 15%);
       }
+      &-type {
+        padding: $padding *6 $padding * 4;
+        border-bottom: $light-border;
+        color: #969787;
+      }
     }
   }
 

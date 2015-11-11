@@ -22,6 +22,13 @@ export default class ListItem extends React.Component{
    this.handleItemMouseOver = this.handleItemMouseOver.bind(this);
    this.renderSavedItem = this.renderSavedItem.bind(this);
    this.renderUnsavedItem = this.renderUnsavedItem.bind(this);
+   this.handleReblendUncheck = this.handleReblendUncheck.bind(this);
+ }
+
+ handleReblendUncheck() {
+   this.setState({
+     checked: false
+   });
  }
 
  handleItemCheck(e) {
