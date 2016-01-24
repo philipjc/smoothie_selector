@@ -32,7 +32,7 @@ export default class GenerateSmoothie extends React.Component {
 
   componentWillReceiveProps(props) {
     let amount = Number(props.amount);
-    this.checkAmount(amount);
+    if (this.state.canGenerate) { this.checkAmount(amount) };
   }
 
   /**
@@ -61,8 +61,21 @@ export default class GenerateSmoothie extends React.Component {
   *
   */
   generateSmoothie() {
-    let { type, amount, liquid, extras } = this.props;
+    let { type, amount, liquid, extras, currentCards } = this.props;
     if (!type || !amount || !liquid || !extras) { return };
+
+    if (amount > (7 - currentCards.length)) {
+      this.setState({
+        canGenerate: false
+      });
+      this.setMessage('Need to reduce amount to blend.');
+      return;
+
+    } else {
+      this.setState({
+        canGenerate: true
+      });
+    }
 
     if (this.state.canGenerate) {
       this.setMessage('Any good?');
